@@ -1,42 +1,71 @@
-import { Icon } from '@iconify/react';
-import styles from '../../styles/Navbar.module.css'
-import Link from 'next/link'
+import { Icon } from "@iconify/react";
+import styles from "../../styles/Navbar.module.css";
+import Link from "next/link";
 
+export default function Navbar() {
+	return (
+		<div
+			className={`${styles.container} d-flex justify-content-evenly m-auto py-2 fixed-bottom bg-white`}
+		>
+			<Link href="/" passHref>
+				<div
+					className={`${styles.navLink} d-flex flex-column align-items-center`}
+				>
+					<Icon
+						icon="ant-design:home-filled"
+						data-align="center"
+						width="20"
+						height="20"
+					/>
+					<p className={styles.text}>Home</p>
+				</div>
+			</Link>
 
+			<Link href="/" passHref>
+				<div
+					className={`${styles.navLink} d-flex flex-column align-items-center`}
+				>
+					<Icon
+						icon="eva:clock-fill"
+						data-align="center"
+						width="20"
+						height="20"
+					/>
+					<p className={styles.text}>Classes</p>
+				</div>
+			</Link>
 
+			<Link href="/newsletter" passHref>
+				<div
+					className={`${styles.navLink} d-flex flex-column align-items-center`}
+				>
+					<Icon
+						icon="ant-design:play-circle-filled"
+						data-align="center"
+						width="20"
+						height="20"
+					/>
+					<p className={styles.text}>Videos</p>
+				</div>
+			</Link>
 
-export default function Navbar () {
-    return (
-    <div className={styles.container}>
-        <Link href="/"className={styles.navLink}>
-            <div>
-            <Icon  icon="ant-design:home-filled" width="20" height="20" />
-            <p >Home</p>
-            </div>
-        </Link>
+			<Link href="/" passHref>
+				<div
+					className={`${styles.navLink} d-flex flex-column align-items-center`}
+				>
+					<Icon icon="bx:bxs-news" data-align="center" width="20" height="20" />
+					<p className={styles.text}>Newsletter</p>
+				</div>
+			</Link>
 
-        <div className={styles.navLink}>
-        <Icon icon="eva:clock-fill" width="20" height="20" />
-        <p >Classes</p>
-        </div>
-
-     <Link href="/newsletter"className={styles.navLink}>
-         <div>
-        <Icon icon="ant-design:play-circle-filled" width="20" height="20" />
-        <p >Videos</p>
-        </div>
-        </Link>
-
-        <div className={styles.navLink}>
-        <Icon icon="bx:bxs-news" width="20" height="20" />
-        <p >Newsletter</p>
-        </div>
-
-        <div className={styles.navLink}>
-        <Icon icon="vs:profile" width="20" height="20" />
-        <p>Profile</p>
-        </div>
-    </div>
-    )
-    
-} 
+			<Link href="/" passHref>
+				<div
+					className={`${styles.navLink} d-flex flex-column align-items-center`}
+				>
+					<Icon icon="vs:profile" data-align="center" width="20" height="20" />
+					<p className={styles.text}>Profile</p>
+				</div>
+			</Link>
+		</div>
+	);
+}

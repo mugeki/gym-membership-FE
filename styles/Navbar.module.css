@@ -1,19 +1,14 @@
-.container{
-    width: 100%;
-    height: 50px;
-    display: flex;
-    justify-content: space-evenly;
-    position: fixed;
-    bottom: 0%;
-    background-color: white;
-    flex-wrap: wrap;
-    max-width: 480px;
-
+.container {
+	width: 100%;
+	height: 50px;
+	max-width: 480px;
 }
 
-.navLink{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
+.navLink {
+	cursor: pointer;
+}
+
+.text {
+	font-size: 10px;
+	margin: 0;
 }
