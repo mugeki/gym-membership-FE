@@ -21,7 +21,7 @@ export default function Navbar() {
 				</div>
 			</Link>
 
-			<Link href="/" passHref>
+			<Link href="/classes" passHref>
 				<div
 					className={`${styles.navLink} d-flex flex-column align-items-center`}
 				>
@@ -35,7 +35,7 @@ export default function Navbar() {
 				</div>
 			</Link>
 
-			<Link href="/newsletter" passHref>
+			<Link href="/videos" passHref>
 				<div
 					className={`${styles.navLink} d-flex flex-column align-items-center`}
 				>
@@ -49,7 +49,7 @@ export default function Navbar() {
 				</div>
 			</Link>
 
-			<Link href="/" passHref>
+			<Link href="/newsletter" passHref>
 				<div
 					className={`${styles.navLink} d-flex flex-column align-items-center`}
 				>
@@ -58,7 +58,7 @@ export default function Navbar() {
 				</div>
 			</Link>
 
-			<Link href="/" passHref>
+			<Link href="/profile" passHref>
 				<div
 					className={`${styles.navLink} d-flex flex-column align-items-center`}
 				>

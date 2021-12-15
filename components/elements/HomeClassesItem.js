@@ -5,7 +5,7 @@ export default function HomeClassesItem() {
 		"https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80";
 	return (
 		<div
-			className="d-flex align-items-end text-white text-center rounded m-0"
+			className="d-flex align-items-end text-white text-center rounded m-0 "
 			style={{
 				backgroundImage: `url(${imgUrl}), linear-gradient(rgba(255,255,255,0) 0%, rgba(0,0,0,0.7) 100%)`,
 				backgroundSize: "cover",

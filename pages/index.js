@@ -2,6 +2,10 @@ import Head from "next/head";
 import Image from "next/image";
 import Layout from "../components/Layout";
 import HomeClassesItem from "../components/elements/HomeClassesItem";
+import NewsletterItem from "../components/elements/NewsletterItem";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
+
 
 export default function Home() {
 	return (
@@ -17,34 +21,33 @@ export default function Home() {
 					<h4 className="text-start mb-4">Hello, John Doe</h4>
 					<h5 className="fw-bolder">Your Classes</h5>
 
-					<div className="d-flex">
+					<Carousel>
+					<div className="d-flex ">
 						<HomeClassesItem />
 						<HomeClassesItem />
 						<HomeClassesItem />
 					</div>
+					<div className="d-flex ">
+						<HomeClassesItem />
+						<HomeClassesItem />
+						<HomeClassesItem />
+					</div>
+						
+					
+					</Carousel>
 
 					<h5 className="fw-bolder">Latest Newsletter</h5>
-					<div>
-						<Image
-							src="/gym/newsletter coaching.png"
-							width={320}
-							height={153}
-							alt="newsletter"
-						/>
-
-						<Image
-							src="/gym/health tips.png"
-							width={320}
-							height={153}
-							alt="newsletter"
-						/>
-
-						<Image
-							src="/gym/images.jpg"
-							width={320}
-							height={153}
-							alt="newsletter"
-						/>
+					<div className="d-flex mb-3" >
+						<NewsletterItem />
+					</div>
+					<div className="d-flex mb-3">
+						<NewsletterItem />
+					</div>
+					<div className="d-flex mb-3 ">
+						<NewsletterItem />
+					</div>
+					<div className="d-flex mb-3">
+						<NewsletterItem />
 					</div>
 				</main>
 			</div>
