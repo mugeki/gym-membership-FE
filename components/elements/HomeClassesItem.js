@@ -10,12 +10,12 @@ export default function HomeClassesItem() {
 				backgroundImage: `url(${imgUrl}), linear-gradient(rgba(255,255,255,0) 0%, rgba(0,0,0,0.7) 100%)`,
 				backgroundSize: "cover",
 				backgroundBlendMode: "multiply",
-				width: "130px",
+				width: "30%",
 				height: "130px",
 				fontSize: "12px",
 			}}
 		>
-			<div className="d-flex flex-column w-100 pb-2">
+			<div className="d-flex flex-column w-100 p-2">
 				<p className="d-block mb-0 fw-bolder">Zumba</p>
 				<p className="d-block mb-0">Monday</p>
 				<p className="d-block mb-0">07:00 - 08:00 AM</p>
