@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import Layout from "../components/Layout";
 import HomeClassesItem from "../components/elements/HomeClassesItem";
 import NewsletterItem from "../components/elements/NewsletterItem";

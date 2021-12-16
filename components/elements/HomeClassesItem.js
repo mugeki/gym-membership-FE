@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export default function HomeClassesItem() {
 	const imgUrl =
 		"https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80";
