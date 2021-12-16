@@ -1,0 +1,32 @@
+{
+	"meta": {
+		"status": 200,
+		"message": "Success"
+	},
+	"data": [
+		{
+			"id": 1,
+			"name": "Coaching Personal",
+			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
+			"date": "2021-12-18T07:00:00.000Z"
+		},
+		{
+			"id": 2,
+			"name": "10 Tips to Build Muscle",
+			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
+			"date": "2021-12-18T08:00:00.000Z"
+		},
+		{
+			"id": 3,
+			"name": "Staying Healthy at Home",
+			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
+			"date": "2021-12-17T10:00:00.000Z"
+		},
+		{
+			"id": 4,
+			"name": "Diet Tips",
+			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
+			"date": "2021-12-16T10:00:00.000Z"
+		}
+	]
+}

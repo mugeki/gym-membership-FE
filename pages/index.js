@@ -5,8 +5,16 @@ import NewsletterItem from "../components/elements/NewsletterItem";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import Link from "next/link";
+import dataClasses from "../mockdata/classes.json";
+import dataNewsletter from "../mockdata/newsletter.json";
 
 export default function Home() {
+	const splitData = (array, chunkSize) =>
+		Array(Math.ceil(array.length / chunkSize))
+			.fill()
+			.map((_, index) => index * chunkSize)
+			.map((begin) => array.slice(begin, begin + chunkSize));
+	const chunks = splitData(dataClasses.data, 3);
 	return (
 		<Layout>
 			<div className="container p-4">
@@ -21,39 +29,25 @@ export default function Home() {
 					<h5 className="fw-bolder">Your Classes</h5>
 
 					<Carousel showIndicators={false} showThumbs={false}>
-						<div className="d-flex justify-content-between">
-							<HomeClassesItem />
-							<HomeClassesItem />
-							<HomeClassesItem />
-						</div>
-						<div className="d-flex justify-content-between">
-							<HomeClassesItem />
-							<HomeClassesItem />
-							<HomeClassesItem />
-						</div>
+						{chunks.map((chunk, i) => (
+							<div key={i} className="d-flex justify-content-between">
+								{chunk.map((item) => (
+									<HomeClassesItem key={item.id} entries={item} />
+								))}
+							</div>
+						))}
 					</Carousel>
 
 					<div className="d-flex justify-content-between mt-5">
 						<h5 className="fw-bolder">Latest Newsletter</h5>
 						<Link href={"/newsletter"} passHref>
-							<p className="text-light m-0" style={{ cursor: "pointer" }}>
-								View All
-							</p>
+							<a className="text-light m-0 text-decoration-none">View All</a>
 						</Link>
 					</div>
 
-					<div className="d-flex mb-3">
-						<NewsletterItem />
-					</div>
-					<div className="d-flex mb-3">
-						<NewsletterItem />
-					</div>
-					<div className="d-flex mb-3 ">
-						<NewsletterItem />
-					</div>
-					<div className="d-flex mb-3">
-						<NewsletterItem />
-					</div>
+					{dataNewsletter.data.map((item) => (
+						<NewsletterItem key={item.id} entries={item} />
+					))}
 				</main>
 			</div>
 		</Layout>

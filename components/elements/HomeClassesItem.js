@@ -1,22 +1,40 @@
-export default function HomeClassesItem() {
-	const imgUrl =
-		"https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80";
+import Image from "next/image";
+import styles from "../../styles/HomeClassesItem.module.css";
+
+export default function HomeClassesItem({ entries }) {
+	const days = [
+		"Sunday",
+		"Monday",
+		"Tuesday",
+		"Wednesday",
+		"Thursday",
+		"Friday",
+		"Saturday",
+	];
+	const date = new Date(entries.date);
+	const dayName = days[date.getDay()];
+	const hours = date.getHours();
+	const hoursFormatted = hours % 12 || 12;
+	const minutes = date.getMinutes().toString();
+	const minutesFormatted = minutes < 10 ? minutes.padStart(2, "0") : minutes;
+	const amOrPm = hours < 12 ? "AM" : "PM";
+
 	return (
 		<div
-			className="d-flex align-items-end text-white text-center rounded m-0 "
-			style={{
-				backgroundImage: `url(${imgUrl}), linear-gradient(rgba(255,255,255,0) 0%, rgba(0,0,0,0.7) 100%)`,
-				backgroundSize: "cover",
-				backgroundBlendMode: "multiply",
-				width: "30%",
-				height: "130px",
-				fontSize: "12px",
-			}}
+			className={`${styles.item} position-relative d-flex align-items-end text-white text-center rounded m-0`}
 		>
-			<div className="d-flex flex-column w-100 p-2">
-				<p className="d-block mb-0 fw-bolder">Zumba</p>
-				<p className="d-block mb-0">Monday</p>
-				<p className="d-block mb-0">07:00 - 08:00 AM</p>
+			<Image
+				src={entries.url_image}
+				layout="fill"
+				objectFit="cover"
+				alt="class"
+			/>
+			<div className={`${styles.overlay} d-flex flex-column w-100 p-2`}>
+				<p className="mb-0 fw-bolder">{entries.name}</p>
+				<p className="mb-0">{dayName}</p>
+				<p className="mb-0">
+					{hoursFormatted}:{minutesFormatted} {amOrPm}
+				</p>
 			</div>
 		</div>
 	);
