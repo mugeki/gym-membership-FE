@@ -1,0 +1,28 @@
+html {
+	background: #808080;
+}
+
+html,
+body {
+	padding: 0;
+	margin: auto;
+	max-width: 480px;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+html,
+body,
+div#__next,
+div#__next > div:first-child {
+	min-height: 100vh;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+* {
+	box-sizing: border-box;
+}
