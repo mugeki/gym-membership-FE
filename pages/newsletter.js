@@ -1,14 +1,9 @@
-import Newsletter from "../components/elements/Newsletter";
+import Newsletter from "../components/elements/NewsletterItem";
 import Layout from "../components/Layout";
 import dataNewsletter from "../mockdata/newsletter.json";
 
 
 export default function newsletter (){
-    const splitData = (array, chunkSize) =>
-		Array(Math.ceil(array.length / chunkSize))
-			.fill()
-			.map((_, newsletter) => newsletter * chunkSize)
-			.map((begin) => array.slice(begin, begin + chunkSize));
 	return (
 
         <Layout>
