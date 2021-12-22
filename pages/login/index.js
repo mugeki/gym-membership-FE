@@ -16,6 +16,12 @@ export default function Login() {
 		const value = e.target.value;
 		setForm({ ...form, [name]: value });
 	};
+	const onBlur = (e) => {
+		const name = e.target.name;
+		const value = e.target.value;
+		const messages = validateForm(name, value);
+		setErrorMsg({ ...errorMsg, ...messages });
+	};
 	const onSubmit = (e) => {
 		e.preventDefault();
 		const newErrors = validateForm(undefined, undefined, form);
@@ -45,6 +51,7 @@ export default function Login() {
 						name="username"
 						value={form.username}
 						onChange={onChange}
+						onBlur={onBlur}
 						isInvalid={!!errorMsg.username}
 					/>
 					<Form.Control.Feedback type="invalid">
@@ -59,6 +66,7 @@ export default function Login() {
 						name="password"
 						value={form.password}
 						onChange={onChange}
+						onBlur={onBlur}
 						isInvalid={!!errorMsg.password}
 					/>
 					<Form.Control.Feedback type="invalid">
