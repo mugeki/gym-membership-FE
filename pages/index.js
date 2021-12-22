@@ -5,8 +5,8 @@ import NewsletterItem from "../components/elements/NewsletterItem";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import Link from "next/link";
-import dataClasses from "../mockdata/classes.json";
-import dataNewsletter from "../mockdata/newsletter.json";
+import dataClasses from "../mock_data/classes.json";
+import dataNewsletter from "../mock_data/newsletter.json";
 
 export default function Home() {
 	const splitData = (array, chunkSize) =>
