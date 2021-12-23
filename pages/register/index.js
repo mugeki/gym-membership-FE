@@ -91,6 +91,9 @@ export default function Register() {
 						isInvalid={!!errorMsg.full_name}
 						required
 					/>
+					<Form.Control.Feedback type="invalid">
+						{errorMsg.full_name}
+					</Form.Control.Feedback>
 				</FloatingLabel>
 				<FloatingLabel className="text-light mb-4" label="Password">
 					<Form.Control
