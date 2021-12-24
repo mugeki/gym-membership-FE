@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
-import { FloatingLabel, Form } from "react-bootstrap";
+import { FloatingLabel, Form, InputGroup } from "react-bootstrap";
 import useValidateForm from "../../hooks/useValidateForm";
 import styles from "../../styles/UserAuth.module.css";
 
@@ -69,6 +69,19 @@ export default function Login() {
 						onBlur={onBlur}
 						isInvalid={!!errorMsg.password}
 					/>
+					{/* <InputGroup>
+						<Form.Control
+							className={`${styles.input} rounded-0 border-0 border-bottom border-secondary shadow-none text-white bg-transparent`}
+							type="password"
+							placeholder=" "
+							name="password"
+							value={form.password}
+							onChange={onChange}
+							onBlur={onBlur}
+							isInvalid={!!errorMsg.password}
+						/>
+						<InputGroup.Text>Tess</InputGroup.Text>
+					</InputGroup> */}
 					<Form.Control.Feedback type="invalid">
 						{errorMsg.password}
 					</Form.Control.Feedback>
