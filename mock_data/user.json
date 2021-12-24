@@ -1,0 +1,16 @@
+{
+	"meta": {
+		"status": 200,
+		"message": "Success"
+	},
+	"data": {
+		"id": 1,
+		"username": "test123",
+		"email": "test@gmail.com",
+		"full_name": "John Doe",
+		"gender": "male",
+		"telephone": "082233445566",
+		"address": "Jl. Jalan No.1",
+		"url_image": "https://images.unsplash.com/photo-1528567339718-6ee254d88c4b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"
+	}
+}
