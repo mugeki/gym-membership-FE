@@ -1,0 +1,17 @@
+.item {
+	background-size: cover;
+	background-blend-mode: multiply;
+	cursor: pointer;
+	width: 48%;
+	height: 200px;
+	font-size: 12px;
+}
+
+.overlay {
+	background: linear-gradient(
+		0deg,
+		rgba(131, 39, 174, 0.8) 0%,
+		rgba(207, 81, 81, 0.8) 100%
+	);
+	z-index: 1;
+}

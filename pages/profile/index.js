@@ -13,8 +13,8 @@ export default function Profile() {
 	);
 	return (
 		<Layout>
-			<div className="container d-flex flex-column">
-				<div className="d-flex align-items-center py-3">
+			<div className="container d-flex flex-column p-4">
+				<div className="d-flex align-items-center">
 					<Image
 						src={dataUser.data.url_image}
 						width={80}
@@ -30,7 +30,7 @@ export default function Profile() {
 						Member
 					</span>
 				</div>
-				<div className="d-flex flex-column py-3">
+				<div className="d-flex flex-column py-5">
 					<Link href={router.pathname + "/edit"} passHref>
 						<div className="d-flex mb-4" style={{ cursor: "pointer" }}>
 							<Icon
