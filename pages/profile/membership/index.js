@@ -1,15 +1,11 @@
 import NavbarTop from "../../../components/elements/NavbarTop";
 import Layout from "../../../components/Layout";
-import dataUser from "../../../mock_data/user.json";
-import dataMembers from "../../../mock_data/members.json";
+import dataMember from "../../../mock_data/member_by_userid.json";
 import dataMemberships from "../../../mock_data/membership_products.json";
 import MembershipProduct from "../../../components/elements/MembershipProduct";
 
 export default function Membership() {
-	const isMember = dataMembers.data.filter(
-		(item) => item.user_id === dataUser.data.id
-	);
-	const expireDate = new Date(isMember[0]?.expired_date).toLocaleDateString(
+	const expireDate = new Date(dataMember?.data.expired_date).toLocaleDateString(
 		"en-GB"
 	);
 	return (
@@ -19,8 +15,8 @@ export default function Membership() {
 				<div className="d-flex flex-column border-0 border-bottom p-4 pb-3">
 					<p className="mb-1 fw-bolder">Membership Status</p>
 					<p className="mb-0" style={{ fontSize: "14px" }}>
-						{isMember[0] ? "Member, " : "Non-Member "}
-						<span className="fw-normal text-light" hidden={!isMember[0]}>
+						{dataMember ? "Member, " : "Non-Member "}
+						<span className="fw-normal text-light" hidden={!dataMember}>
 							Valid until: {expireDate}
 						</span>
 					</p>

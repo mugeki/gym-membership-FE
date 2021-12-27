@@ -3,14 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import Layout from "../../components/Layout";
 import dataUser from "../../mock_data/user.json";
-import dataMembers from "../../mock_data/members.json";
+import dataMember from "../../mock_data/member_by_userid.json";
 import { useRouter } from "next/router";
 
 export default function Profile() {
 	const router = useRouter();
-	const isMember = dataMembers.data.filter(
-		(item) => item.user_id === dataUser.data.id
-	);
 	return (
 		<Layout>
 			<div className="container d-flex flex-column p-4">
@@ -25,7 +22,7 @@ export default function Profile() {
 					<span className="mx-3 fs-5">{dataUser.data.full_name}</span>
 					<span
 						className="border border-secondary text-secondary rounded px-2"
-						hidden={!isMember[0]}
+						hidden={!dataMember}
 					>
 						Member
 					</span>
