@@ -1,0 +1,25 @@
+.container {
+	background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+		url("../public/auth-bg.jpg");
+	background-size: cover;
+	background-blend-mode: multiply;
+}
+
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active {
+	transition: background-color 5000s ease-in-out 0s;
+}
+
+.input:-webkit-autofill {
+	-webkit-text-fill-color: white !important;
+}
+
+.input::placeholder {
+	color: white !important;
+}
+
+.option {
+	color: var(--secondary);
+}
