@@ -1,6 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
 import NavbarTop from "../../../components/elements/NavbarTop";
 import Layout from "../../../components/Layout";
 import dataUser from "../../../mock_data/user.json";
@@ -9,7 +6,6 @@ import dataMemberships from "../../../mock_data/membership_products.json";
 import MembershipProduct from "../../../components/elements/MembershipProduct";
 
 export default function Membership() {
-	const router = useRouter();
 	const isMember = dataMembers.data.filter(
 		(item) => item.user_id === dataUser.data.id
 	);
