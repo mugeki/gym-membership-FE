@@ -1,5 +1,3 @@
-import Link from "next/link";
-import { Button } from "react-bootstrap";
 import { Icon } from "@iconify/react";
 import useFormatDatetime from "../../hooks/useFormatDatetime";
 
@@ -26,7 +24,12 @@ export default function ScheduleItem({ entries }) {
 				)}
 			</div>
 			{regexUrl.test(entries.location) && (
-				<Link href={entries.location} passHref>
+				<a
+					href={entries.location}
+					target="_blank"
+					rel="noopener noreferrer"
+					style={{ textDecoration: "none" }}
+				>
 					<div
 						className="d-flex flex-column align-items-center"
 						style={{ cursor: "pointer" }}
@@ -36,7 +39,7 @@ export default function ScheduleItem({ entries }) {
 							Join Meet
 						</p>
 					</div>
-				</Link>
+				</a>
 			)}
 		</div>
 	);
