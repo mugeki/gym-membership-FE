@@ -49,12 +49,12 @@ export default function Navbar() {
 				</div>
 			</Link>
 
-			<Link href="/newsletter" passHref>
+			<Link href="/newsletters" passHref>
 				<div
 					className={`${styles.navLink} d-flex flex-column align-items-center`}
 				>
 					<Icon icon="bx:bxs-news" data-align="center" width="20" height="20" />
-					<p className={styles.text}>Newsletter</p>
+					<p className={styles.text}>Newsletters</p>
 				</div>
 			</Link>
 
