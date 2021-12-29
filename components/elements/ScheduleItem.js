@@ -19,28 +19,19 @@ export default function ScheduleItem({ entries }) {
 					{dateStart.hours}:{dateStart.minutes} {dateStart.period} -{" "}
 					{dateEnd.hours}:{dateEnd.minutes} {dateEnd.period}
 				</p>
-				{!regexUrl.test(entries.location) && (
+				{!regexUrl.test(entries.location) ? (
 					<p className="m-0 text-light">{entries.location}</p>
+				) : (
+					<a
+						className="text-light"
+						href={entries.location}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						{entries.location}
+					</a>
 				)}
 			</div>
-			{regexUrl.test(entries.location) && (
-				<a
-					href={entries.location}
-					target="_blank"
-					rel="noopener noreferrer"
-					style={{ textDecoration: "none" }}
-				>
-					<div
-						className="d-flex flex-column align-items-center"
-						style={{ cursor: "pointer" }}
-					>
-						<Icon icon="logos:google-meet" height="40" width="40" />
-						<p className="m-0 text-light" style={{ fontSize: "14px" }}>
-							Join Meet
-						</p>
-					</div>
-				</a>
-			)}
 		</div>
 	);
 }
