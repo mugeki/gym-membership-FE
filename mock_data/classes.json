@@ -8,37 +8,49 @@
 			"id": 1,
 			"name": "Zumba",
 			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
-			"date": "2021-12-16T07:00:00.000Z"
+			"date_start": "2021-12-16T07:00:00.000Z",
+			"date_end": "2021-12-16T09:00:00.000Z",
+			"location": "https://meet.google.com/ktx-tiyu-oof"
 		},
 		{
 			"id": 2,
 			"name": "Another Zumba",
 			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
-			"date": "2021-12-17T08:00:00.000Z"
+			"date_start": "2021-12-17T08:00:00.000Z",
+			"date_end": "2021-12-17T10:00:00.000Z",
+			"location": "Jl. Jalan No. 11"
 		},
 		{
 			"id": 3,
 			"name": "Muscle Training",
 			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
-			"date": "2021-12-18T10:30:00.000Z"
+			"date_start": "2021-12-18T10:30:00.000Z",
+			"date_end": "2021-12-18T11:30:00.000Z",
+			"location": "Jl. Jalan No. 11"
 		},
 		{
 			"id": 4,
 			"name": "Another Zumba",
 			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
-			"date": "2021-12-17T08:00:00.000Z"
+			"date_start": "2021-12-17T08:00:00.000Z",
+			"date_end": "2021-12-17T09:00:00.000Z",
+			"location": "https://meet.google.com/ktx-tiyu-oof"
 		},
 		{
 			"id": 5,
 			"name": "Muscle Training",
 			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
-			"date": "2021-12-18T10:00:00.000Z"
+			"date_start": "2021-12-18T10:00:00.000Z",
+			"date_end": "2021-12-18T10:30:00.000Z",
+			"location": "Jl. Jalan No. 11"
 		},
 		{
 			"id": 6,
 			"name": "Zumba",
 			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
-			"date": "2021-12-16T07:30:00.000Z"
+			"date_start": "2021-12-16T07:30:00.000Z",
+			"date_end": "2021-12-16T08:30:00.000Z",
+			"location": "https://meet.google.com/ktx-tiyu-oof"
 		}
 	]
 }

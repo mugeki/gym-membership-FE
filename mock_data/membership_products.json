@@ -1,0 +1,29 @@
+{
+	"meta": {
+		"status": 200,
+		"message": "Success"
+	},
+	"data": [
+		{
+			"id": 1,
+			"name": "1 Month",
+			"price": 200000,
+			"period_time": 1,
+			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+		},
+		{
+			"id": 2,
+			"name": "3 Month",
+			"price": 550000,
+			"period_time": 3,
+			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+		},
+		{
+			"id": 3,
+			"name": "1 Year",
+			"price": 2050000,
+			"period_time": 12,
+			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+		}
+	]
+}
