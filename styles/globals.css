@@ -14,7 +14,8 @@ body {
 html,
 body,
 div#__next,
-div#__next > div:first-child {
+div#__next > div:first-child,
+div#__next > div.NavbarTop + div {
 	min-height: 100vh;
 }
 

@@ -7,6 +7,7 @@ import { Carousel } from "react-responsive-carousel";
 import Link from "next/link";
 import dataClasses from "../mock_data/classes.json";
 import dataNewsletter from "../mock_data/newsletter.json";
+import dataUser from "../mock_data/user.json";
 
 export default function Home() {
 	const splitData = (array, chunkSize) =>
@@ -25,7 +26,7 @@ export default function Home() {
 				</Head>
 
 				<main className="d-flex flex-column justify-content-center">
-					<h4 className="text-start mb-4">Hello, John Doe</h4>
+					<h4 className="text-start mb-4">Hello, {dataUser.data.full_name}</h4>
 					<h5 className="fw-bolder">Your Classes</h5>
 
 					<Carousel showIndicators={false} showThumbs={false}>
