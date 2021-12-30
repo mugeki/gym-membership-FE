@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button, Modal } from "react-bootstrap";
 
 export default function MemberOnlyModal(props) {
@@ -8,18 +9,17 @@ export default function MemberOnlyModal(props) {
 			aria-labelledby="contained-modal-title-vcenter"
 			centered
 		>
-			<Modal.Header closeButton>
-				<Modal.Title id="contained-modal-title-vcenter">
-					Modal heading
-				</Modal.Title>
-				<h4>Member Only Content</h4>
-				<p>
-					Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-					dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-					consectetur ac, vestibulum at eros.
+			<Modal.Body className="d-flex flex-column align-items-center py-4">
+				<h4>Member Content</h4>
+				<p className="text-center">
+					You've discovered a member exclusive content
 				</p>
-				<Button onClick={props.onHide}>Close</Button>
-			</Modal.Header>
+				<Link href="/profile/membership" passHref>
+					<Button variant="primary rounded-pill py-2 px-4">
+						Get Membership
+					</Button>
+				</Link>
+			</Modal.Body>
 		</Modal>
 	);
 }

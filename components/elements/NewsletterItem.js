@@ -1,32 +1,55 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import useFormatDatetime from "../../hooks/useFormatDatetime";
 import styles from "../../styles/NewsletterItem.module.css";
+import MemberOnlyModal from "./MemberOnlyModal";
+import dataMember from "../../mock_data/member_by_userid.json";
 
 export default function NewsletterItem({ entries }) {
+	const [modalShow, setModalShow] = useState(false);
 	const { formatDatetime } = useFormatDatetime();
 	const date = formatDatetime(entries.created_at);
+	const onClick = () => {
+		if (!dataMember) {
+			setModalShow(true);
+		}
+	};
+	const href =
+		entries.member_only && !dataMember ? "" : `/newsletters/${entries.id}`;
 	return (
-		<Link href={`/newsletters/${entries.id}`} passHref>
-			<div
-				className={`${styles.item} position-relative d-flex align-items-end text-white text-center rounded mb-3`}
-			>
-				<Image
-					src={entries.url_image}
-					layout="fill"
-					objectFit="cover"
-					alt="class"
-					className="rounded"
-				/>
+		<>
+			<Link href={href} passHref scroll={!entries.member_only || !!dataMember}>
 				<div
-					className={`${styles.overlay} d-flex flex-column align-items-start w-100 p-3 rounded`}
+					className={`${styles.item} position-relative d-flex align-items-end text-white text-center rounded mb-3`}
+					onClick={entries.member_only ? () => onClick() : undefined}
 				>
-					<p className="mb-0 fw-bolder fs-6">{entries.title}</p>
-					<p className="mb-0">
-						{date.day} {date.month} {date.year}
-					</p>
+					<Image
+						src={entries.url_image}
+						layout="fill"
+						objectFit="cover"
+						alt="class"
+						className="rounded"
+					/>
+					<div
+						className={`${styles.overlay} d-flex flex-column align-items-start justify-content-end h-100 w-100 p-3 rounded`}
+					>
+						<p
+							className="mb-1 bg-secondary px-2 py- rounded-pill shadow-sm"
+							hidden={!entries.member_only}
+						>
+							Member Only
+						</p>
+						<p className="mb-0 fw-bolder fs-6 text-start text-truncate w-100">
+							{entries.title}
+						</p>
+						<p className="mb-0">
+							{date.day} {date.month} {date.year}
+						</p>
+					</div>
 				</div>
-			</div>
-		</Link>
+			</Link>
+			<MemberOnlyModal show={modalShow} onHide={() => setModalShow(false)} />
+		</>
 	);
 }
