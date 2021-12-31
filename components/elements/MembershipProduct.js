@@ -11,6 +11,7 @@ export default function MembershipProduct({ entries }) {
 				layout="fill"
 				objectFit="cover"
 				alt="class"
+				className="rounded"
 			/>
 			<div
 				className={`${styles.overlay} d-flex flex-column align-items-start w-100 h-100 p-3 rounded`}
