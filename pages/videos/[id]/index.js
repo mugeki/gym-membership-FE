@@ -8,7 +8,7 @@ export async function getServerSideProps(context) {
 	const API_URL = "https://youtube.googleapis.com/youtube/v3/videos";
 	const API_KEY = process.env.YOUTUBE_API_KEY;
 	const res = await axios.get(
-		`${API_URL}?part=snippet&id=${context.params.id}&key=${API_KEY}`
+		`${API_URL}?part=snippet&id=${context.query.id}&key=${API_KEY}`
 	);
 	const data = await res.data.items[0];
 	if (!data) {

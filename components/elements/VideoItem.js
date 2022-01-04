@@ -18,7 +18,17 @@ export default function VideoItem({ entries }) {
 	const href = entries.member_only && !dataMember ? "" : `/videos/${videoID}`;
 	return (
 		<>
-			<Link href={href} passHref scroll={!entries.member_only || !!dataMember}>
+			<Link
+				href={{
+					pathname: href,
+					query: {
+						videoID: videoID,
+					},
+				}}
+				as={`/videos/${entries.id}`}
+				passHref
+				scroll={!entries.member_only || !!dataMember}
+			>
 				<div
 					className={`${styles.item} position-relative d-flex text-white text-center rounded mb-3`}
 					onClick={entries.member_only ? () => onClick() : undefined}
