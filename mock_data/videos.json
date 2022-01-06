@@ -1,0 +1,94 @@
+{
+	"meta": {
+		"status": 200,
+		"message": "Success"
+	},
+	"page": {
+		"offset": 0,
+		"limit": 10,
+		"total_data": 20
+	},
+	"data": [
+		{
+			"id": 1,
+			"title": "Abs Workout in 2 weeks",
+			"classification": "daily workout",
+			"admin_id": 1,
+			"member_only": false,
+			"url": "https://www.youtube.com/embed/8PwoytUU06g",
+			"created_at": "2021-12-17T08:00:00.000Z"
+		},
+		{
+			"id": 2,
+			"title": "Abs Workout in 2 weeks",
+			"classification": "daily workout",
+			"admin_id": 1,
+			"member_only": false,
+			"url": "https://www.youtube.com/embed/8PwoytUU06g",
+			"created_at": "2021-12-17T08:00:00.000Z"
+		},
+		{
+			"id": 3,
+			"title": "Abs Workout in 2 weeks",
+			"classification": "daily workout",
+			"admin_id": 1,
+			"member_only": false,
+			"url": "https://www.youtube.com/embed/8PwoytUU06g",
+			"created_at": "2021-12-17T08:00:00.000Z"
+		},
+		{
+			"id": 4,
+			"title": "Abs Workout in 2 weeks",
+			"classification": "daily workout",
+			"admin_id": 1,
+			"member_only": true,
+			"url": "https://www.youtube.com/embed/8PwoytUU06g",
+			"created_at": "2021-12-17T08:00:00.000Z"
+		},
+		{
+			"id": 5,
+			"title": "Abs Workout in 2 weeks",
+			"classification": "daily workout",
+			"admin_id": 1,
+			"member_only": true,
+			"url": "https://www.youtube.com/embed/8PwoytUU06g",
+			"created_at": "2021-12-17T08:00:00.000Z"
+		},
+		{
+			"id": 7,
+			"title": "Abs Workout in 2 weeks",
+			"classification": "daily workout",
+			"admin_id": 1,
+			"member_only": false,
+			"url": "https://www.youtube.com/embed/8PwoytUU06g",
+			"created_at": "2021-12-17T08:00:00.000Z"
+		},
+		{
+			"id": 8,
+			"title": "Abs Workout in 2 weeks",
+			"classification": "daily workout",
+			"admin_id": 1,
+			"member_only": true,
+			"url": "https://www.youtube.com/embed/8PwoytUU06g",
+			"created_at": "2021-12-17T08:00:00.000Z"
+		},
+		{
+			"id": 9,
+			"title": "Abs Workout in 2 weeks",
+			"classification": "daily workout",
+			"admin_id": 1,
+			"member_only": false,
+			"url": "https://www.youtube.com/embed/8PwoytUU06g",
+			"created_at": "2021-12-17T08:00:00.000Z"
+		},
+		{
+			"id": 10,
+			"title": "Abs Workout in 2 weeks",
+			"classification": "daily workout",
+			"admin_id": 1,
+			"member_only": true,
+			"url": "https://www.youtube.com/embed/8PwoytUU06g",
+			"created_at": "2021-12-17T08:00:00.000Z"
+		}
+	]
+}
