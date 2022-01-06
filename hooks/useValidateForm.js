@@ -20,9 +20,9 @@ export default function useValidateForm() {
 			} else if (name === "email" && regexEmail.test(value)) {
 				messages = { [name]: "" };
 			}
-			if (name === "full_name" && !regexName.test(value)) {
+			if (name === "fullname" && !regexName.test(value)) {
 				messages = { [name]: "Min. 3 character" };
-			} else if (name === "full_name" && regexName.test(value)) {
+			} else if (name === "fullname" && regexName.test(value)) {
 				messages = { [name]: "" };
 			}
 			if (name === "username" && !regexUsername.test(value)) {

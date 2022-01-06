@@ -5,9 +5,21 @@ import Layout from "../../components/Layout";
 import dataUser from "../../mock_data/user.json";
 import dataMember from "../../mock_data/member_by_userid.json";
 import { useRouter } from "next/router";
+import Cookies from "universal-cookie";
+import { useDispatch } from "react-redux";
+import { clearUser } from "../../store/userSlice";
+import { useSelector } from "react-redux";
 
 export default function Profile() {
+	const user = useSelector((state) => state.user);
+	const dispatch = useDispatch();
+	const cookies = new Cookies();
 	const router = useRouter();
+	const onClick = () => {
+		dispatch(clearUser());
+		cookies.remove("token");
+		router.push("/login");
+	};
 	return (
 		<Layout>
 			<div className="container d-flex flex-column p-4">
@@ -64,6 +76,14 @@ export default function Profile() {
 							<span className="ms-2">Transactions</span>
 						</div>
 					</Link>
+					<div
+						className="d-flex mb-4"
+						style={{ cursor: "pointer" }}
+						onClick={onClick}
+					>
+						<Icon icon="cil:account-logout" color="#5965ce" width="20" />
+						<span className="ms-2">Logout</span>
+					</div>
 				</div>
 			</div>
 		</Layout>
