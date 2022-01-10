@@ -44,11 +44,13 @@
 	width: 80px;
 	height: 80px;
 	border-radius:5px;
+	
 }
 
-.detailPayment{
-	position:relative;
-	width:400px
+.bgGrey{
+	/* position:relative;	 */
+	/* width:300px */
+	background-color: rgb(231, 230, 230) !important;
 }
 
 .warningText{

@@ -7,26 +7,26 @@ import NavbarTop from "../../../../../components/elements/NavbarTop";
 import paymentData from "../../../../../mock_data/paymentAccount.json";
 import {useState} from 'react'
 
-// export async function getServerSideProps() {
-// 	const API_URL =
-// 		"http://ec2-3-142-219-49.us-east-2.compute.amazonaws.com:8000";
-// 	const res = await axios.get(`${API_URL}/users/videos`).catch((error) => {
-// 		if (error.response) {
-// 			return {
-// 				props: { error: "An error occured, please try again later" },
-// 			};
-// 		}
-// 	});
-// 	if (res.status === 204) {
-// 		return {
-// 			props: { error: "No Classes" },
-// 		};
-// 	}
-// 	const data = await res.data;
-// 	return {
-// 		props: { data },
-// 	};
-// }
+export async function getServerSideProps() {
+	const API_URL =
+		"http://ec2-3-142-219-49.us-east-2.compute.amazonaws.com:8000";
+	const res = await axios.get(`${API_URL}/users/videos`).catch((error) => {
+		if (error.response) {
+			return {
+				props: { error: "An error occured, please try again later" },
+			};
+		}
+	});
+	if (res.status === 204) {
+		return {
+			props: { error: "No Classes" },
+		};
+	}
+	const data = await res.data;
+	return {
+		props: { data },
+	};
+}
 
 export default function BookClass({ data, error }) {
     const [idActive, setIdActive]=useState(1)
@@ -34,14 +34,15 @@ export default function BookClass({ data, error }) {
 
 	return (
 		<Layout>
-            <NavbarTop title = "Book Class"/>
+            <NavbarTop title={"Book Class"}/>
 			<div className="container p-4 mb-5 d-flex flex-column align-content-center">
 				<div className="d-flex flex-row justify-content-between ">
                     {paymentData.data.map((item) => (
-						<PaymentItem key={item.id} entries={item} setIdActive={setIdActive} />
+						<PaymentItem key={item.id} entries={item} setIdActive={setIdActive} idActive={idActive} />
 					))}
+                    
 				</div>
-                <div className="card p-3 rounded-3">
+                <div className={`card p-3 rounded-3 ${styles.bgGrey}`}>
                     <p className="fw-bold mb-0">Transfer to</p>
                     <p className="mb-0">{paymentData.data[idActive-1].name}</p>
                     <p className="">{`${paymentData.data[idActive-1].no_card} (a/n ${paymentData.data[idActive-1].owner})`}</p>

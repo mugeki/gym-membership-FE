@@ -28,7 +28,6 @@ import styles from "../../../../styles/ClassItem.module.css";
 export default function ClassById() {
     const { formatDatetime} = useFormatDatetime();
     const listSchedule = dataClass.data.date.split(";")
-    // const [scheduleResult, setScheduleResult] = useState([]);
     let listScheduleFormatted=[]
     for (var i = 0; i < listSchedule.length;i++){
         var oneSchedule = listSchedule[i].split(",")
@@ -41,16 +40,6 @@ export default function ClassById() {
     const price = nf.format(dataClass.data.price)
     const router = useRouter()
     const href =`/classes/offline/${dataClass.data.id}/book-class`
-    // console.log(listScheduleFormatted[0])
-	// const description = data.description.split("\n").map((str, i) => (
-	// 	<p
-	// 		key={i}
-	// 		className="mw-100 text-truncate"
-	// 		style={{ fontSize: "14px", whiteSpace: "normal" }}
-	// 	>
-	// 		{str}
-	// 	</p>
-	// ));
 	return (
 		<Layout>
 			<NavbarTop title={"Offline Classes"} />
