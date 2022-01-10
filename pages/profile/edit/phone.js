@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import NavbarTop from "../../../components/elements/NavbarTop";
 import Layout from "../../../components/Layout";
 import useValidateForm from "../../../hooks/useValidateForm";
 
 export default function EditPhone() {
-	const [form, setForm] = useState({ telephone: "" });
+	const user = useSelector((state) => state.user);
+	const [form, setForm] = useState({ telephone: user.telephone });
 	const [errorMsg, setErrorMsg] = useState({});
 	const { validateForm } = useValidateForm();
 	const onChange = (e) => {

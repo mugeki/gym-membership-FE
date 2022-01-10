@@ -11,7 +11,7 @@ module.exports = withPWA({
 	images: {
 		domains: [
 			"images.unsplash.com",
-			"ec2-3-142-219-49.us-east-2.compute.amazonaws.com",
+			"firebasestorage.googleapis.com",
 			"lh3.googleusercontent.com",
 		],
 	},
@@ -20,5 +20,6 @@ module.exports = withPWA({
 		BE_API_URL: process.env.BE_API_URL,
 		BE_API_URL_LOCAL: process.env.BE_API_URL_LOCAL,
 		JWT_SECRET: process.env.JWT_SECRET,
+		DEFAULT_PROFILE: process.env.DEFAULT_PROFILE,
 	},
 });

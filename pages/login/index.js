@@ -51,19 +51,7 @@ export default function Login() {
 		}
 	};
 	// const onSuccess = (res) => {
-	// 	// const API_URL = process.env.BE_API_URL;
-	// 	const API_URL = "http://localhost:8000";
-	// 	axios
-	// 		.get("https://www.googleapis.com/admin/directory/v1/users/userKey", {
-	// 			headers: {
-	// 				Authorization: "Bearer " + cookies.get("access_token"),
-	// 			},
-	// 		})
-	// 		.then((resGetUser) => {
-	// 			console.log(resGetUser);
-	// 			// form.password = "aaaaaaaaaaaaaaa";
-	// 		})
-	// 		.catch((error) => console.log(error));
+	// 	const API_URL = process.env.BE_API_URL_LOCAL;
 	// 	axios
 	// 		.post(`${API_URL}/users/login`, {
 	// 			...form,

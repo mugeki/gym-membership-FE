@@ -1,10 +1,23 @@
 import NavbarTop from "../../../components/elements/NavbarTop";
 import Layout from "../../../components/Layout";
 import dataMember from "../../../mock_data/member_by_userid.json";
-import dataMemberships from "../../../mock_data/membership_products.json";
 import MembershipProduct from "../../../components/elements/MembershipProduct";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Membership() {
+	const [products, setProducts] = useState();
+
+	useEffect(() => {
+		const API_URL = process.env.BE_API_URL_LOCAL;
+		axios
+			.get(`${API_URL}/membership-products`)
+			.then((res) => {
+				setProducts(res.data.data);
+			})
+			.catch((error) => console.log(error));
+	}, [setProducts]);
+
 	const expireDate = new Date(dataMember?.data.expired_date).toLocaleDateString(
 		"en-GB"
 	);
@@ -27,7 +40,7 @@ export default function Membership() {
 						Available Plans:
 					</p>
 					<div className="d-flex flex-wrap justify-content-between py-2">
-						{dataMemberships.data.map((item) => (
+						{products?.map((item) => (
 							<MembershipProduct key={item.id} entries={item} />
 						))}
 					</div>

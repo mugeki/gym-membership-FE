@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 import NavbarTop from "../../../components/elements/NavbarTop";
 import Layout from "../../../components/Layout";
 import dataUser from "../../../mock_data/user.json";
 
 export default function EditProfile() {
+	const user = useSelector((state) => state.user);
 	const router = useRouter();
 	return (
 		<Layout>
@@ -13,13 +15,13 @@ export default function EditProfile() {
 			<div className="container d-flex flex-column align-items-center px-4">
 				<div className="d-flex flex-column align-items-center py-4">
 					<Image
-						src={dataUser.data.url_image}
+						src={user.url_image || process.env.DEFAULT_PROFILE}
 						width={80}
 						height={80}
 						alt="profile"
 						className="rounded-circle"
 					/>
-					<p className="mt-2 fs-5">{dataUser.data.full_name}</p>
+					<p className="mt-2">{user.fullname}</p>
 				</div>
 				<Link href={router.pathname + "/password"} passHref>
 					<div

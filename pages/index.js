@@ -22,13 +22,6 @@ export default function Home() {
 
 	let chunks = splitData(dataClasses.data, 3);
 
-	// axios
-	// 	.get(`${API_URL}/article`)
-	// 	.then((res) => {
-	// 		setNewsletters(res.data.data);
-	// 	})
-	// 	.then(console.log(newsletters))
-	// 	.catch((error) => console.log(error));
 	useEffect(() => {
 		const API_URL = process.env.BE_API_URL_LOCAL;
 		axios
@@ -36,7 +29,6 @@ export default function Home() {
 			.then((res) => {
 				setNewsletters(res.data.data);
 			})
-			.then(console.log(newsletters))
 			.catch((error) => console.log(error));
 	}, [setNewsletters]);
 	return (

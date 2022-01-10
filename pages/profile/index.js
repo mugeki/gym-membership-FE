@@ -2,7 +2,6 @@ import { Icon } from "@iconify/react";
 import Image from "next/image";
 import Link from "next/link";
 import Layout from "../../components/Layout";
-import dataUser from "../../mock_data/user.json";
 import dataMember from "../../mock_data/member_by_userid.json";
 import { useRouter } from "next/router";
 import Cookies from "universal-cookie";
@@ -25,13 +24,14 @@ export default function Profile() {
 			<div className="container d-flex flex-column p-4">
 				<div className="d-flex align-items-center">
 					<Image
-						src={dataUser.data.url_image}
-						width={80}
-						height={80}
+						src={user.url_image || process.env.DEFAULT_PROFILE}
+						width={70}
+						height={70}
 						alt="profile"
+						objectFit="cover"
 						className="rounded-circle"
 					/>
-					<span className="mx-3 fs-5">{dataUser.data.full_name}</span>
+					<span className="mx-3 text-truncate">{user.fullname}</span>
 					<span
 						className="border border-secondary text-secondary rounded px-2"
 						hidden={!dataMember}

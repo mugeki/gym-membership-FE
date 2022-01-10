@@ -7,7 +7,7 @@ export const userSlice = createSlice({
 		email: "",
 		username: "",
 		fullname: "",
-		img_url: "",
+		url_image: "",
 		address: "",
 		telephone: "",
 		gender: "",
@@ -18,7 +18,7 @@ export const userSlice = createSlice({
 			state.email = action.payload.email;
 			state.username = action.payload.username;
 			state.fullname = action.payload.fullname;
-			state.img_url = action.payload.img_url;
+			state.url_image = action.payload.url_image;
 			state.telephone = action.payload.telephone;
 			state.address = action.payload.address;
 			state.gender = action.payload.gender;
@@ -28,7 +28,7 @@ export const userSlice = createSlice({
 			state.email = "";
 			state.username = "";
 			state.fullname = "";
-			state.img_url = "";
+			state.url_image = "";
 			state.address = "";
 			state.telephone = "";
 			state.gender = "";
