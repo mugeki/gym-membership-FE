@@ -1,0 +1,14 @@
+.item {
+	background-size: cover;
+	background-blend-mode: multiply;
+	cursor: pointer;
+	width: 100%;
+	height: 200px;
+	font-size: 12px;
+}
+
+.overlay {
+	background: rgba(0, 0, 0, 0.3);
+	z-index: 1;
+	max-width: 60%;
+}

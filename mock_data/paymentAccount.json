@@ -1,0 +1,36 @@
+{
+	"meta": {
+		"status": 200,
+		"message": "Success"
+	},
+	"data": [
+		{
+			"id": 1,
+			"name": "BRI",
+			"no_card": "75757182839481727",
+			"owner": "PT STR HEALTHY, BRI",
+			"desc": "this payment need a manual confirmation by uploading image of receipt"
+		},
+		{
+			"id": 2,
+			"name": "BCA",
+			"no_card": "00123884848",
+			"owner": "PT STR HEALTHY, BCA",
+			"desc": "this payment need a manual confirmation by uploading image of receipt"
+		},
+        {
+			"id": 3,
+			"name": "LINKAJA",
+			"no_card": "081234567899",
+			"owner": "SDR STR HEALTHY, LINKAJA",
+			"desc": "this payment need a manual confirmation by uploading image of receipt"
+		},
+        {
+			"id": 4,
+			"name": "GOPAY",
+			"no_card": "081234567899",
+			"owner": "SDR STR HEALTHY, GOPAY",
+			"desc": "this payment need a manual confirmation by uploading image of receipt"
+		}
+	]
+}

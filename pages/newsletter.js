@@ -1,6 +1,6 @@
 import Newsletter from "../components/elements/NewsletterItem";
 import Layout from "../components/Layout";
-import dataNewsletter from "../mockdata/newsletter.json";
+import dataNewsletter from "../mock_data/newsletter.json";
 
 
 export default function newsletter (){
