@@ -13,6 +13,7 @@ module.exports = withPWA({
 			"images.unsplash.com",
 			"firebasestorage.googleapis.com",
 			"lh3.googleusercontent.com",
+			"img.youtube.com",
 		],
 	},
 	env: {

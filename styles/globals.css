@@ -27,3 +27,7 @@ a {
 * {
 	box-sizing: border-box;
 }
+
+.modal-dialog {
+	max-width: 450px !important;
+}

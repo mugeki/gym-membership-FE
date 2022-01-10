@@ -8,9 +8,6 @@
 }
 
 .overlay {
-	background: linear-gradient(
-		rgba(255, 255, 255, 0) 0%,
-		rgba(0, 0, 0, 0.6) 35%
-	);
+	background: rgba(0, 0, 0, 0.6);
 	z-index: 1;
 }

@@ -3,30 +3,67 @@
 		"status": 200,
 		"message": "Success"
 	},
+	"page": {
+		"offset": 0,
+		"limit": 10,
+		"total_data": 8
+	},
 	"data": [
 		{
 			"id": 1,
-			"name": "Coaching Personal",
+			"title": "Coaching Personal",
 			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
-			"date": "2021-12-18T07:00:00.000Z"
+			"created_at": "2021-12-18T07:00:00.000Z",
+			"member_only": true
 		},
 		{
 			"id": 2,
-			"name": "10 Tips to Build Muscle",
+			"title": "10 Tips to Build Muscle",
 			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
-			"date": "2021-12-18T08:00:00.000Z"
+			"created_at": "2021-12-18T08:00:00.000Z",
+			"member_only": true
 		},
 		{
 			"id": 3,
-			"name": "Staying Healthy at Home",
+			"title": "Staying Healthy at Home",
 			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
-			"date": "2021-12-17T10:00:00.000Z"
+			"created_at": "2021-12-17T10:00:00.000Z",
+			"member_only": false
 		},
 		{
 			"id": 4,
-			"name": "Diet Tips",
+			"title": "Diet Tips",
 			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
-			"date": "2021-12-16T10:00:00.000Z"
+			"created_at": "2021-12-16T10:00:00.000Z",
+			"member_only": false
+		},
+		{
+			"id": 5,
+			"title": "Coaching Personal",
+			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
+			"created_at": "2021-12-18T07:00:00.000Z",
+			"member_only": true
+		},
+		{
+			"id": 6,
+			"title": "10 Tips to Build Muscle",
+			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
+			"created_at": "2021-12-18T08:00:00.000Z",
+			"member_only": true
+		},
+		{
+			"id": 7,
+			"title": "Staying Healthy at Home",
+			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
+			"created_at": "2021-12-17T10:00:00.000Z",
+			"member_only": false
+		},
+		{
+			"id": 8,
+			"title": "Diet Tips",
+			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
+			"created_at": "2021-12-16T10:00:00.000Z",
+			"member_only": false
 		}
 	]
 }

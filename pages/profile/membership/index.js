@@ -24,7 +24,7 @@ export default function Membership() {
 	return (
 		<Layout>
 			<NavbarTop title={"Membership"} />
-			<div className="d-flex flex-column">
+			<div className="d-flex flex-column pb-5 mb-4">
 				<div className="d-flex flex-column border-0 border-bottom p-4 pb-3">
 					<p className="mb-1 fw-bolder">Membership Status</p>
 					<p className="mb-0" style={{ fontSize: "14px" }}>
