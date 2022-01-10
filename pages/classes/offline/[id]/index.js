@@ -25,7 +25,7 @@ import styles from "../../../../styles/ClassItem.module.css";
 // 	};
 // }
 
-export default function Class() {
+export default function ClassById() {
     const { formatDatetime} = useFormatDatetime();
     const listSchedule = dataClass.data.date.split(";")
     // const [scheduleResult, setScheduleResult] = useState([]);
