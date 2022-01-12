@@ -1,7 +1,7 @@
 // import axios from "axios";
 import NavbarTop from "../../../../components/elements/NavbarTop";
 import Layout from "../../../../components/Layout";
-import useFormatDatetime from "../../../../hooks/useFormatDatetime";
+import useGetDateList from "../../../../hooks/useGetDateList";
 import dataClass from "../../../../mock_data/class_by_id.json";
 import { useRouter } from 'next/router'
 import React, { useState } from 'react';
@@ -26,16 +26,9 @@ import styles from "../../../../styles/ClassItem.module.css";
 // }
 
 export default function ClassById() {
-    const { formatDatetime} = useFormatDatetime();
-    const listSchedule = dataClass.data.date.split(";")
-    let listScheduleFormatted=[]
-    for (var i = 0; i < listSchedule.length;i++){
-        var oneSchedule = listSchedule[i].split(",")
-        var dateStart = formatDatetime(oneSchedule[0])
-        var dateEnd = formatDatetime(oneSchedule[1])
-        var scheduleFormatted = `${dateStart.dayName},${dateStart.day} ${dateStart.month} ${dateStart.year} (${dateStart.hours}:${dateStart.minutes}${dateStart.period} - ${dateEnd.hours}:${dateEnd.minutes}${dateEnd.period})`
-        listScheduleFormatted.push(scheduleFormatted)
-    }
+    const { GetDateList } = useGetDateList();
+    const listScheduleFormatted = GetDateList(dataClass.data.date)
+
     const nf = new Intl.NumberFormat('en-US');
     const price = nf.format(dataClass.data.price)
     const router = useRouter()
@@ -45,9 +38,6 @@ export default function ClassById() {
 			<NavbarTop title={"Offline Classes"} />
 			<div className="container d-flex flex-column justify-content-center p-4 mb-5">
 				<h6 className="fw-bolder mb-0 fs-5">{dataClass.data.name}</h6>
-				{/* <p className="text-light" style={{ fontSize: "14px" }}>
-					{date.day} {date.month} {date.year}
-				</p> */}
                 
                 <div className={`${styles.item} mt-3 bg-dark position-relative d-flex align-items-end text-white text-center rounded-3 mb-3`}>
                     <Image

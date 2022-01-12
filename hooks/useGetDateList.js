@@ -1,20 +1,20 @@
-//"[2021-12-16T07:00:00.000Z,2021-12-16T09:08:00.000Z],[2021-12-17T07:00:00.000Z,2021-12-17T09:08:00.000Z],[2021-12-18T07:00:00.000Z,2021-12-18T09:08:00.000Z]"
-import useFormatDatetime from "./useFormatDatetime";
-import React, { useState } from 'react';
+import useFormatDatetime from "./useFormatDatetime"
 
 export default function useGetDateList() {
-	const GetDateList = (listSchedule) => {
-        const [scheduleResult, setScheduleResult] = useState([]);
-        for (var i = 0; i < listSchedule.length;i++){
-			var dateStart = useFormatDatetime(listSchedule[i][0])
-			var dateEnd = useFormatDatetime(listSchedule[i][1])
-            var schedule = `${dateStart.dayName}, ${dateStart.day}, ${dateStart.month},  , ${dateStart.year} - ${dateEnd.dayName}, ${dateEnd.day}, ${dateEnd.month}, ${dateEnd.year}`
-            setScheduleResult(...scheduleList,schedule)
-        }
-		return {
-			scheduleResult
-		};
+	
+	const GetDateList = (scheduleString) => {
+		const { formatDatetime} = useFormatDatetime();
+        const listSchedule = scheduleString.split(";")
+		let listScheduleFormatted=[]
+    	for (var i = 0; i < listSchedule.length;i++){
+			var oneSchedule = listSchedule[i].split(",")
+			var dateStart = formatDatetime(oneSchedule[0])
+			var dateEnd = formatDatetime(oneSchedule[1])
+			var scheduleFormatted = `${dateStart.dayName},${dateStart.day} ${dateStart.month} ${dateStart.year} (${dateStart.hours}:${dateStart.minutes}${dateStart.period} - ${dateEnd.hours}:${dateEnd.minutes}${dateEnd.period})`
+			listScheduleFormatted.push(scheduleFormatted)
+    	}
+		return listScheduleFormatted
 	};
 
-	return { GetDateList };
+	return {GetDateList};
 }
