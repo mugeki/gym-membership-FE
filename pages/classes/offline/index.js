@@ -38,7 +38,7 @@ export default function Classes({ data, error }) {
 		<Layout>
 			<div className="container p-4 mb-5">
 				<div className="d-flex flex-column justify-content-center ">
-					<h4 className="text-start fw-bolder">Online Classes</h4>
+					<h4 className="text-start fw-bolder">Offline Classes</h4>
                     {dataClasses.data.map((item) => (
 						<ClassItem key={item.id} entries={item} />
 					))}
