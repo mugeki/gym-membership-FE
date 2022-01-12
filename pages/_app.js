@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Custom.css";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { store, persistor } from "../store/store";
+import { store, persistor, wrapper } from "../store/store";
 import { parseCookies } from "nookies";
 import Router from "next/router";
 let jwt = require("jsonwebtoken");

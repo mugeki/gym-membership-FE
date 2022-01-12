@@ -7,10 +7,12 @@ export const userSlice = createSlice({
 		email: "",
 		username: "",
 		fullname: "",
-		url_image: "",
+		url_image: process.env.DEFAULT_PROFILE,
 		address: "",
 		telephone: "",
 		gender: "",
+		is_member: false,
+		expire_date: "",
 	},
 	reducers: {
 		storeUser: (state, action) => {
@@ -22,16 +24,20 @@ export const userSlice = createSlice({
 			state.telephone = action.payload.telephone;
 			state.address = action.payload.address;
 			state.gender = action.payload.gender;
+			state.is_member = action.payload.is_member;
+			state.expire_date = action.payload.expire_date;
 		},
 		clearUser: (state) => {
 			state.id = 0;
 			state.email = "";
 			state.username = "";
 			state.fullname = "";
-			state.url_image = "";
+			state.url_image = process.env.DEFAULT_PROFILE;
 			state.address = "";
 			state.telephone = "";
 			state.gender = "";
+			state.is_member = false;
+			state.expire_date = "";
 		},
 	},
 });

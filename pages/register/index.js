@@ -18,6 +18,7 @@ export default function Register() {
 		password: "",
 		telephone: "",
 		gender: "male",
+		url_image: process.env.DEFAULT_PROFILE,
 	});
 	const [errorMsg, setErrorMsg] = useState({});
 	const onChange = (e) => {

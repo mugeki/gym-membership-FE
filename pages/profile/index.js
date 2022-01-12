@@ -2,7 +2,6 @@ import { Icon } from "@iconify/react";
 import Image from "next/image";
 import Link from "next/link";
 import Layout from "../../components/Layout";
-import dataMember from "../../mock_data/member_by_userid.json";
 import { useRouter } from "next/router";
 import Cookies from "universal-cookie";
 import { useDispatch } from "react-redux";
@@ -15,26 +14,26 @@ export default function Profile() {
 	const cookies = new Cookies();
 	const router = useRouter();
 	const onClick = () => {
-		dispatch(clearUser());
-		cookies.remove("token");
 		router.push("/login");
+		cookies.remove("token");
+		dispatch(clearUser());
 	};
 	return (
 		<Layout>
 			<div className="container d-flex flex-column p-4">
-				<div className="d-flex align-items-center">
+				<div className="d-flex align-items-center flex-nowrap">
 					<Image
-						src={user.url_image || process.env.DEFAULT_PROFILE}
-						width={70}
-						height={70}
+						src={user.url_image}
+						width={55}
+						height={55}
 						alt="profile"
 						objectFit="cover"
-						className="rounded-circle"
+						className="rounded-circle align-self-center"
 					/>
 					<span className="mx-3 text-truncate">{user.fullname}</span>
 					<span
 						className="border border-secondary text-secondary rounded px-2"
-						hidden={!dataMember}
+						hidden={!user.is_member}
 					>
 						Member
 					</span>
