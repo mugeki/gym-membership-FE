@@ -33,7 +33,7 @@ export default function useHandleLogin() {
 			});
 
 		const hash = Base64.encode(res.token);
-		cookies.set("token", hash);
+		cookies.set("token", hash, { path: "/", domain: window.location.hostname });
 		dispatch(storeUser(userData));
 		router.push("/");
 	};

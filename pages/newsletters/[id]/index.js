@@ -1,13 +1,11 @@
 import axios from "axios";
-import { Base64 } from "js-base64";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import Cookies from "universal-cookie";
 import NavbarTop from "../../../components/elements/NavbarTop";
 import Layout from "../../../components/Layout";
 import useFormatDatetime from "../../../hooks/useFormatDatetime";
-import { handleUnauthorized } from "../../../utils/helper";
+import { generateAxiosConfig, handleUnauthorized } from "../../../utils/helper";
 
 export default function Newsletter() {
 	const router = useRouter();
@@ -16,15 +14,9 @@ export default function Newsletter() {
 
 	useEffect(() => {
 		if (!router.query.title) {
-			const token = Base64.decode(new Cookies().get("token"));
 			const API_URL = process.env.BE_API_URL_LOCAL;
-			const config = {
-				headers: {
-					Authorization: "Bearer " + token,
-				},
-			};
 			axios
-				.get(`${API_URL}/articles/${router.query.id}`, config)
+				.get(`${API_URL}/articles/${router.query.id}`, generateAxiosConfig())
 				.then((res) => {
 					setNewsletter(res.data.data);
 				})

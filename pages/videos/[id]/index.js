@@ -6,7 +6,7 @@ import Cookies from "universal-cookie";
 import NavbarTop from "../../../components/elements/NavbarTop";
 import Layout from "../../../components/Layout";
 import useFormatDatetime from "../../../hooks/useFormatDatetime";
-import { handleUnauthorized } from "../../../utils/helper";
+import { generateAxiosConfig, handleUnauthorized } from "../../../utils/helper";
 
 export default function Video() {
 	const router = useRouter();
@@ -60,15 +60,9 @@ export default function Video() {
 					});
 			};
 
-			const token = Base64.decode(cookies.get("token"));
 			const API_URL = process.env.BE_API_URL_LOCAL;
-			const config = {
-				headers: {
-					Authorization: "Bearer " + token,
-				},
-			};
 			axios
-				.get(`${API_URL}/videos/${router.query.id}`, config)
+				.get(`${API_URL}/videos/${router.query.id}`, generateAxiosConfig())
 				.then((res) => {
 					setVideo(res.data.data);
 				})

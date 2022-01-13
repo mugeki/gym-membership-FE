@@ -31,9 +31,7 @@ export default function useValidateForm() {
 				messages = { [name]: "" };
 			}
 			if (name === "password" && !regexPassword.test(value)) {
-				messages = {
-					[name]: "Min. 6 character",
-				};
+				messages = { [name]: "Min. 6 character" };
 			} else if (name === "password" && regexPassword.test(value)) {
 				messages = { [name]: "" };
 			}
@@ -44,7 +42,6 @@ export default function useValidateForm() {
 				}
 			}
 		}
-
 		return messages;
 	};
 

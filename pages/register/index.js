@@ -35,11 +35,9 @@ export default function Register() {
 	const onSubmit = (e) => {
 		e.preventDefault();
 		const newErrors = validateForm(undefined, undefined, form);
-		console.log("newErrors", newErrors);
 		if (Object.keys(newErrors).length > 0) {
 			setErrorMsg(newErrors);
 		} else {
-			console.log("masuk");
 			const API_URL = process.env.BE_API_URL_LOCAL;
 			axios
 				.post(`${API_URL}/users`, {

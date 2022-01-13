@@ -1,33 +1,66 @@
+import axios from "axios";
 import { useState } from "react";
-import { Button, Form } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { Button, Form, Spinner } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import NavbarTop from "../../../components/elements/NavbarTop";
 import Layout from "../../../components/Layout";
 import useValidateForm from "../../../hooks/useValidateForm";
+import { storeUser } from "../../../store/userSlice";
+import { generateAxiosConfig, handleUnauthorized } from "../../../utils/helper";
 
 export default function EditPhone() {
 	const user = useSelector((state) => state.user);
-	const [form, setForm] = useState({ telephone: user.telephone });
-	const [errorMsg, setErrorMsg] = useState({});
+	const dispatch = useDispatch();
+	const [form, setForm] = useState(user.telephone || "");
+	const [error, setError] = useState();
+	const [loading, setLoading] = useState(false);
 	const { validateForm } = useValidateForm();
-	const onChange = (e) => {
-		const name = e.target.name;
-		const value = e.target.value;
-		setForm({ ...form, [name]: value });
+
+	const updateProfile = (data) => {
+		const API_URL = process.env.BE_API_URL_LOCAL;
+		axios
+			.put(
+				`${API_URL}/users`,
+				{
+					...data,
+				},
+				generateAxiosConfig()
+			)
+			.then(() => {
+				dispatch(storeUser(data));
+				setLoading(false);
+			})
+			.catch((error) => {
+				setLoading(false);
+				handleUnauthorized(error.response);
+				console.log(error);
+			});
 	};
+
+	const onChange = (e) => {
+		const value = e.target.value;
+		setForm(value);
+	};
+
 	const onBlur = (e) => {
 		const name = e.target.name;
 		const value = e.target.value;
 		const messages = validateForm(name, value);
-		setErrorMsg({ ...errorMsg, ...messages });
+		setError(messages.telephone);
 	};
+
 	const onSubmit = (e) => {
 		e.preventDefault();
-		const newErrors = validateForm(undefined, undefined, form);
+		const newErrors = validateForm("telephone", form);
 		if (Object.keys(newErrors).length > 0) {
-			setErrorMsg(newErrors);
+			setError(newErrors.telephone);
+		} else {
+			const newData = { ...user, telephone: form };
+			setLoading(true);
+			updateProfile(newData);
 		}
 	};
+
 	return (
 		<Layout>
 			<NavbarTop title={"Edit Phone Number"} />
@@ -37,14 +70,18 @@ export default function EditPhone() {
 					className="border-light border-0 border-bottom shadow-none rounded-0"
 					type="tel"
 					name="telephone"
-					value={form.telephone}
+					value={form}
 					onChange={onChange}
 					onBlur={onBlur}
-					isInvalid={!!errorMsg.telephone}
+					isInvalid={!!error}
 				/>
 				<Form.Text>Phone number must be 10 - 15 digits long</Form.Text>
 				<Button variant="primary w-100 mt-4" type="submit">
-					Confirm
+					{loading ? (
+						<Spinner animation="border" variant="white" size="sm" />
+					) : (
+						"Confirm"
+					)}
 				</Button>
 			</Form>
 		</Layout>

@@ -7,13 +7,10 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Cookies from "universal-cookie";
-import { Base64 } from "js-base64";
-import { handleUnauthorized } from "../utils/helper";
+import { generateAxiosConfig, handleUnauthorized } from "../utils/helper";
 
 export default function Home() {
 	const user = useSelector((state) => state.user);
-	const token = Base64.decode(new Cookies().get("token"));
 	const [newsletters, setNewsletters] = useState();
 	const [classes, setClasses] = useState();
 	const splitData = (array, chunkSize) =>
@@ -24,13 +21,8 @@ export default function Home() {
 
 	useEffect(() => {
 		const API_URL = process.env.BE_API_URL_LOCAL;
-		const config = {
-			headers: {
-				Authorization: "Bearer " + token,
-			},
-		};
 		axios
-			.get(`${API_URL}/articles`, config)
+			.get(`${API_URL}/articles`, generateAxiosConfig())
 			.then((res) => {
 				setNewsletters(res.data.data.slice(0, 4));
 			})
@@ -38,17 +30,15 @@ export default function Home() {
 				handleUnauthorized(error.response);
 				console.log(error);
 			});
-	}, [setNewsletters, token]);
+	}, [setNewsletters]);
 
 	useEffect(() => {
 		const API_URL = process.env.BE_API_URL_LOCAL;
-		const config = {
-			headers: {
-				Authorization: "Bearer " + token,
-			},
-		};
 		axios
-			.get(`${API_URL}/transaction-class/active/${user.id}`, config)
+			.get(
+				`${API_URL}/transaction-class/active/${user.id}`,
+				generateAxiosConfig()
+			)
 			.then((res) => {
 				res.status !== 204 && setClasses(splitData(res.data.data), 3);
 			})
@@ -56,7 +46,7 @@ export default function Home() {
 				handleUnauthorized(error.response);
 				console.log(error);
 			});
-	}, [setClasses, user.id, token]);
+	}, [setClasses, user.id]);
 
 	return (
 		<Layout>

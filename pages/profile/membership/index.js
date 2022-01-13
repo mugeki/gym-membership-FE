@@ -4,23 +4,16 @@ import MembershipProduct from "../../../components/elements/MembershipProduct";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { Base64 } from "js-base64";
-import Cookies from "universal-cookie";
+import { generateAxiosConfig } from "../../../utils/helper";
 
 export default function Membership() {
 	const user = useSelector((state) => state.user);
 	const [products, setProducts] = useState();
 
 	useEffect(() => {
-		const token = Base64.decode(new Cookies().get("token"));
 		const API_URL = process.env.BE_API_URL_LOCAL;
-		const config = {
-			headers: {
-				Authorization: "Bearer " + token,
-			},
-		};
 		axios
-			.get(`${API_URL}/membership-products`, config)
+			.get(`${API_URL}/membership-products`, generateAxiosConfig())
 			.then((res) => {
 				setProducts(res.data.data);
 			})

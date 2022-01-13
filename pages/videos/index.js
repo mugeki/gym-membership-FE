@@ -1,31 +1,8 @@
 import axios from "axios";
-import { Base64 } from "js-base64";
 import { useEffect, useState } from "react";
-import Cookies from "universal-cookie";
 import VideoItem from "../../components/elements/VideoItem";
 import Layout from "../../components/Layout";
-import { handleUnauthorized } from "../../utils/helper";
-
-// export async function getServerSideProps() {
-// 	const API_URL = process.env.BE_API_URL_LOCAL;
-// 	const res = await axios.get(`${API_URL}/videos`).catch((error) => {
-// 		if (error.response) {
-// 			return {
-// 				props: { error: error.response.data.meta.messages },
-// 			};
-// 		}
-// 	});
-// 	if (res.status === 204) {
-// 		return {
-// 			props: { error: "Videos not found" },
-// 		};
-// 	}
-// 	const data = await res.data.data;
-// 	const page = await res.data.page;
-// 	return {
-// 		props: { data, page },
-// 	};
-// }
+import { generateAxiosConfig, handleUnauthorized } from "../../utils/helper";
 
 export default function Videos() {
 	const [videos, setVideos] = useState();
@@ -33,15 +10,9 @@ export default function Videos() {
 	const [error, setError] = useState();
 
 	useEffect(() => {
-		const token = Base64.decode(new Cookies().get("token"));
 		const API_URL = process.env.BE_API_URL_LOCAL;
-		const config = {
-			headers: {
-				Authorization: "Bearer " + token,
-			},
-		};
 		axios
-			.get(`${API_URL}/videos`, config)
+			.get(`${API_URL}/videos`, generateAxiosConfig())
 			.then((res) => {
 				setVideos(res.data.data);
 				setPages(res.data.page);

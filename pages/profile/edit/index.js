@@ -2,7 +2,7 @@ import { Icon } from "@iconify/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { app } from "../../../firebase/firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import imageCompression from "browser-image-compression";
@@ -10,25 +10,53 @@ import NavbarTop from "../../../components/elements/NavbarTop";
 import Layout from "../../../components/Layout";
 import { Spinner } from "react-bootstrap";
 import { useState } from "react";
+import { generateAxiosConfig, handleUnauthorized } from "../../../utils/helper";
+import { storeUser } from "../../../store/userSlice";
+import axios from "axios";
 
 export default function EditProfile() {
 	const user = useSelector((state) => state.user);
+	const dispatch = useDispatch();
 	const router = useRouter();
-	const [loadingUpload, setLoadingUpload] = useState(false);
+	const [loading, setLoading] = useState(false);
+
+	const updateProfile = (data) => {
+		const API_URL = process.env.BE_API_URL_LOCAL;
+		axios
+			.put(
+				`${API_URL}/users`,
+				{
+					...data,
+				},
+				generateAxiosConfig()
+			)
+			.then(() => {
+				dispatch(storeUser(data));
+			})
+			.catch((error) => {
+				handleUnauthorized(error.response);
+				console.log(error);
+			});
+	};
 	const onChange = (e) => {
 		if (app) {
 			const file = e.target.files[0];
 			const storageRef = getStorage();
 			const fileRef = ref(storageRef, file.name);
-			setLoadingUpload(true);
+			const compressionOption = {
+				maxWidthOrHeight: 528,
+				useWebWorker: true,
+			};
+			setLoading(true);
 			imageCompression(file, compressionOption).then((compressedFile) => {
 				uploadBytes(fileRef, compressedFile).then(() => {
 					getDownloadURL(fileRef)
 						.then((url) => {
-							// setForm({ ...form, img_link: url });
+							const newData = { ...user, url_image: url };
+							updateProfile(newData);
 						})
 						.then(() => {
-							setLoadingUpload(false);
+							setLoading(false);
 						});
 				});
 			});
@@ -46,8 +74,17 @@ export default function EditProfile() {
 						alt="profile"
 						className="rounded-circle"
 					/>
-					{loadingUpload ? (
-						<Spinner animation="border" variant="primary" />
+					{loading ? (
+						<Spinner
+							animation="border"
+							variant="light position-absolute"
+							style={{
+								width: "25px",
+								height: "25px",
+								marginTop: "3.6rem",
+								marginLeft: "4.3rem",
+							}}
+						/>
 					) : (
 						<label
 							htmlFor="img"

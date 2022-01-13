@@ -1,31 +1,68 @@
-import { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Button, Form, Spinner } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import NavbarTop from "../../../components/elements/NavbarTop";
 import Layout from "../../../components/Layout";
 import useValidateForm from "../../../hooks/useValidateForm";
+import { storeUser } from "../../../store/userSlice";
+import { generateAxiosConfig, handleUnauthorized } from "../../../utils/helper";
 
 export default function EditPassword() {
-	const [form, setForm] = useState({ password: "" });
-	const [errorMsg, setErrorMsg] = useState({});
+	const user = useSelector((state) => state.user);
+	const dispatch = useDispatch();
+	const [form, setForm] = useState("");
+	const [error, setError] = useState();
+	const [loading, setLoading] = useState(false);
 	const { validateForm } = useValidateForm();
-	const onChange = (e) => {
-		const name = e.target.name;
-		const value = e.target.value;
-		setForm({ ...form, [name]: value });
+
+	const updateProfile = (data) => {
+		const API_URL = process.env.BE_API_URL_LOCAL;
+		axios
+			.put(
+				`${API_URL}/users`,
+				{
+					...data,
+				},
+				generateAxiosConfig()
+			)
+			.then(() => {
+				delete data.password;
+				dispatch(storeUser(data));
+				setLoading(false);
+			})
+			.catch((error) => {
+				setLoading(false);
+				handleUnauthorized(error.response);
+				console.log(error);
+			});
 	};
+
+	const onChange = (e) => {
+		const value = e.target.value;
+		setForm(value);
+	};
+
 	const onBlur = (e) => {
 		const name = e.target.name;
 		const value = e.target.value;
 		const messages = validateForm(name, value);
-		setErrorMsg({ ...errorMsg, ...messages });
+		setError(messages.password);
 	};
+
 	const onSubmit = (e) => {
 		e.preventDefault();
-		const newErrors = validateForm(undefined, undefined, form);
+		const newErrors = validateForm("password", form);
+		newErrors.password === "" && delete newErrors.password;
 		if (Object.keys(newErrors).length > 0) {
-			setErrorMsg(newErrors);
+			setError(newErrors.password);
+		} else {
+			const newData = { ...user, password: form };
+			setLoading(true);
+			updateProfile(newData);
 		}
 	};
+
 	return (
 		<Layout>
 			<NavbarTop title={"Edit Password"} />
@@ -35,14 +72,18 @@ export default function EditPassword() {
 					className="border-light border-0 border-bottom shadow-none rounded-0"
 					type="password"
 					name="password"
-					value={form.password}
+					value={form}
 					onChange={onChange}
 					onBlur={onBlur}
-					isInvalid={!!errorMsg.password}
+					isInvalid={!!error}
 				/>
 				<Form.Text>Password length must be atleast 6 characters long</Form.Text>
 				<Button variant="primary w-100 mt-4" type="submit">
-					Confirm
+					{loading ? (
+						<Spinner animation="border" variant="white" size="sm" />
+					) : (
+						"Confirm"
+					)}
 				</Button>
 			</Form>
 		</Layout>

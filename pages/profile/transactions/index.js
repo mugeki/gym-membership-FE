@@ -4,10 +4,8 @@ import TransactionItem from "../../../components/elements/TransactionItem";
 import { Button, Fade } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Cookies from "universal-cookie";
 import { useSelector } from "react-redux";
-import { handleUnauthorized } from "../../../utils/helper";
-import { Base64 } from "js-base64";
+import { generateAxiosConfig, handleUnauthorized } from "../../../utils/helper";
 
 export default function MySchedule() {
 	const user = useSelector((state) => state.user);
@@ -17,15 +15,12 @@ export default function MySchedule() {
 	const [errorClass, setErrorClass] = useState();
 
 	useEffect(() => {
-		const token = Base64.decode(new Cookies().get("token"));
-		const config = {
-			headers: {
-				Authorization: "Bearer " + token,
-			},
-		};
 		const API_URL = process.env.BE_API_URL_LOCAL;
 		axios
-			.get(`${API_URL}/transaction-membership?idUser=${user.id}`, config)
+			.get(
+				`${API_URL}/transaction-membership?idUser=${user.id}`,
+				generateAxiosConfig()
+			)
 			.then((res) => {
 				if (res.status === 204) {
 					setError("No transaction has been made");
@@ -42,15 +37,12 @@ export default function MySchedule() {
 	}, [setMemberTx, user.id]);
 
 	useEffect(() => {
-		const token = Base64.decode(new Cookies().get("token"));
-		const config = {
-			headers: {
-				Authorization: "Bearer " + token,
-			},
-		};
 		const API_URL = process.env.BE_API_URL_LOCAL;
 		axios
-			.get(`${API_URL}/transaction-class?idUser=${user.id}`, config)
+			.get(
+				`${API_URL}/transaction-class?idUser=${user.id}`,
+				generateAxiosConfig()
+			)
 			.then((res) => {
 				if (res.status === 204) {
 					setErrorClass("No transaction has been made");
@@ -87,7 +79,6 @@ export default function MySchedule() {
 						aria-expanded={openMember}
 						variant={openMember ? "primary" : "outline-primary"}
 						className="me-3"
-						// disabled={openMember}
 					>
 						Memberships
 					</Button>
@@ -96,7 +87,6 @@ export default function MySchedule() {
 						aria-controls="class"
 						aria-expanded={openClass}
 						variant={openClass ? "primary" : "outline-primary"}
-						// disabled={openClass}
 					>
 						Classes
 					</Button>
