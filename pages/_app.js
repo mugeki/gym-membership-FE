@@ -3,10 +3,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Custom.css";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { store, persistor, wrapper } from "../store/store";
+import { store, persistor } from "../store/store";
 import { parseCookies } from "nookies";
-import Router from "next/router";
-let jwt = require("jsonwebtoken");
+import axios from "axios";
+import { Base64 } from "js-base64";
+import { redirect } from "../utils/helper";
 
 function MyApp({ Component, pageProps }) {
 	return (
@@ -27,38 +28,36 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
 		pageProps = await Component.getInitialProps(ctx);
 	}
 
-	const redirect = (ctx, location) => {
-		if (ctx.req) {
-			ctx.res.writeHead(302, { Location: location });
-			ctx.res.end();
-		} else {
-			Router.push(location);
-		}
-	};
-
 	const isProtectedRoute =
 		ctx.pathname !== "/login" && ctx.pathname !== "/register";
 
 	if (!token && isProtectedRoute) {
+		console.log("masuk 1");
 		redirect(ctx, "/login");
 	}
+
 	if (token && !isProtectedRoute) {
+		console.log("masuk 2");
 		redirect(ctx, "/");
 	}
-	// } else if (isProtectedRoute) {
-	// 	try {
-	// 		console.log(token);
-	// 		const verified = jwt.verify(token, process.env.JWT_SECRET, {
-	// 			algorithm: "HS256",
+
+	// if (token) {
+	// 	const parsedToken = Base64.decode(token);
+	// 	const API_URL = process.env.BE_API_URL_LOCAL;
+	// 	const res = await axios
+	// 		.post(`${API_URL}/auth/verify-jwt/${parsedToken}`)
+	// 		.catch((error) => {
+	// 			console.log(error.response);
 	// 		});
-	// 	} catch (err) {
-	// 		console.error(err);
-	// 		if (ctx.req) {
-	// 			ctx.res.writeHead(302, { Location: "/login" });
-	// 			ctx.res.end();
-	// 		} else {
-	// 			Router.push("/login");
-	// 		}
+
+	// 	if (isProtectedRoute && res?.status !== 200) {
+	// 		destroyCookie(ctx, "token");
+	// 		destroyCookie(ctx, "user_id");
+	// 		redirect(ctx, "/login");
+	// 	}
+
+	// 	if (!isProtectedRoute && res?.status === 200) {
+	// 		redirect(ctx, "/");
 	// 	}
 	// }
 

@@ -7,9 +7,13 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Cookies from "universal-cookie";
+import { Base64 } from "js-base64";
+import { handleUnauthorized } from "../utils/helper";
 
 export default function Home() {
 	const user = useSelector((state) => state.user);
+	const token = Base64.decode(new Cookies().get("token"));
 	const [newsletters, setNewsletters] = useState();
 	const [classes, setClasses] = useState();
 	const splitData = (array, chunkSize) =>
@@ -20,23 +24,40 @@ export default function Home() {
 
 	useEffect(() => {
 		const API_URL = process.env.BE_API_URL_LOCAL;
+		const config = {
+			headers: {
+				Authorization: "Bearer " + token,
+			},
+		};
 		axios
-			.get(`${API_URL}/article`)
+			.get(`${API_URL}/articles`, config)
 			.then((res) => {
 				setNewsletters(res.data.data.slice(0, 4));
 			})
-			.catch((error) => console.log(error));
-	}, [setNewsletters]);
+			.catch((error) => {
+				handleUnauthorized(error.response);
+				console.log(error);
+			});
+	}, [setNewsletters, token]);
 
 	useEffect(() => {
 		const API_URL = process.env.BE_API_URL_LOCAL;
+		const config = {
+			headers: {
+				Authorization: "Bearer " + token,
+			},
+		};
 		axios
-			.get(`${API_URL}/transaction-class/active/${user.id}`)
+			.get(`${API_URL}/transaction-class/active/${user.id}`, config)
 			.then((res) => {
 				res.status !== 204 && setClasses(splitData(res.data.data), 3);
 			})
-			.catch((error) => console.log(error));
-	}, [setClasses, user.id]);
+			.catch((error) => {
+				handleUnauthorized(error.response);
+				console.log(error);
+			});
+	}, [setClasses, user.id, token]);
+
 	return (
 		<Layout>
 			<div className="container p-4 mb-5">
@@ -51,7 +72,7 @@ export default function Home() {
 						showThumbs={false}
 						showStatus={false}
 					>
-						{!classes ? (
+						{!classes || error ? (
 							<p className="text-center text-light mt-5">
 								You are not participated in any class
 							</p>

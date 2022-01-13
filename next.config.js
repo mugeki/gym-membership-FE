@@ -17,10 +17,10 @@ module.exports = withPWA({
 		],
 	},
 	env: {
+		YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY,
 		GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
 		BE_API_URL: process.env.BE_API_URL,
 		BE_API_URL_LOCAL: process.env.BE_API_URL_LOCAL,
-		JWT_SECRET: process.env.JWT_SECRET,
 		DEFAULT_PROFILE: process.env.DEFAULT_PROFILE,
 	},
 });

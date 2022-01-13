@@ -16,14 +16,18 @@ export default function useHandleLogin() {
 			...res,
 		};
 		delete userData.token;
+		const config = {
+			headers: {
+				Authorization: "Bearer " + res.token,
+			},
+		};
 		await axios
-			.get(`${BE_API_URL_LOCAL}/members/${res.id}`)
+			.get(`${BE_API_URL_LOCAL}/members/${res.id}`, config)
 			.then((resp) => {
 				userData.is_member = resp.data.data.is_member;
 				userData.expire_date = resp.data.data.expire_date;
 			})
-			.catch((error) => {
-				console.log(error);
+			.catch(() => {
 				userData.is_member = false;
 				userData.expire_date = "";
 			});

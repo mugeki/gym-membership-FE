@@ -16,6 +16,7 @@ export default function Profile() {
 	const onClick = () => {
 		router.push("/login");
 		cookies.remove("token");
+		cookies.remove("user_id");
 		dispatch(clearUser());
 	};
 	return (
