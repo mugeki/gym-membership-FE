@@ -3,6 +3,7 @@ import ClassItem from "../../components/elements/ClassItemOnline";
 import Layout from "../../components/Layout";
 import Image from "next/image";
 import styles from "../../styles/ClassItem.module.css";
+import { useEffect } from "react";
 // import { Hoverable, Pressable } from 'react-native-web-hover'
 
 // export async function getServerSideProps() {
@@ -26,7 +27,12 @@ import styles from "../../styles/ClassItem.module.css";
 // 	};
 // }
 
+
+
 export default function Classes({ data, error }) {
+
+	
+
 	return (
 		<Layout>
 			<div className="container p-4 mb-5">

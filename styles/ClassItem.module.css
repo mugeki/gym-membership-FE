@@ -36,8 +36,8 @@
 }
 
 .button{
-	background-color: #5965CE;
-	color:white !important;
+	background-color: #5965CE !important;
+	color:#ffffff !important;
 }
 
 .paymentItem{
@@ -50,7 +50,7 @@
 .bgGrey{
 	/* position:relative;	 */
 	/* width:300px */
-	background-color: rgb(231, 230, 230) !important;
+	background-color: #dcdff7 !important;
 }
 
 .warningText{

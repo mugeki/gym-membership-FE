@@ -3,16 +3,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import styles from "../../styles/ClassItem.module.css";
+import ClassById from "../../pages/classes/offline/[id]";
 // import MemberOnlyModal from "./MemberOnlyModal";
-import dataMember from "../../mock_data/member_by_userid.json";
+// import dataMember from "../../mock_data/member_by_userid.json";
 
 export default function ClassItem({ entries }) {
-	const [modalShow, setModalShow] = useState(false);
+	// const [modalShow, setModalShow] = useState(false);
 	const classID = entries.id;
-	// const thumbnail = `https://img.youtube.com/vi/${videoID}/0.jpg`;
-
-	// const href = entries.member_only && !dataMember ? "" : `/videos/${videoID}`;
+	const dataByID=JSON.stringify(entries)
 	const href = `/classes/offline/${entries.id}`
+	
 	return (
 		<>
 			<Link
@@ -20,15 +20,17 @@ export default function ClassItem({ entries }) {
 					pathname: href,
 					query: {
 						classID: classID,
+						dataByID:dataByID,
 					},
 				}}
 				as={`/classes/offline/${entries.id}`}
+				onClick={(<ClassById entries={entries} />)}
 				passHref
-				// scroll={!entries.member_only || !!dataMember}
+				params
 			>
 				<div
 					className={`${styles.item} position-relative d-flex align-items-end text-white text-center rounded-3 mb-3`}
-					// onClick={onClick()}
+					
 				>
 					<Image
 						src={entries.url_image}

@@ -4,7 +4,8 @@ import ClassItem from "../../../components/elements/ClassItemOffline";
 import Image from "next/image";
 import styles from "../../../styles/ClassItem.module.css";
 // import { Hoverable, Pressable } from 'react-native-web-hover'
-import dataClasses from "../../../mock_data/classes.json";
+// import dataClasses from "../../../mock_data/classes.json";
+import React, { useState, useEffect} from 'react';
 
 // export async function getServerSideProps() {
 // 	const API_URL =
@@ -32,14 +33,22 @@ import dataClasses from "../../../mock_data/classes.json";
 // }
 
 export default function Classes({ data, error }) {
-	// console.log("data fetching",data)
-	
+	const [classData, setClassData]= useState()
+
+	useEffect(() => {
+		const API_URL=process.env.BE_API_URL_LOCAL;
+		axios.get(`${API_URL}/class`).then((response) =>
+		setClassData(response.data.data))
+
+	 },[setClassData]);
+
+
 	return (
 		<Layout>
 			<div className="container p-4 mb-5">
 				<div className="d-flex flex-column justify-content-center ">
 					<h4 className="text-start fw-bolder">Offline Classes</h4>
-                    {dataClasses.data.map((item) => (
+                    {classData?.map((item) => (
 						<ClassItem key={item.id} entries={item} />
 					))}
 				</div>

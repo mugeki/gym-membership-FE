@@ -16,14 +16,14 @@
 			"name": "BCA",
 			"no_card": "00123884848",
 			"owner": "PT Subur Jaya",
-			"desc": "this payment need a manual confirmation by uploading image of receipt"
+			"desc": "this is description for BCA account payment"
 		},
         {
 			"id": 3,
 			"name": "LINKAJA",
 			"no_card": "081234567899",
 			"owner": "SDR Subur Jaya",
-			"desc": "this payment need a manual confirmation by uploading image of receipt"
+			"desc": "this payment need a camera phone for scan QR code"
 		},
         {
 			"id": 4,
