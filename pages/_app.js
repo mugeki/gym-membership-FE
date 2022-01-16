@@ -32,12 +32,10 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
 		ctx.pathname !== "/login" && ctx.pathname !== "/register";
 
 	if (!token && isProtectedRoute) {
-		console.log("masuk 1");
 		redirect(ctx, "/login");
 	}
 
 	if (token && !isProtectedRoute) {
-		console.log("masuk 2");
 		redirect(ctx, "/");
 	}
 

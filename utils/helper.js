@@ -12,7 +12,7 @@ function redirect(ctx, location) {
 }
 
 function handleUnauthorized(res) {
-	if ([401, 403].includes(res.status)) {
+	if ([401, 403].includes(res?.status)) {
 		const cookies = new Cookies();
 		cookies.remove("token", { path: "/", domain: window.location.hostname });
 		Router.push("/login");

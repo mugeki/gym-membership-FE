@@ -96,7 +96,7 @@ export default function MySchedule() {
 						{errorMember && (
 							<p className="text-center text-light mt-5">{errorMember}</p>
 						)}
-						{memberTx?.data.map((item) => (
+						{memberTx?.data?.map((item) => (
 							<TransactionItem key={item.id} entries={item} />
 						))}
 					</div>
@@ -106,7 +106,7 @@ export default function MySchedule() {
 						{errorClass && (
 							<p className="text-center text-light mt-5">{errorClass}</p>
 						)}
-						{classTx?.data.map((item) => (
+						{classTx?.data?.map((item) => (
 							<TransactionItem key={item.id} entries={item} />
 						))}
 					</div>

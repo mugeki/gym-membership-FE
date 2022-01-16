@@ -39,7 +39,7 @@ export default function VideoItem({ entries }) {
 				scroll={!entries.member_only || !!user.is_member}
 			>
 				<div
-					className={`${styles.item} position-relative d-flex text-white text-center rounded mb-3`}
+					className={`${styles.item} position-relative d-flex text-white text-center rounded mb-3 shadow-sm`}
 					onClick={entries.member_only ? () => onClick() : undefined}
 				>
 					<Image
