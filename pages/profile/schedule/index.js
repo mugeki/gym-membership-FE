@@ -1,6 +1,7 @@
 import NavbarTop from "../../../components/elements/NavbarTop";
 import Layout from "../../../components/Layout";
-import dataSchedule from "../../../mock_data/classes.json";
+// import dataSchedule from "../../../mock_data/classes.json";
+import dataSchedule from "../../../mock_data/classesSchedule.json";
 import ScheduleItem from "../../../components/elements/ScheduleItem";
 
 export default function MySchedule() {
