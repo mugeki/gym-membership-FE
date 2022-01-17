@@ -1,4 +1,4 @@
-export default function ScheduleItem({ entries }) {
+export default function TranasctionItem({ entries }) {
 	const date = new Date(entries.created_at);
 	const status =
 		entries.status.charAt(0).toUpperCase() + entries.status.slice(1);
