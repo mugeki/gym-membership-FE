@@ -1,29 +1,203 @@
 {
-	"meta": {
-		"status": 200,
-		"message": "Success"
-	},
-	"data": [
-		{
-			"id": 1,
-			"product": "1 Month Membership",
-			"price": 200000,
-			"status": "accepted",
-			"created_at": "2021-12-30T00:00:00.000Z"
-		},
-		{
-			"id": 2,
-			"product": "Cardio: Bodystep Athletic",
-			"price": 225000,
-			"status": "waiting-for-confirmation",
-			"created_at": "2021-12-30T00:00:00.000Z"
-		},
-		{
-			"id": 3,
-			"product": "Cardio: Bodystep Athletic",
-			"price": 225000,
-			"status": "waiting-for-payment",
-			"created_at": "2021-12-30T00:00:00.000Z"
-		}
-	]
+    "meta": {
+        "status": 200,
+        "message": "Success"
+    },
+    "page": {
+        "offset": 0,
+        "limit": 10,
+        "total_data": 11
+    },
+    "data": [
+        {
+            "id": 13,
+            "user_id": 1,
+            "admin_id": 0,
+            "status": "waiting-for-payment",
+            "nominal": 500000,
+            "class_id": 2,
+            "class_name": "jump rope program edited7",
+            "url_image_of_receipt": "",
+            "updated_at": "2022-01-14T11:52:59.413+07:00",
+            "created_at": "2022-01-14T11:52:59.413+07:00",
+            "payment": {
+                "id": 2,
+                "name": "GOPAY",
+                "no_card": "081234567899",
+                "owner_name": "SDR Subur Jaya",
+                "desc": "this payment need a manual confirmation by uploading image of receipt"
+            }
+        },
+        {
+            "id": 12,
+            "user_id": 1,
+            "admin_id": 0,
+            "status": "waiting-for-payment",
+            "nominal": 500000,
+            "class_id": 2,
+            "class_name": "jump rope program edited7",
+            "url_image_of_receipt": "",
+            "updated_at": "2022-01-11T15:25:59.024+07:00",
+            "created_at": "2022-01-11T15:25:59.024+07:00",
+            "payment": {
+                "id": 2,
+                "name": "GOPAY",
+                "no_card": "081234567899",
+                "owner_name": "SDR Subur Jaya",
+                "desc": "this payment need a manual confirmation by uploading image of receipt"
+            }
+        },
+        {
+            "id": 11,
+            "user_id": 1,
+            "admin_id": 0,
+            "status": "waiting for payment",
+            "nominal": 500000,
+            "class_id": 2,
+            "class_name": "jump rope program edited7",
+            "url_image_of_receipt": "",
+            "updated_at": "2022-01-11T15:24:38.08+07:00",
+            "created_at": "2022-01-11T15:24:38.08+07:00",
+            "payment": {
+                "id": 2,
+                "name": "GOPAY",
+                "no_card": "081234567899",
+                "owner_name": "SDR Subur Jaya",
+                "desc": "this payment need a manual confirmation by uploading image of receipt"
+            }
+        },
+        {
+            "id": 10,
+            "user_id": 1,
+            "admin_id": 1,
+            "status": "accepted",
+            "nominal": 500000,
+            "class_id": 2,
+            "class_name": "jump rope program edited7",
+            "url_image_of_receipt": "",
+            "updated_at": "2022-01-11T15:19:19.106+07:00",
+            "created_at": "2022-01-11T15:17:15.98+07:00",
+            "payment": {
+                "id": 3,
+                "name": "BRI",
+                "no_card": "75757182839481727",
+                "owner_name": "PT Subur Jaya",
+                "desc": "this payment need a manual confirmation by uploading image of receipt"
+            }
+        },
+        {
+            "id": 4,
+            "user_id": 1,
+            "admin_id": 1,
+            "status": "accepted",
+            "nominal": 500000,
+            "class_id": 2,
+            "class_name": "jump rope program edited7",
+            "url_image_of_receipt": "",
+            "updated_at": "2022-01-07T23:04:21.572+07:00",
+            "created_at": "2021-12-28T17:09:59.951+07:00",
+            "payment": {
+                "id": 1,
+                "name": "linkAja",
+                "no_card": "163272399893",
+                "owner_name": "a/n marka kreasi",
+                "desc": "this payment need a camera phone for scan QR code"
+            }
+        },
+        {
+            "id": 9,
+            "user_id": 1,
+            "admin_id": 0,
+            "status": "waiting for payment",
+            "nominal": 500000,
+            "class_id": 2,
+            "class_name": "jump rope program edited7",
+            "url_image_of_receipt": "",
+            "updated_at": "2022-01-02T18:55:48.798+07:00",
+            "created_at": "2022-01-02T18:55:48.798+07:00",
+            "payment": {
+                "id": 4,
+                "name": "BCA",
+                "no_card": "71256938747",
+                "owner_name": "a/n marka kreasi",
+                "desc": "this is description for BCA account payment"
+            }
+        },
+        {
+            "id": 8,
+            "user_id": 1,
+            "admin_id": 0,
+            "status": "waiting for payment",
+            "nominal": 500000,
+            "class_id": 2,
+            "class_name": "jump rope program edited7",
+            "url_image_of_receipt": "",
+            "updated_at": "2021-12-30T16:54:08.628+07:00",
+            "created_at": "2021-12-30T16:54:08.628+07:00",
+            "payment": {
+                "id": 2,
+                "name": "GOPAY",
+                "no_card": "081234567899",
+                "owner_name": "SDR Subur Jaya",
+                "desc": "this payment need a manual confirmation by uploading image of receipt"
+            }
+        },
+        {
+            "id": 7,
+            "user_id": 1,
+            "admin_id": 0,
+            "status": "waiting for payment",
+            "nominal": 500000,
+            "class_id": 2,
+            "class_name": "jump rope program edited7",
+            "url_image_of_receipt": "",
+            "updated_at": "2021-12-30T01:55:53.699+07:00",
+            "created_at": "2021-12-30T01:55:53.699+07:00",
+            "payment": {
+                "id": 3,
+                "name": "BRI",
+                "no_card": "75757182839481727",
+                "owner_name": "PT Subur Jaya",
+                "desc": "this payment need a manual confirmation by uploading image of receipt"
+            }
+        },
+        {
+            "id": 6,
+            "user_id": 1,
+            "admin_id": 0,
+            "status": "waiting for payment",
+            "nominal": 500000,
+            "class_id": 2,
+            "class_name": "jump rope program edited7",
+            "url_image_of_receipt": "",
+            "updated_at": "2021-12-28T17:13:01.706+07:00",
+            "created_at": "2021-12-28T17:13:01.706+07:00",
+            "payment": {
+                "id": 4,
+                "name": "BCA",
+                "no_card": "71256938747",
+                "owner_name": "a/n marka kreasi",
+                "desc": "this is description for BCA account payment"
+            }
+        },
+        {
+            "id": 5,
+            "user_id": 1,
+            "admin_id": 0,
+            "status": "waiting for payment",
+            "nominal": 500000,
+            "class_id": 2,
+            "class_name": "jump rope program edited7",
+            "url_image_of_receipt": "",
+            "updated_at": "2021-12-28T17:12:43.471+07:00",
+            "created_at": "2021-12-28T17:12:43.471+07:00",
+            "payment": {
+                "id": 2,
+                "name": "GOPAY",
+                "no_card": "081234567899",
+                "owner_name": "SDR Subur Jaya",
+                "desc": "this payment need a manual confirmation by uploading image of receipt"
+            }
+        }
+    ]
 }
