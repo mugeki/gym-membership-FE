@@ -8,7 +8,6 @@ import ClassById from "../../pages/classes/offline/[id]";
 // import dataMember from "../../mock_data/member_by_userid.json";
 
 export default function ClassItem({ entries }) {
-	// const [modalShow, setModalShow] = useState(false);
 	const classID = entries.id;
 	const dataByID=JSON.stringify(entries)
 	const href = `/classes/offline/${entries.id}`
@@ -43,10 +42,9 @@ export default function ClassItem({ entries }) {
 					<p className= {`${styles.overlay}  ms-3 text-start fs-6 text-capitalize`}>
 							{entries.name}
 					</p>
-
 				</div>
 			</Link>
-			{/* <MemberOnlyModal show={modalShow} onHide={() => setModalShow(false)} /> */}
+			
 		</>
 	);
 }
