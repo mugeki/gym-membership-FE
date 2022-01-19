@@ -15,8 +15,9 @@ export default function HomeClassesItem({ entries }) {
 				layout="fill"
 				objectFit="cover"
 				alt="class"
+				className="rounded"
 			/>
-			<div className={`${styles.overlay} d-flex flex-column w-100 p-2`}>
+			<div className={`${styles.overlay} d-flex flex-column w-100 p-2 rounded`}>
 				<p className="mb-0 fw-bolder">{entries.name}</p>
 				<p className="mb-0">{dateStart.dayName}</p>
 				<p className="mb-0">

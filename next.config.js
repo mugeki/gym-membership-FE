@@ -9,7 +9,7 @@ module.exports = withPWA({
 		disable: process.env.NODE_ENV === "development",
 	},
 	images: {
-		domains: ["images.unsplash.com"],
+		domains: ["images.unsplash.com", "img.youtube.com"],
 	},
 	env: {
 		GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
