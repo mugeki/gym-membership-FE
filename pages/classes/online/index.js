@@ -1,8 +1,11 @@
 import axios from "axios";
 import Layout from "../../../components/Layout";
+import mockClassData from "../../../mock_data/classes.json";
 import ClassItem from "../../../components/elements/ClassItemOnline";
 import Image from "next/image";
 import styles from "../../../styles/ClassItem.module.css";
+// import { useEffect, useState } from "react";
+
 // import { Hoverable, Pressable } from 'react-native-web-hover'
 // import dataClasses from "../../../mock_data/classes.json";
 
@@ -28,14 +31,15 @@ import styles from "../../../styles/ClassItem.module.css";
 // }
 
 export default function Classes({ data, error }) {
-	const [classData, setClassData]= useState()
+	// const [classData, setClassData]= useState()
 
-	useEffect(() => {
-		const API_URL=process.env.BE_API_URL_LOCAL;
-		axios.get(`${API_URL}/class`).then((response) =>
-		setClassData(response.data.data))
+	// useEffect(() => {
+	// 	const API_URL=process.env.BE_API_URL_LOCAL;
+	// 	axios.get(`${API_URL}/class`).then((response) =>
+	// 	setClassData(response.data.data))
 
-	 },[setClassData]);
+	//  },[setClassData]);
+	const classData = mockClassData?.data
 	return (
 		<Layout>
 			<div className="container p-4 mb-5">

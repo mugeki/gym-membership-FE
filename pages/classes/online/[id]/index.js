@@ -1,7 +1,7 @@
 // import axios from "axios";
 import NavbarTop from "../../../../components/elements/NavbarTop";
 import Layout from "../../../../components/Layout";
-import useFormatDatetime from "../../../../hooks/useFormatDatetime";
+import useGetDateList from "../../../../hooks/useGetDateList";
 import dataClass from "../../../../mock_data/class_by_id.json";
 import { useRouter } from 'next/router'
 import React, { useState } from 'react';
@@ -26,32 +26,25 @@ import styles from "../../../../styles/ClassItem.module.css";
 // }
 
 export default function ClassById() {
-    const { formatDatetime} = useFormatDatetime();
-    const listSchedule = dataClass.data.date.split(";")
-    let listScheduleFormatted=[]
-    for (var i = 0; i < listSchedule.length;i++){
-        var oneSchedule = listSchedule[i].split(",")
-        var dateStart = formatDatetime(oneSchedule[0])
-        var dateEnd = formatDatetime(oneSchedule[1])
-        var scheduleFormatted = `${dateStart.dayName},${dateStart.day} ${dateStart.month} ${dateStart.year} (${dateStart.hours}:${dateStart.minutes}${dateStart.period} - ${dateEnd.hours}:${dateEnd.minutes}${dateEnd.period})`
-        listScheduleFormatted.push(scheduleFormatted)
-    }
+    const dataByID= dataClass.data
+    const { GetDateList } = useGetDateList();
+    const listScheduleFormatted = GetDateList(dataByID.date)
     const nf = new Intl.NumberFormat('en-US');
     const price = nf.format(dataClass.data.price)
     const router = useRouter()
-    const href =`/classes/offline/${dataClass.data.id}/book-class`
+    const href =`/classes/online/${dataClass.data.id}/book-class`
 	return (
 		<Layout>
 			<NavbarTop title={"Online Classes"} />
 			<div className="container d-flex flex-column justify-content-center p-4 mb-5">
-				<h6 className="fw-bolder mb-0 fs-5">{dataClass.data.name}</h6>
+				<h6 className="fw-bolder mb-0 fs-5">{dataByID.name}</h6>
 				{/* <p className="text-light" style={{ fontSize: "14px" }}>
 					{date.day} {date.month} {date.year}
 				</p> */}
                 
                 <div className={`${styles.item} mt-3 bg-dark position-relative d-flex align-items-end text-white text-center rounded-3 mb-3`}>
                     <Image
-                        src={dataClass.data.url_image}
+                        src={dataByID.url_image}
                         layout="fill"
                         objectFit="cover"
                         alt="class"
@@ -60,11 +53,11 @@ export default function ClassById() {
                 </div>
                 <div className="d-flex flex-row justify-content-between">
                     <h4 className={`${styles.textPurple} fw-bold`}>{`Rp ${price}`}</h4>
-                    <p>{`Available Slot ${dataClass.data.participant}/${dataClass.data.kuota}`}</p>
+                    <p>{`Available Slot ${dataByID.participant}/${dataByID.kuota}`}</p>
                 </div>
 				<div className="d-flex flex-column align-items-start">
                     <p className="fw-bold mb-0">Description</p>
-					<p className="fs-smaller">{dataClass.data.desc}</p>
+					<p className="fs-smaller">{dataByID.desc}</p>
 				</div>
                 <div className="d-flex flex-column align-items-start">
                     <p className="fw-bold mb-0">Schedule</p>
@@ -72,7 +65,8 @@ export default function ClassById() {
 				</div>
                 <div className="d-flex flex-column align-items-start">
                     <p className="fw-bold mb-0 mt-2">Location</p>
-					<p className="fs-smaller">{dataClass.data.location}</p>
+					{/* <p className="fs-smaller">{dataClass.data.location}</p> */}
+                    <p className="fs-smaller">Online Zoom Meeting</p>
 				</div>
                  <button className={`btn ${styles.button} rounded-3`} onClick={() => router.push(href)} >Book</button>
 			</div>

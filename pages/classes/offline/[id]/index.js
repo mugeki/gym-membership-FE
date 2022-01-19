@@ -7,16 +7,18 @@ import { useRouter } from 'next/router'
 import React, { useState } from 'react';
 import Image from "next/image";
 import styles from "../../../../styles/ClassItem.module.css";
+// import dataClass from "../../../../mock_data/class_by_id.json";
 
-export async function getServerSideProps(context){
-    const dataByID=JSON.parse(context.query.dataByID)
-    return {
-        props: {dataByID},
-    }
-}
-export default function ClassById({dataByID}) {
+// export async function getServerSideProps(context){
+//     const dataByID=JSON.parse(context.query.dataByID)
+//     return {
+//         props: {dataByID},
+//     }
+// }
+export default function ClassById({dataaByID}) {
     
     const { GetDateList } = useGetDateList();
+    const dataByID= dataClass.data
     const listScheduleFormatted = GetDateList(dataByID.date)
 
     const nf = new Intl.NumberFormat('en-US');
@@ -58,7 +60,7 @@ export default function ClassById({dataByID}) {
                     {!regexUrl.test(dataByID.location) ? (
 							<p className="fs-smaller">{dataByID.location}</p>
 						) : (
-							<p>Online Meeting</p>
+							<p className="fs-smaller">Online Meeting</p>
                     )}
 				</div>
                  <button className={`btn ${styles.button} rounded-3`} onClick={() => router.push(href)} >Book</button>
