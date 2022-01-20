@@ -1,0 +1,12 @@
+.modalAccepted{
+	width:250px;
+	height:250px;
+	background-color:#ccf0c5;
+    background-blend-mode: multiply;
+}
+
+.linkTo{
+    cursor: pointer;
+    font-size:smaller;
+
+}
