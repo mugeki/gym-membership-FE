@@ -7,15 +7,8 @@ import styles from "../../styles/ClassItem.module.css";
 import dataMember from "../../mock_data/member_by_userid.json";
 
 export default function ClassItem({ entries }) {
-	const [modalShow, setModalShow] = useState(false);
 	const classID = entries.id;
-	// const thumbnail = `https://img.youtube.com/vi/${videoID}/0.jpg`;
-	const onClick = () => {
-		if (!dataMember) {
-			setModalShow(true);
-		}
-	};
-	// const href = entries.member_only && !dataMember ? "" : `/videos/${videoID}`;
+	const dataByID=JSON.stringify(entries)
 	const href = `/classes/online/${entries.id}`
 	return (
 		<>
@@ -24,15 +17,15 @@ export default function ClassItem({ entries }) {
 					pathname: href,
 					query: {
 						classID: classID,
+						dataByID:dataByID,
 					},
 				}}
 				as={`/classes/online/${entries.id}`}
 				passHref
-				// scroll={!entries.member_only || !!dataMember}
+				
 			>
 				<div
 					className={`${styles.item} position-relative d-flex align-items-end text-white text-center rounded-3 mb-3`}
-					onClick={entries.member_only ? () => onClick() : undefined}
 				>
 					<Image
 						src={entries.url_image}
@@ -48,7 +41,6 @@ export default function ClassItem({ entries }) {
 
 				</div>
 			</Link>
-			{/* <MemberOnlyModal show={modalShow} onHide={() => setModalShow(false)} /> */}
 		</>
 	);
 }

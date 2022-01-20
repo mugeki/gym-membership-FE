@@ -3,7 +3,7 @@ import styles from "../../styles/ModalAcc.module.css";
 import CloseButton from 'react-bootstrap/CloseButton'
 import { useRouter } from 'next/router'
 
-export default function PaymentAccepted({title, message, hrefTo, messageHref}) {
+export default function PaymentAccepted({title, message, hrefTo, messageHref, hrefTo_2, messageHref_2}) {
     const router = useRouter()
 	return (
         <div className="d-flex position-absolute top-50 start-50 translate-middle shadow-lg bg-body rounded justify-content-center">
@@ -14,9 +14,10 @@ export default function PaymentAccepted({title, message, hrefTo, messageHref}) {
                     <a href={linkTo}>{backTo}</a>
                 </div> */}
                 <p className="fw-bold fs-4 m-0">{title}</p>
-                <Icon icon="la:check-circle" color="#69ba5b" width="240" height="240" />
+                <Icon icon="la:check-circle" color="#69ba5b" width="220" height="220" />
                 <p className="text-center">{message}</p>
                 <a className={`${styles.linkTo}`} href={hrefTo}>{messageHref}</a>
+                <a className={`${styles.linkTo} m-1`} href={hrefTo_2}>{messageHref_2}</a>
             </div>
         </div>
 

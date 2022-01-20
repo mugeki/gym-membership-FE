@@ -1,5 +1,6 @@
 import axios from "axios";
 import Layout from "../../../components/Layout";
+import mockClass from "../../../mock_data/classes.json"
 import ClassItem from "../../../components/elements/ClassItemOffline";
 import Image from "next/image";
 import styles from "../../../styles/ClassItem.module.css";
@@ -33,14 +34,14 @@ import React, { useState, useEffect} from 'react';
 // }
 
 export default function Classes({ data, error }) {
-	const [classData, setClassData]= useState()
+	const [classData, setClassData]= useState(mockClass.data)
 
-	useEffect(() => {
-		const API_URL=process.env.BE_API_URL_LOCAL;
-		axios.get(`${API_URL}/class`).then((response) =>
-		setClassData(response.data.data))
+	// useEffect(() => {
+	// 	const API_URL=process.env.BE_API_URL_LOCAL;
+	// 	axios.get(`${API_URL}/class`).then((response) =>
+	// 	setClassData(response.data.data))
 
-	 },[setClassData]);
+	//  },[setClassData]);
 
 
 	return (

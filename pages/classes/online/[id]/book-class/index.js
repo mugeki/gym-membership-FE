@@ -57,7 +57,7 @@ export default function BookClass({ data, error }) {
 			</div>
 			{
 			seeModalAcc?
-			<PaymentAccepted title={"Accepted"} message={"please make payment in 1x24 hours after"} hrefTo={`/classes/online`} messageHref={'see another class'}/>
+			<PaymentAccepted title={"Accepted"} message={"please make payment in 1x24 hours after"} hrefTo={`/classes/online`} messageHref={'See Another Classes'} hrefTo_2={`/classes/online`} messageHref_2={'Pay Now'}/>
 			: null
 			}
 			
