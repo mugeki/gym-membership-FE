@@ -1,0 +1,28 @@
+
+.paymentItem{
+	width: 80px;
+	height: 80px;
+	border-radius:5px;
+	
+}
+
+.bgGrey{
+	/* position:relative;	 */
+	/* width:300px */
+	background-color: #dcdff7 !important;
+}
+
+.button{
+	background-color: #5965CE !important;
+	color:#ffffff !important;
+}
+
+.countdown{
+	background-color: #a5acb8 !important;
+	/* color:#ffffff !important; */
+}
+
+.button{
+	background-color: #5965CE !important;
+	color:#ffffff !important;
+}

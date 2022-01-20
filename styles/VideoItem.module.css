@@ -8,6 +8,9 @@
 }
 
 .overlay {
-	background: rgba(0, 0, 0, 0.6);
+	background: rgba(0, 0, 0, 0.3);
+	z-index: 1;
+	max-width: 60%;
+	/* background: rgba(0, 0, 0, 0.6); */
 	z-index: 1;
 }
