@@ -3,7 +3,6 @@ import Layout from "../../../components/Layout";
 import TransactionItem from "../../../components/elements/TransactionItem";
 import { Button, Fade } from "react-bootstrap";
 import { useEffect, useState } from "react";
-<<<<<<< HEAD
 // import axios from "axios";
 // import Cookies from "universal-cookie";
 // import { useSelector } from "react-redux";
@@ -11,15 +10,6 @@ import { useEffect, useState } from "react";
 // import { Base64 } from "js-base64";
 import dataTransactions from "../../../mock_data/transactions.json";
 
-export default function MySchedule() {
-	// const user = useSelector((state) => state.user);
-	// const [memberTx, setMemberTx] = useState();
-	// const [classTx, setClassTx] = useState();
-	const [errorMember, setErrorMember] = useState();
-	const [errorClass, setErrorClass] = useState();
-	const classTx=dataTransactions
-	const memberTx=dataTransactions
-=======
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { generateAxiosConfig, handleUnauthorized } from "../../../utils/helper";
@@ -74,7 +64,6 @@ export default function MySchedule() {
 				}
 			});
 	}, [setClassTx, user.id]);
->>>>>>> main
 
 	const [openMember, setOpenMember] = useState(true);
 	const [openClass, setOpenClass] = useState(false);
@@ -89,14 +78,12 @@ export default function MySchedule() {
 	return (
 		<Layout>
 			<NavbarTop title={"Transactions"} />
-<<<<<<< HEAD
 			{/* <div className="d-flex flex-column pb-5 mb-5">
 				{dataTransactions.data.map((item) => (
 					<TransactionItem key={item.id} entries={item} />
 				))}
 			</div> */}
-=======
->>>>>>> main
+
 			<div className="d-flex flex-column pb-5 mb-5">
 				<div className="px-4 mt-4">
 					<Button
@@ -105,10 +92,6 @@ export default function MySchedule() {
 						aria-expanded={openMember}
 						variant={openMember ? "primary" : "outline-primary"}
 						className="me-3"
-<<<<<<< HEAD
-						// disabled={openMember}
-=======
->>>>>>> main
 					>
 						Memberships
 					</Button>
@@ -117,10 +100,6 @@ export default function MySchedule() {
 						aria-controls="class"
 						aria-expanded={openClass}
 						variant={openClass ? "primary" : "outline-primary"}
-<<<<<<< HEAD
-						// disabled={openClass}
-=======
->>>>>>> main
 					>
 						Classes
 					</Button>
@@ -130,11 +109,7 @@ export default function MySchedule() {
 						{errorMember && (
 							<p className="text-center text-light mt-5">{errorMember}</p>
 						)}
-<<<<<<< HEAD
-						{memberTx?.data.map((item) => (
-=======
 						{memberTx?.data?.map((item) => (
->>>>>>> main
 							<TransactionItem key={item.id} entries={item} />
 						))}
 					</div>
@@ -144,11 +119,7 @@ export default function MySchedule() {
 						{errorClass && (
 							<p className="text-center text-light mt-5">{errorClass}</p>
 						)}
-<<<<<<< HEAD
-						{classTx?.data.map((item) => (
-=======
 						{classTx?.data?.map((item) => (
->>>>>>> main
 							<TransactionItem key={item.id} entries={item} />
 						))}
 					</div>
