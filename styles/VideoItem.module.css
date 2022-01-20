@@ -3,12 +3,22 @@
 	background-blend-mode: multiply;
 	cursor: pointer;
 	width: 100%;
+<<<<<<< HEAD
 	height: 200px;
+=======
+	height: 153px;
+>>>>>>> main
 	font-size: 12px;
 }
 
 .overlay {
+<<<<<<< HEAD
 	background: rgba(0, 0, 0, 0.3);
 	z-index: 1;
 	max-width: 60%;
 }
+=======
+	background: rgba(0, 0, 0, 0.6);
+	z-index: 1;
+}
+>>>>>>> main
