@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Navbar from "./elements/navbar";
+import Navbar from "./elements/Navbar";
 
 export default function Layout(props) {
 	return (

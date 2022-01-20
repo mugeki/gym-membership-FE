@@ -1,13 +1,27 @@
 import NavbarTop from "../../../components/elements/NavbarTop";
 import Layout from "../../../components/Layout";
-import dataMember from "../../../mock_data/member_by_userid.json";
-import dataMemberships from "../../../mock_data/membership_products.json";
 import MembershipProduct from "../../../components/elements/MembershipProduct";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { generateAxiosConfig } from "../../../utils/helper";
 
 export default function Membership() {
-	const expireDate = new Date(dataMember?.data.expired_date).toLocaleDateString(
-		"en-GB"
-	);
+	const user = useSelector((state) => state.user);
+	const [products, setProducts] = useState();
+
+	useEffect(() => {
+		const API_URL = process.env.BE_API_URL_LOCAL;
+		axios
+			.get(`${API_URL}/membership-products`, generateAxiosConfig())
+			.then((res) => {
+				setProducts(res.data.data);
+			})
+			.catch((error) => console.log(error));
+	}, [setProducts]);
+
+	const expireDate =
+		user.expire_date || new Date(user?.expire_date).toLocaleDateString("en-GB");
 	return (
 		<Layout>
 			<NavbarTop title={"Membership"} />
@@ -15,8 +29,8 @@ export default function Membership() {
 				<div className="d-flex flex-column border-0 border-bottom p-4 pb-3">
 					<p className="mb-1 fw-bolder">Membership Status</p>
 					<p className="mb-0" style={{ fontSize: "14px" }}>
-						{dataMember ? "Member, " : "Non-Member "}
-						<span className="fw-normal text-light" hidden={!dataMember}>
+						{user.is_member ? "Member, " : "Non-Member "}
+						<span className="fw-normal text-light" hidden={!user.is_member}>
 							Valid until: {expireDate}
 						</span>
 					</p>
@@ -27,7 +41,7 @@ export default function Membership() {
 						Available Plans:
 					</p>
 					<div className="d-flex flex-wrap justify-content-between py-2">
-						{dataMemberships.data.map((item) => (
+						{products?.map((item) => (
 							<MembershipProduct key={item.id} entries={item} />
 						))}
 					</div>

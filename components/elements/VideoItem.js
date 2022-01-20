@@ -1,36 +1,45 @@
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import styles from "../../styles/VideoItem.module.css";
 import MemberOnlyModal from "./MemberOnlyModal";
-import dataMember from "../../mock_data/member_by_userid.json";
 
 export default function VideoItem({ entries }) {
+	const user = useSelector((state) => state.user);
+	const router = useRouter();
 	const [modalShow, setModalShow] = useState(false);
 	const videoID = entries.url.split("embed/")[1];
 	const thumbnail = `https://img.youtube.com/vi/${videoID}/0.jpg`;
 	const onClick = () => {
-		if (!dataMember) {
+		if (!user.is_member) {
 			setModalShow(true);
 		}
 	};
-	const href = entries.member_only && !dataMember ? "" : `/videos/${videoID}`;
+	const pathname =
+		entries.member_only && !user.is_member ? router.pathname : "/videos/[id]";
+	const href =
+		entries.member_only && !user.is_member
+			? router.pathname
+			: `/videos/${entries.id}`;
 	return (
 		<>
 			<Link
 				href={{
-					pathname: href,
+					pathname: pathname,
 					query: {
-						videoID: videoID,
+						...entries,
+						videoID,
 					},
 				}}
-				as={`/videos/${entries.id}`}
+				as={href}
 				passHref
-				scroll={!entries.member_only || !!dataMember}
+				scroll={!entries.member_only || !!user.is_member}
 			>
 				<div
-					className={`${styles.item} position-relative d-flex text-white text-center rounded mb-3`}
+					className={`${styles.item} position-relative d-flex text-white text-center rounded mb-3 shadow-sm`}
 					onClick={entries.member_only ? () => onClick() : undefined}
 				>
 					<Image

@@ -1,37 +1,39 @@
 import axios from "axios";
+import { useEffect, useState } from "react";
 import VideoItem from "../../components/elements/VideoItem";
 import Layout from "../../components/Layout";
+import { generateAxiosConfig, handleUnauthorized } from "../../utils/helper";
 
-export async function getServerSideProps() {
-	const API_URL =
-		"http://ec2-3-142-219-49.us-east-2.compute.amazonaws.com:8000";
-	const res = await axios.get(`${API_URL}/users/videos`).catch((error) => {
-		if (error.response) {
-			return {
-				props: { error: "An error occured, please try again later" },
-			};
-		}
-	});
-	if (res.status === 204) {
-		return {
-			props: { error: "Videos not found" },
-		};
-	}
-	const data = await res.data;
-	return {
-		props: { data },
-	};
-}
+export default function Videos() {
+	const [videos, setVideos] = useState();
+	const [page, setPages] = useState();
+	const [error, setError] = useState();
 
-export default function Videos({ data, error }) {
+	useEffect(() => {
+		const API_URL = process.env.BE_API_URL_LOCAL;
+		axios
+			.get(`${API_URL}/videos`, generateAxiosConfig())
+			.then((res) => {
+				setVideos(res.data.data);
+				setPages(res.data.page);
+			})
+			.catch((error) => {
+				handleUnauthorized(error.response);
+				setError(error.response.data.meta.messages[0]);
+				console.log(error);
+			});
+	}, [setVideos]);
+
 	return (
 		<Layout>
 			<div className="container p-4 mb-5">
 				<div className="d-flex flex-column justify-content-center">
 					<h4 className="text-start fw-bolder mb-4">Videos</h4>
-					{error
-						? error
-						: data?.map((item) => <VideoItem key={item.id} entries={item} />)}
+					{error ? (
+						<p className="text-center text-light mt-5">{error}</p>
+					) : (
+						videos?.map((item) => <VideoItem key={item.id} entries={item} />)
+					)}
 				</div>
 			</div>
 		</Layout>

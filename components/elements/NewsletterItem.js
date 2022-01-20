@@ -1,27 +1,44 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
-import useFormatDatetime from "../../hooks/useFormatDatetime";
+import { useSelector } from "react-redux";
+import useHandleDate from "../../hooks/useHandleDate";
 import styles from "../../styles/NewsletterItem.module.css";
 import MemberOnlyModal from "./MemberOnlyModal";
-import dataMember from "../../mock_data/member_by_userid.json";
 
 export default function NewsletterItem({ entries }) {
+	const user = useSelector((state) => state.user);
+	const router = useRouter();
 	const [modalShow, setModalShow] = useState(false);
-	const { formatDatetime } = useFormatDatetime();
+	const { formatDatetime } = useHandleDate();
 	const date = formatDatetime(entries.created_at);
 	const onClick = () => {
-		if (!dataMember) {
+		if (!user.is_member) {
 			setModalShow(true);
 		}
 	};
+	const pathname =
+		entries.member_only && !user.is_member
+			? router.pathname
+			: "/newsletters/[id]";
 	const href =
-		entries.member_only && !dataMember ? "" : `/newsletters/${entries.id}`;
+		entries.member_only && !user.is_member
+			? router.pathname
+			: `/newsletters/${entries.id}`;
 	return (
 		<>
-			<Link href={href} passHref scroll={!entries.member_only || !!dataMember}>
+			<Link
+				href={{
+					pathname: pathname,
+					query: { ...entries },
+				}}
+				as={href}
+				passHref
+				scroll={!entries.member_only || !!user.is_member}
+			>
 				<div
-					className={`${styles.item} position-relative d-flex align-items-end text-white text-center rounded mb-3`}
+					className={`${styles.item} position-relative d-flex align-items-end text-white text-center rounded mb-3 shadow-sm`}
 					onClick={entries.member_only ? () => onClick() : undefined}
 				>
 					<Image

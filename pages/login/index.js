@@ -1,10 +1,15 @@
+import axios from "axios";
 import Link from "next/link";
 import { useState } from "react";
-import { FloatingLabel, Form, InputGroup } from "react-bootstrap";
+import { Button, FloatingLabel, Form } from "react-bootstrap";
+import { Icon } from "@iconify/react";
+import { GoogleLogin } from "react-google-login";
 import useValidateForm from "../../hooks/useValidateForm";
 import styles from "../../styles/UserAuth.module.css";
+import useHandleLogin from "../../hooks/useHandleLogin";
 
 export default function Login() {
+	const handleLogin = useHandleLogin();
 	const { validateForm } = useValidateForm();
 	const [form, setForm] = useState({
 		username: "",
@@ -27,8 +32,54 @@ export default function Login() {
 		const newErrors = validateForm(undefined, undefined, form);
 		if (Object.keys(newErrors).length > 0) {
 			setErrorMsg(newErrors);
+		} else {
+			// const API_URL = process.env.BE_API_URL;
+			const API_URL = process.env.BE_API_URL_LOCAL;
+			axios
+				.post(`${API_URL}/users/login`, {
+					...form,
+				})
+				.then((res) => {
+					handleLogin(res.data.data);
+				})
+				.catch((error) => {
+					setErrorMsg({
+						...errorMsg,
+						auth: error.response.data.meta.messages[0],
+					});
+				});
 		}
 	};
+	// const onSuccess = (res) => {
+	// 	const API_URL = process.env.BE_API_URL_LOCAL;
+	// 	axios
+	// 		.post(`${API_URL}/users/login`, {
+	// 			...form,
+	// 		})
+	// 		.then((resLogin) => {
+	// 			cookies.set("token", resLogin.data.data.token);
+	// 			cookies.set("access_token", res.tokenObj.access_token);
+
+	// 			const userData = {
+	// 				user_id: resLogin.data.data.id,
+	// 				email: res.profileObj.email,
+	// 				username: res.profileObj.email,
+	// 				fullname: res.profileObj.name,
+	// 				img_url: res.profileObj.imageUrl,
+	// 			};
+	// 			dispatch(storeUser(userData));
+	// 			router.push("/");
+	// 		})
+	// 		.catch((error) => {
+	// 			setErrorMsg({
+	// 				...errorMsg,
+	// 				auth: error.response.data.meta.messages[0],
+	// 			});
+	// 		});
+	// };
+	// const onFailure = (res) => {
+	// 	console.log("Login Failed, ", res);
+	// };
 	return (
 		<div
 			className={`${styles.container} d-flex flex-column justify-content-between p-4`}
@@ -43,7 +94,8 @@ export default function Login() {
 				noValidate
 				onSubmit={onSubmit}
 			>
-				<FloatingLabel className="text-light mb-4" label="Username">
+				<p className="text-danger text-center">{errorMsg.auth}</p>
+				<FloatingLabel className="text-light mb-4" label="Username / Email">
 					<Form.Control
 						className={`${styles.input} rounded-0 border-0 border-bottom border-secondary shadow-none text-white bg-transparent`}
 						type="text"
@@ -52,7 +104,7 @@ export default function Login() {
 						value={form.username}
 						onChange={onChange}
 						onBlur={onBlur}
-						isInvalid={!!errorMsg.username}
+						isInvalid={!!errorMsg.username || !!errorMsg.auth}
 					/>
 					<Form.Control.Feedback type="invalid">
 						{errorMsg.username}
@@ -67,37 +119,37 @@ export default function Login() {
 						value={form.password}
 						onChange={onChange}
 						onBlur={onBlur}
-						isInvalid={!!errorMsg.password}
+						isInvalid={!!errorMsg.password || !!errorMsg.auth}
 					/>
-					{/* <InputGroup>
-						<Form.Control
-							className={`${styles.input} rounded-0 border-0 border-bottom border-secondary shadow-none text-white bg-transparent`}
-							type="password"
-							placeholder=" "
-							name="password"
-							value={form.password}
-							onChange={onChange}
-							onBlur={onBlur}
-							isInvalid={!!errorMsg.password}
-						/>
-						<InputGroup.Text>Tess</InputGroup.Text>
-					</InputGroup> */}
 					<Form.Control.Feedback type="invalid">
 						{errorMsg.password}
 					</Form.Control.Feedback>
 				</FloatingLabel>
-				<button className="btn btn-secondary text-white mb-5" type="submit">
+				<button className="btn btn-secondary text-white mb-4" type="submit">
 					Login
 				</button>
+				{/* <GoogleLogin
+					clientId={process.env.GOOGLE_CLIENT_ID}
+					render={(props) => (
+						<Button
+							variant="mb-5 d-flex justify-content-center shadow-none"
+							onClick={props.onClick}
+							disabled={props.disabled}
+						>
+							<Icon icon="flat-color-icons:google" width={25} />
+							<p className="d-inline m-0 ms-2 text-white">
+								Continue with Google
+							</p>
+						</Button>
+					)}
+					onSuccess={onSuccess}
+					onFailure={onFailure}
+					cookiePolicy={"single_host_origin"}
+				/> */}
 			</Form>
-			<div className="flex-grow d-flex justify-content-between pb-3 px-4">
-				<Link href="register">
+			<div className="flex-grow d-flex pb-3 px-4">
+				<Link href="/register">
 					<a className="text-secondary m-0 text-decoration-none">Sign Up</a>
-				</Link>
-				<Link href="login">
-					<a className="text-secondary m-0 text-decoration-none">
-						Forgot Password?
-					</a>
 				</Link>
 			</div>
 		</div>

@@ -12,7 +12,7 @@ export default function MemberOnlyModal(props) {
 			<Modal.Body className="d-flex flex-column align-items-center py-4">
 				<h4>Member Content</h4>
 				<p className="text-center">
-					You've discovered a member exclusive content
+					You&apos;ve discovered a member exclusive content
 				</p>
 				<Link href="/profile/membership" passHref>
 					<Button variant="primary rounded-pill py-2 px-4">
