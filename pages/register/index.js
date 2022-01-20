@@ -1,18 +1,24 @@
+import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { useState } from "react";
-import { FloatingLabel, Form } from "react-bootstrap";
+import { Button, FloatingLabel, Form } from "react-bootstrap";
+import GoogleLogin from "react-google-login";
 import useValidateForm from "../../hooks/useValidateForm";
 import styles from "../../styles/UserAuth.module.css";
+import useHandleLogin from "../../hooks/useHandleLogin";
+import axios from "axios";
 
 export default function Register() {
+	const handleLogin = useHandleLogin();
 	const { validateForm } = useValidateForm();
 	const [form, setForm] = useState({
 		username: "",
 		email: "",
-		full_name: "",
+		fullname: "",
 		password: "",
 		telephone: "",
-		gender: "",
+		gender: "male",
+		url_image: process.env.DEFAULT_PROFILE,
 	});
 	const [errorMsg, setErrorMsg] = useState({});
 	const onChange = (e) => {
@@ -31,8 +37,36 @@ export default function Register() {
 		const newErrors = validateForm(undefined, undefined, form);
 		if (Object.keys(newErrors).length > 0) {
 			setErrorMsg(newErrors);
+		} else {
+			const API_URL = process.env.BE_API_URL_LOCAL;
+			axios
+				.post(`${API_URL}/users`, {
+					...form,
+				})
+				.then(() => {
+					axios
+						.post(`${API_URL}/users/login`, {
+							username: form.username,
+							password: form.password,
+						})
+						.then((resLogin) => {
+							handleLogin(resLogin.data.data);
+						})
+						.catch((error) => {
+							console.log(error);
+						});
+				})
+				.catch((error) => {
+					setErrorMsg({
+						...errorMsg,
+						auth: error.response.data.meta.messages[0],
+					});
+				});
 		}
 	};
+	// const responseGoogle = (response) => {
+	// 	console.log(response);
+	// };
 	return (
 		<div
 			className={`${styles.container} d-flex flex-column justify-content-between p-4`}
@@ -84,15 +118,15 @@ export default function Register() {
 						className={`${styles.input} rounded-0 border-0 border-bottom border-secondary shadow-none text-white bg-transparent`}
 						type="text"
 						placeholder=" "
-						name="full_name"
-						value={form.full_name}
+						name="fullname"
+						value={form.fullname}
 						onChange={onChange}
 						onBlur={onBlur}
-						isInvalid={!!errorMsg.full_name}
+						isInvalid={!!errorMsg.fullname}
 						required
 					/>
 					<Form.Control.Feedback type="invalid">
-						{errorMsg.full_name}
+						{errorMsg.fullname}
 					</Form.Control.Feedback>
 				</FloatingLabel>
 				<FloatingLabel className="text-light mb-4" label="Password">
@@ -138,18 +172,31 @@ export default function Register() {
 						<option value="female">Female</option>
 					</Form.Select>
 				</FloatingLabel>
-				<button className="btn btn-secondary text-white mb-5" type="submit">
+				<button className="btn btn-secondary text-white mb-4" type="submit">
 					Register
 				</button>
+				{/* <GoogleLogin
+					clientId={process.env.GOOGLE_CLIENT_ID}
+					render={(props) => (
+						<Button
+							variant="mb-5 d-flex justify-content-center shadow-none"
+							onClick={props.onClick}
+							disabled={props.disabled}
+						>
+							<Icon icon="flat-color-icons:google" width={25} />
+							<p className="d-inline m-0 ms-2 text-white">
+								Continue with Google
+							</p>
+						</Button>
+					)}
+					onSuccess={responseGoogle}
+					onFailure={responseGoogle}
+					cookiePolicy={"single_host_origin"}
+				/> */}
 			</Form>
 			<div className="flex-grow d-flex justify-content-between pb-3 px-4">
-				<Link href="login">
+				<Link href="/login">
 					<a className="text-secondary m-0 text-decoration-none">Login</a>
-				</Link>
-				<Link href="login">
-					<a className="text-secondary m-0 text-decoration-none">
-						Forgot Password?
-					</a>
 				</Link>
 			</div>
 		</div>

@@ -1,13 +1,38 @@
+import axios from "axios";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import NavbarTop from "../../../components/elements/NavbarTop";
 import Layout from "../../../components/Layout";
 import useFormatDatetime from "../../../hooks/useFormatDatetime";
-import dataNewsletter from "../../../mock_data/newsletter_getbyid.json";
+import { generateAxiosConfig, handleUnauthorized } from "../../../utils/helper";
 
 export default function Newsletter() {
+	const router = useRouter();
+	const [newsletter, setNewsletter] = useState();
+	const [error, setError] = useState();
+
+	useEffect(() => {
+		if (!router.query.title) {
+			const API_URL = process.env.BE_API_URL_LOCAL;
+			axios
+				.get(`${API_URL}/articles/${router.query.id}`, generateAxiosConfig())
+				.then((res) => {
+					setNewsletter(res.data.data);
+				})
+				.catch((error) => {
+					handleUnauthorized(error.response);
+					setError(error.response.data.meta.messages[0]);
+					console.log(error);
+				});
+		} else {
+			setNewsletter(router.query);
+		}
+	}, [setNewsletter, router]);
+
 	const { formatDatetime } = useFormatDatetime();
-	const date = formatDatetime(dataNewsletter.data.created_at);
-	const content = dataNewsletter.data.text.split("\n").map((str, i) => (
+	const date = formatDatetime(newsletter?.created_at);
+	const content = newsletter?.text.split("\n").map((str, i) => (
 		<p
 			key={i}
 			className="mw-100 text-truncate"
@@ -16,24 +41,28 @@ export default function Newsletter() {
 			{str}
 		</p>
 	));
+
 	return (
 		<Layout>
 			<NavbarTop title={"Newsletter"} />
-			<div className="container d-flex flex-column justify-content-center p-4 mb-5">
-				<h6 className="fw-bolder mb-0 fs-5">{dataNewsletter.data.title}</h6>
-				<p className="text-light" style={{ fontSize: "14px" }}>
-					{date.day} {date.month} {date.year}
-				</p>
-				<Image
-					src={dataNewsletter.data.url_image}
-					width={"100%"}
-					height={"200px"}
-					alt="newsletter"
-					objectFit="cover"
-					className="mb-4"
-				/>
-				<div className="d-flex flex-column align-items-start">{content}</div>
-			</div>
+			{error && <p className="text-center text-light mt-5">{error}</p>}
+			{newsletter && (
+				<div className="container d-flex flex-column justify-content-center p-4 mb-5">
+					<h6 className="fw-bolder mb-0 fs-5">{newsletter.title}</h6>
+					<p className="text-light" style={{ fontSize: "14px" }}>
+						{date.day} {date.month} {date.year}
+					</p>
+					<Image
+						src={newsletter.url_image}
+						width={"100%"}
+						height={"200px"}
+						alt="newsletter"
+						objectFit="cover"
+						className="mb-4"
+					/>
+					<div className="d-flex flex-column align-items-start">{content}</div>
+				</div>
+			)}
 		</Layout>
 	);
 }

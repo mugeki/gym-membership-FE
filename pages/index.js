@@ -1,50 +1,106 @@
-import Head from "next/head";
 import Layout from "../components/Layout";
-import HomeClassesItem from "../components/elements/HomeClassesItem";
 import NewsletterItem from "../components/elements/NewsletterItem";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from "react-responsive-carousel";
 import Link from "next/link";
-import dataClasses from "../mock_data/classes.json";
-import dataNewsletter from "../mock_data/newsletter.json";
-import dataUser from "../mock_data/user.json";
+import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { generateAxiosConfig, handleUnauthorized } from "../utils/helper";
+import HomeClassesList from "../components/elements/HomeClassesList";
+import Image from "next/image";
 
 export default function Home() {
-	const splitData = (array, chunkSize) =>
-		Array(Math.ceil(array.length / chunkSize))
-			.fill()
-			.map((_, index) => index * chunkSize)
-			.map((begin) => array.slice(begin, begin + chunkSize));
-	const chunks = splitData(dataClasses.data, 3);
+	const user = useSelector((state) => state.user);
+	const [newsletters, setNewsletters] = useState();
+	const [classes, setClasses] = useState();
+	const [errorClass, setErrorClass] = useState();
+	const [errorNewsletter, setErrorNewsletter] = useState();
+
+	useEffect(() => {
+		const API_URL = process.env.BE_API_URL_LOCAL;
+		axios
+			.get(`${API_URL}/articles`, generateAxiosConfig())
+			.then((res) => {
+				if (res.status === 204) {
+					setErrorNewsletter((state) => {
+						return { ...state, classes: "Newsletter not found" };
+					});
+				} else {
+					setNewsletters(res.data.data.slice(0, 4));
+				}
+			})
+			.catch((error) => {
+				handleUnauthorized(error.response);
+				console.log(error);
+			});
+	}, [setNewsletters]);
+
+	useEffect(() => {
+		const API_URL = process.env.BE_API_URL_LOCAL;
+		axios
+			.get(
+				`${API_URL}/transaction-class/active/${user.id}`,
+				generateAxiosConfig()
+			)
+			.then((res) => {
+				if (res.status === 204) {
+					setErrorClass("You are not participated in any class");
+				} else {
+					setClasses(res.data.data);
+				}
+			})
+			.catch((error) => {
+				handleUnauthorized(error.response);
+				console.log(error);
+			});
+	}, [setClasses, user.id]);
+
 	return (
 		<Layout>
 			<div className="container p-4 mb-5">
 				<main className="d-flex flex-column justify-content-center">
-					<h4 className="text-start mb-4 fw-bolder">
-						Hello, {dataUser.data.full_name}
-					</h4>
-					<h5>Your Classes</h5>
-
-					<Carousel showIndicators={false} showThumbs={false}>
-						{chunks.map((chunk, i) => (
-							<div key={i} className="d-flex justify-content-between">
-								{chunk.map((item) => (
-									<HomeClassesItem key={item.id} entries={item} />
-								))}
-							</div>
-						))}
-					</Carousel>
-
-					<div className="d-flex justify-content-between mt-5">
-						<h5>Latest Newsletter</h5>
-						<Link href={"/newsletters"} passHref>
-							<a className="text-light m-0 text-decoration-none">View All</a>
+					<div className="d-flex align-items-center justify-content-between flex-nowrap mb-4">
+						<h4 className="fs-6 fw-bolder text-truncate m-0 me-1">
+							Hello, {user.fullname}
+						</h4>
+						<Link href="/profile" passHref>
+							<Image
+								width={"45px"}
+								height={"45px"}
+								src={user.url_image}
+								alt="profile"
+								className="rounded-circle"
+							/>
 						</Link>
 					</div>
-
-					{dataNewsletter.data.slice(0, 4).map((item) => (
-						<NewsletterItem key={item.id} entries={item} />
-					))}
+					<h5 className="mb-0">Your Schedules</h5>
+					<p
+						className="text-light text-decoration-none"
+						style={{ fontSize: "14px" }}
+					>
+						Your class schedule in the next 1 week
+					</p>
+					{errorClass && (
+						<p className="text-center text-light mt-5">{errorClass}</p>
+					)}{" "}
+					{classes && <HomeClassesList entries={classes} />}
+					<div className="d-flex justify-content-between align-items-center mt-5">
+						<h5>Latest Newsletter</h5>
+						<Link href="/newsletters" passHref>
+							<a
+								className="text-light mb-1 text-decoration-none"
+								style={{ fontSize: "14px" }}
+							>
+								View All
+							</a>
+						</Link>
+					</div>
+					{errorNewsletter && (
+						<p className="text-center text-light mt-5">{errorNewsletter}</p>
+					)}{" "}
+					{newsletters &&
+						newsletters?.map((item) => (
+							<NewsletterItem key={item.id} entries={item} />
+						))}
 				</main>
 			</div>
 		</Layout>

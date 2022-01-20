@@ -1,4 +1,23 @@
-export default function useFormatDatetime() {
+export default function useHandleDate() {
+	const parseDateList = (dateList) => {
+		let dateStart, dateEnd;
+		let dateArr = [];
+		const dates = dateList.split(";");
+		for (const date of dates) {
+			const currDate = date.split(",");
+			const currDateTimestamp = new Date(currDate[0]).getTime();
+			const difference = currDateTimestamp - Date.now();
+			const isThisWeek = difference >= -86400000 && difference <= 604800000;
+			if (isThisWeek) {
+				console.log();
+				dateStart = currDate[0];
+				dateEnd = currDate[1];
+				dateArr.push([dateStart, dateEnd]);
+			}
+		}
+
+		return dateArr;
+	};
 	const formatDatetime = (datetime) => {
 		const days = [
 			"Sunday",
@@ -24,7 +43,7 @@ export default function useFormatDatetime() {
 			"Dec",
 		];
 		const date = new Date(datetime);
-		const day = date.getDay();
+		const day = date.getDate();
 		const month = months[date.getMonth()];
 		const year = date.getFullYear();
 		const dayName = days[date.getDay()];
@@ -45,5 +64,5 @@ export default function useFormatDatetime() {
 		};
 	};
 
-	return { formatDatetime };
+	return { parseDateList, formatDatetime };
 }

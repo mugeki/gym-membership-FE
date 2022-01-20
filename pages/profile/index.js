@@ -2,27 +2,38 @@ import { Icon } from "@iconify/react";
 import Image from "next/image";
 import Link from "next/link";
 import Layout from "../../components/Layout";
-import dataUser from "../../mock_data/user.json";
-import dataMember from "../../mock_data/member_by_userid.json";
 import { useRouter } from "next/router";
+import Cookies from "universal-cookie";
+import { useDispatch } from "react-redux";
+import { clearUser } from "../../store/userSlice";
+import { useSelector } from "react-redux";
 
 export default function Profile() {
+	const user = useSelector((state) => state.user);
+	const dispatch = useDispatch();
+	const cookies = new Cookies();
 	const router = useRouter();
+	const onClick = () => {
+		router.push("/login");
+		cookies.remove("token", { path: "/", domain: window.location.hostname });
+		dispatch(clearUser());
+	};
 	return (
 		<Layout>
 			<div className="container d-flex flex-column p-4">
-				<div className="d-flex align-items-center">
+				<div className="d-flex align-items-center flex-nowrap">
 					<Image
-						src={dataUser.data.url_image}
-						width={80}
-						height={80}
+						src={user.url_image}
+						width={55}
+						height={55}
 						alt="profile"
-						className="rounded-circle"
+						objectFit="cover"
+						className="rounded-circle align-self-center"
 					/>
-					<span className="mx-3 fs-5">{dataUser.data.full_name}</span>
+					<span className="mx-3 text-truncate">{user.fullname}</span>
 					<span
 						className="border border-secondary text-secondary rounded px-2"
-						hidden={!dataMember}
+						hidden={!user.is_member}
 					>
 						Member
 					</span>
@@ -64,6 +75,14 @@ export default function Profile() {
 							<span className="ms-2">Transactions</span>
 						</div>
 					</Link>
+					<div
+						className="d-flex mb-4"
+						style={{ cursor: "pointer" }}
+						onClick={onClick}
+					>
+						<Icon icon="cil:account-logout" color="#5965ce" width="20" />
+						<span className="ms-2">Logout</span>
+					</div>
 				</div>
 			</div>
 		</Layout>

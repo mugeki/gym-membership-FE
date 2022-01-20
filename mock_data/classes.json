@@ -40,49 +40,46 @@
             "location": "jl jlan jalan"
         },
 		{
-            "id": 3,
-            "name": "tabata workout program",
-            "url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
-            "price": 500000,
-            "kuota": 20,
-            "participant": 0,
-            "trainer_name": "chris yulia",
-            "trainer_image": "",
-            "description": "Tabata training breaks a workout down into clearly defined intervals",
-            "available_status": true,
-            "is_online": false,
-            "date": "2021-12-16T07:00:00.000Z,2021-12-16T09:08:00.000;2021-12-20T07:00:00.000Z,2021-12-16T09:08:00.000;2021-12-18T07:00:00.000Z,2021-12-18T09:08:00.000Z",
-            "location": "jl jlan jalan"
-        },
-        {
-            "id": 4,
-            "name": "jump rope program",
-            "url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
-            "price": 500000,
-            "kuota": 20,
-            "participant": 0,
-            "trainer_name": "chris yulia",
-            "trainer_image": "",
-            "description": "Tabata training breaks a workout down into clearly defined intervals",
-            "available_status": true,
-            "is_online": true,
-            "date": "2021-12-16T07:00:00.000Z,2021-12-16T09:08:00.000;2021-12-20T07:00:00.000Z,2021-12-16T09:08:00.000;2021-12-18T07:00:00.000Z,2021-12-18T09:08:00.000Z",
-            "location": "jl jlan jalan"
-        },
+			"id": 2,
+			"name": "jump rope program",
+			"date": "2021-12-16T07:00:00.000Z,2021-12-16T09:08:00.000Z;2022-01-16T09:00:00.000Z,2022-01-16T11:08:00.000Z;2022-01-18T07:00:00.000Z,2022-01-18T09:08:00.000Z",
+			"location": "jl jlan jalan",
+			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+		},
 		{
-            "id": 5,
-            "name": "jump rope program",
-            "url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
-            "price": 500000,
-            "kuota": 20,
-            "participant": 0,
-            "trainer_name": "chris yulia",
-            "trainer_image": "",
-            "description": "Tabata training breaks a workout down into clearly defined intervals",
-            "available_status": true,
-            "is_online": true,
-            "date": "2021-12-16T07:00:00.000Z,2021-12-16T09:08:00.000;2021-12-20T07:00:00.000Z,2021-12-16T09:08:00.000;2021-12-18T07:00:00.000Z,2021-12-18T09:08:00.000Z",
-            "location": "jl jlan jalan"
-        }
-    ]
+			"id": 3,
+			"name": "jump",
+			"date": "2021-12-16T07:00:00.000Z,2021-12-16T09:08:00.000Z;2021-12-20T07:00:00.000Z,2021-12-16T09:08:00.000Z;2022-02-18T07:00:00.000Z,2022-02-18T09:08:00.000Z",
+			"location": "jl jlan jalan",
+			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+		},
+		{
+			"id": 4,
+			"name": "asd",
+			"date": "2021-12-16T07:00:00.000Z,2021-12-16T09:08:00.000Z;2021-12-20T07:00:00.000Z,2021-12-16T09:08:00.000Z;2022-01-18T07:00:00.000Z,2022-01-18T09:08:00.000Z",
+			"location": "jl jlan jalan",
+			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+		},
+		{
+			"id": 5,
+			"name": "program",
+			"date": "2021-12-16T07:00:00.000Z,2021-12-16T09:08:00.000Z;2021-12-20T07:00:00.000Z,2021-12-16T09:08:00.000Z;2022-01-18T07:00:00.000Z,2022-01-18T09:08:00.000Z",
+			"location": "jl jlan jalan",
+			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+		},
+		{
+			"id": 6,
+			"name": "fafaf",
+			"date": "2021-12-16T07:00:00.000Z,2021-12-16T09:08:00.000Z;2021-12-20T07:00:00.000Z,2021-12-16T09:08:00.000Z;2022-01-18T07:00:00.000Z,2022-01-18T09:08:00.000Z",
+			"location": "jl jlan jalan",
+			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+		},
+		{
+			"id": 7,
+			"name": "proaasd",
+			"date": "2021-12-16T07:00:00.000Z,2021-12-16T09:08:00.000Z;2021-12-20T07:00:00.000Z,2021-12-16T09:08:00.000Z;2022-01-18T07:00:00.000Z,2022-01-18T09:08:00.000Z",
+			"location": "jl jlan jalan",
+			"url_image": "https://images.unsplash.com/photo-1594737626072-90dc274bc2bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+		}
+	]
 }
