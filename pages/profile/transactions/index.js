@@ -3,13 +3,6 @@ import Layout from "../../../components/Layout";
 import TransactionItem from "../../../components/elements/TransactionItem";
 import { Button, Fade } from "react-bootstrap";
 import { useEffect, useState } from "react";
-// import axios from "axios";
-// import Cookies from "universal-cookie";
-// import { useSelector } from "react-redux";
-// import { handleUnauthorized } from "../../../utils/helper";
-// import { Base64 } from "js-base64";
-import dataTransactions from "../../../mock_data/transactions.json";
-
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { generateAxiosConfig, handleUnauthorized } from "../../../utils/helper";
@@ -25,7 +18,7 @@ export default function MySchedule() {
 		const API_URL = process.env.BE_API_URL_LOCAL;
 		axios
 			.get(
-				`${API_URL}/transaction-membership?idUser=${user.id}`,
+				`${API_URL}/transaction-membership/user`,
 				generateAxiosConfig()
 			)
 			.then((res) => {
@@ -47,13 +40,14 @@ export default function MySchedule() {
 		const API_URL = process.env.BE_API_URL_LOCAL;
 		axios
 			.get(
-				`${API_URL}/transaction-class?idUser=${user.id}`,
+				`${API_URL}/transaction-class/user`,
 				generateAxiosConfig()
 			)
 			.then((res) => {
 				if (res.status === 204) {
 					setErrorClass("No transaction has been made");
 				}
+				
 				setClassTx({ data: res.data.data, page: res.data.page });
 			})
 			.catch((error) => {
@@ -63,6 +57,7 @@ export default function MySchedule() {
 					console.log(error);
 				}
 			});
+		
 	}, [setClassTx, user.id]);
 
 	const [openMember, setOpenMember] = useState(true);
@@ -75,6 +70,7 @@ export default function MySchedule() {
 		setOpenMember(false);
 		setOpenClass(true);
 	};
+	
 	return (
 		<Layout>
 			<NavbarTop title={"Transactions"} />
@@ -93,7 +89,7 @@ export default function MySchedule() {
 						variant={openMember ? "primary" : "outline-primary"}
 						className="me-3"
 					>
-						Memberships
+					Memberships
 					</Button>
 					<Button
 						onClick={handleClassTab}

@@ -1,94 +1,30 @@
-<<<<<<< HEAD
-// import Link from "next/link";
-// import styles from "../../styles/Transaction.module.css"
-// import React, { useState } from 'react';
-
-// export default function ScheduleItem({ entries }) {
-// 	const date = new Date(entries.created_at);
-// 	const transactionData =JSON.stringify(entries);
-// 	const href = `/profile/transaction/${entries.id}`
-// 	const transactionID = entries.id
-// 	const transactionStatus = entries.status
-// 	const linkStatus=()=>{
-// 		if(entries.status=="accepted"){
-// 			return "see receipt"
-// 		}else{
-// 			if(entries.status=="waiting-for-confirmation"){
-// 				// setStatusColor("red")
-// 				return "see status"
-// 			}
-// 			else{
-// 				// setStatusColor("red")
-// 				return "pay now"
-// 			}
-// 		}
-// 	}
-// 	const statusButton=()=>{
-// 		if(entries.status=="accepted"){
-// 			return ` bg-light ${styles.containerGreen} rounded-3 px-2 m-0`
-// 		}else{
-// 			if(entries.status=="waiting-for-confirmation"){
-// 				return ` bg-light ${styles.containerRed} rounded-3 px-2 m-0`
-// 			}
-// 			else{
-// 				return ` bg-light ${styles.containerRed} rounded-3 px-2 m-0`
-// 			}
-// 		}
-// 	}
-	
-
-// 	return (
-// 		<Link
-// 			href={{
-// 				pathname: href,
-// 				query: {
-// 					ID: transactionID,
-// 					transactionData:transactionData
-// 				},
-// 			}}
-// 			as={`/profile/transactions/${entries.id}`}
-// 			// onClick={(<ClassById entries={entries} />)}
-// 			passHref
-// 			params
-// 			>
-		
-// 			<div className={` d-flex justify-content-between align-items-center border-0 border-bottom p-4 py-3 shadow my-3 bg-body rounded`}>
-// 				<div className="d-flex flex-column">
-// 					<p className="mb-2 fw-bolder text-primary text-capitalize m-0 p-0">{entries.class_name}</p>
-// 					<div className={statusButton()}>
-// 						<p className="mb-0">{entries.status}</p>
-// 					</div>
-					
-// 					<p className="mb-0">
-// 						Rp {entries.nominal.toLocaleString().replace(/,/g, ".")}
-// 					</p>
-// 					<p className="mb-0">Made at {date.toLocaleString("en-GB")}</p>
-// 				</div>
-// 				<div>
-// 					<button 
-// 						className={`btn ${styles.button} p-1 rounded-3`} >
-// 						{linkStatus()}
-// 					</button>
-// 				</div>
-// 			</div>
-// 		</Link>
-// 	);
-// }
-
-import Link from "next/link";
 import styles from "../../styles/Transaction.module.css"
-
-export default function ScheduleItem({ entries }) {
-	const href = `/profile/transaction/${entries.id}`
-	const transactionID = entries.id
-	const transactionStatus = entries.status
-	const transactionData =JSON.stringify(entries);
-
+import Link from "next/link";
+export default function TranasctionItem({ entries }) {
 	const date = new Date(entries.created_at);
-	const status =
-		entries.status.charAt(0).toUpperCase() + entries.status.slice(1);
-	
-		const linkStatus=()=>{
+	const status =entries.status.replaceAll("-"," ")
+		
+	const transactionID= entries.ID
+	const transactionData= entries
+	const href =()=>{
+		if (entries.membership_product_id!=null){
+			console.log("route to member",entries.membership_product_id)
+			return `/profile/transactions/member/${entries.id}`
+		}else if (entries.class_id!=null){
+			console.log("route to class",entries.class_id)
+			return `/profile/transactions/class/${entries.id}`
+		}
+	} 
+	const as =()=>{
+		if (entries.membership_product_id!=null){
+			return `/profile/transactions/member/${entries.id}`
+		}else if (entries.class_id!=null){
+			return `/profile/transactions/class/${entries.id}`
+		}
+	} 
+	// const href =`/profile/transaction/${entries.id}`
+
+	const linkStatus=()=>{
 		if(entries.status=="accepted"){
 			return "see receipt"
 		}else{
@@ -101,61 +37,15 @@ export default function ScheduleItem({ entries }) {
 			}
 		}
 	}
-	const statusColor=()=>{
-	if(entries.status=="accepted"){
-		return ` bg-light ${styles.containerGreen} rounded-3 px-2 m-0`
-	}else{
-		if(entries.status=="waiting-for-confirmation"){
-			return ` bg-light ${styles.containerRed} rounded-3 px-2 m-0`
-		}
-		else{
-			return ` bg-light ${styles.containerRed} rounded-3 px-2 m-0`
-		}
-	}
-=======
-export default function TranasctionItem({ entries }) {
-	const date = new Date(entries.created_at);
-	const status =
-		entries.status.charAt(0).toUpperCase() + entries.status.slice(1);
-	return (
-		<div className="d-flex justify-content-between align-items-center border-0 border-bottom p-4 py-3">
-			<div className="d-flex flex-column">
-				<p className="mb-2 fw-bolder text-primary">{entries.product_name}</p>
-				<div
-					className={
-						"mb-1 p-1 px-2 rounded align-self-start shadow-sm " +
-						(status === "Waiting for payment"
-							? "bg-light"
-							: status === "Waiting for confirmation"
-							? "bg-warning"
-							: status === "Accepted"
-							? "bg-success"
-							: "bg-danger")
-					}
-					style={{ fontSize: "14px" }}
-				>
-					<p className="m-0 text-white">{status}</p>
-				</div>
-
-				<p className="mb-0">
-					Rp{entries.nominal.toLocaleString().replace(/,/g, ".")}
-				</p>
-				<p className="mb-0">Made at {date.toLocaleString("en-GB")}</p>
-			</div>
-		</div>
-	);
->>>>>>> main
-}
 	return (
 		<Link
 		href={{
-			pathname: href,
+			pathname: href(),
 			query: {
-				ID: transactionID,
-				transactionData:transactionData
+				ID: transactionID
 			},
 		}}
-		as={`/profile/transactions/${entries.id}`}
+		as={as()}
 		// onClick={(<ClassById entries={entries} />)}
 		passHref
 		params
@@ -163,18 +53,33 @@ export default function TranasctionItem({ entries }) {
 			<div className="d-flex justify-content-between align-items-center border-0 border-bottom p-4 py-3">
 				<div className="d-flex flex-column">
 					<p className="mb-2 fw-bolder text-primary text-capitalize">{entries.product_name}</p>
-					<p className={`${statusColor()} mb-0`}>{status}</p>
+					<div
+						className={
+							"mb-1 px-2 rounded align-self-start shadow-sm " +
+							(status === "Waiting for payment"
+								? "bg-light"
+								: status === "Waiting for confirmation"
+								? "bg-warning"
+								: status === "Accepted"
+								? "bg-success"
+								: "bg-danger")
+						}
+						style={{ fontSize: "14px" }}
+					>
+						<p className="m-0 text-white">{status}</p>
+					</div>
+
 					<p className="mb-0">
 						Rp{entries.nominal.toLocaleString().replace(/,/g, ".")}
 					</p>
 					<p className="mb-0">Made at {date.toLocaleString("en-GB")}</p>
 				</div>
 				<div>
-					<button className={`btn ${styles.button} p-1 rounded-3`} >
+					<button 
+						className={`btn ${styles.button} p-1 rounded-3`} >
 						{linkStatus()}
 					</button>
 				</div>
-				
 			</div>
 		</Link>
 	);
