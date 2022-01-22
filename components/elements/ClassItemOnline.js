@@ -3,8 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import styles from "../../styles/ClassItem.module.css";
-// import MemberOnlyModal from "./MemberOnlyModal";
-import dataMember from "../../mock_data/member_by_userid.json";
 
 export default function ClassItem({ entries }) {
 	const classID = entries.id;

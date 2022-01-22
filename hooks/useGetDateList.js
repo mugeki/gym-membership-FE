@@ -1,9 +1,10 @@
-import useFormatDatetime from "./useFormatDatetime"
+import useHandleDate from "./useHandleDate"
 
 export default function useGetDateList() {
 	
 	const GetDateList = (scheduleString) => {
-		const { formatDatetime} = useFormatDatetime();
+		console.log(scheduleString)
+		const { formatDatetime} = useHandleDate();
         const listSchedule = scheduleString.split(";")
 		let listScheduleFormatted=[]
     	for (var i = 0; i < listSchedule.length;i++){

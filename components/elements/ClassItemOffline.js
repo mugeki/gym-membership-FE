@@ -4,8 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import styles from "../../styles/ClassItem.module.css";
 import ClassById from "../../pages/classes/offline/[id]";
-// import MemberOnlyModal from "./MemberOnlyModal";
-// import dataMember from "../../mock_data/member_by_userid.json";
+
 
 export default function ClassItem({ entries }) {
 	const classID = entries.id;
@@ -23,9 +22,7 @@ export default function ClassItem({ entries }) {
 					},
 				}}
 				as={`/classes/offline/${entries.id}`}
-				onClick={(<ClassById entries={entries} />)}
 				passHref
-				params
 			>
 				<div
 					className={`${styles.item} position-relative d-flex align-items-end text-white text-center rounded-3 mb-3`}
