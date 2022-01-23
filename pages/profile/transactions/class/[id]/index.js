@@ -57,9 +57,9 @@ export default function TransactionByID({ID, type}){
             {
                 classTx===""?
                     <p>setLoading </p>
-                    :classTx.data.status==="waiting-for-paymentn" ?
+                    :classTx.data.status==="waiting-for-payment" ?
                     <Payment id={idTransactionClass} entries={classTx.data}/>
-                    :classTx.data.status==="waiting-for-payment"?
+                    :classTx.data.status==="completed"?
                     <Receipt id={idTransactionClass} entries={classTx.data} type={"class"}/>
                     :
                     <StatusWaiting/>
