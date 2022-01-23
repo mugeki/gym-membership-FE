@@ -12,7 +12,7 @@ export default function TransactionByID({ID, type}){
     const user = useSelector((state) => state.user);
     const router = useRouter();
     const idTransactionMember=router.query.id
-	const [memberTx, setMemberTx] = useState("");
+	const [memberTx, setMemberTx] = useState();
 	const [errorMember, setErrorMember] = useState();
     const title=()=>{
 		if(memberTx?.status=="accepted"){
@@ -30,7 +30,7 @@ export default function TransactionByID({ID, type}){
 		const API_URL = process.env.BE_API_URL_LOCAL;
 		axios
 			.get(
-				`${API_URL}/transaction-membership/user/2`,
+				`${API_URL}/transaction-membership/user/${idTransactionMember}`,
 				generateAxiosConfig()
 			)
 			.then((res) => {
