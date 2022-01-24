@@ -1,5 +1,12 @@
-//
-export default function Receipt({entries, productType}){
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import { generateAxiosConfig, handleUnauthorized } from "../../utils/helper";
+
+
+export default function Receipt({id, type, entries}){
+
+
     
     return(
         <>
@@ -10,13 +17,13 @@ export default function Receipt({entries, productType}){
                 </div>
                 <p></p>
                 <p className="fs-2 text-primary mb-0">
-                    Rp {entries.price.toLocaleString().replace(/,/g, ".")}
+                    Rp {entries?.nominal.toLocaleString().replace(/,/g, ".")}
                 </p>
-                <p className="text-light text-capitalize">{productType}</p>
+                <p className="text-light text-capitalize">{`${type} payment`}</p>
                 <div className="d-flex flex-column align-self-start card shadow rounded-3  m-4 py-5 px-3"> 
                     <div className="d-flex">
                         <p className="fs-4 fw-bold ">Receipt ID </p>
-                        <p className="fs-4 ms-3 text-light">{`#${entries.id}`} </p>
+                        <p className="fs-4 ms-3 text-light">{`#${entries?.id}`} </p>
                     </div>
                     <table class="table table-borderless">
                         <tr>
@@ -29,7 +36,7 @@ export default function Receipt({entries, productType}){
                         </tr>
                         <tr>
                             <td className="fs-6  col-4 align-top"> Summary </td>
-                            <td className="fs-6 ms-3 col-4 align-top">{`: ${entries.name}`}</td>
+                            <td className="fs-6 ms-3 col-4 align-top text-capitalize">{`: ${entries?.product_name} (${type})`}</td>
                         </tr>
                     </table>
                     <div className='hr'></div>
@@ -42,7 +49,7 @@ export default function Receipt({entries, productType}){
                         <tr>
                             <td className="fs-6  col-4 align-top">Total</td>
                             <td className="fs-6 ms-3 col-4 align-top">: </td>
-                            <td className="fs-6 ms-3 col-4 align-top">Rp {entries.price.toLocaleString().replace(/,/g, ".")}</td>
+                            <td className="fs-6 ms-3 col-4 align-top">Rp {entries?.nominal.toLocaleString().replace(/,/g, ".")}</td>
                         </tr>
                     </table>
                 </div>
