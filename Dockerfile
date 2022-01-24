@@ -1,32 +1,8 @@
-# # build react app, it should be /build
-# FROM node:16-alpine as build
-# WORKDIR /app
-# RUN npm config set registry http://registry.npmjs.org/
-# COPY package.json /app/package.json
-# RUN npm install --only=prod
-# COPY . /app
-# RUN npm run build
-
-# # Creating nginx image and copy build folder from above
-# FROM nginx:stable-alpine
-# RUN mkdir /usr/share/nginx/buffer
-# COPY --from=build /app/.next /usr/share/nginx/buffer
-# COPY --from=build /app/deploy.sh /usr/share/nginx/buffer
-# RUN chmod +x /usr/share/nginx/buffer/deploy.sh
-# RUN cd /usr/share/nginx/buffer && ./deploy.sh
-# RUN mkdir /usr/share/nginx/log
-# RUN rm /etc/nginx/conf.d/default.conf
-# COPY nginx/default.conf /etc/nginx/conf.d
-# EXPOSE 80
-# CMD ["nginx", "-g", "daemon off;"]
-
 # Install dependencies only when needed
 FROM node:16-alpine AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
-RUN npm i -g npm@latest
-RUN npm i -D @swc/cli @swc/core
 COPY package.json package-lock.json ./
 RUN npm ci
 

@@ -23,4 +23,5 @@ module.exports = withPWA({
 		BE_API_URL_LOCAL: process.env.BE_API_URL_LOCAL,
 		DEFAULT_PROFILE: process.env.DEFAULT_PROFILE,
 	},
+	swcMinify: false,
 });
