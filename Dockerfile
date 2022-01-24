@@ -26,6 +26,7 @@ FROM node:16-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 RUN npm i -g npm@latest
+RUN npm i -D @swc/cli @swc/core
 COPY package.json package-lock.json ./
 RUN npm ci
 
