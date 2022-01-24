@@ -15,12 +15,9 @@ export default function MySchedule() {
 	const [errorClass, setErrorClass] = useState();
 
 	useEffect(() => {
-		const API_URL = process.env.BE_API_URL_LOCAL;
+		const API_URL = process.env.BE_API_URL;
 		axios
-			.get(
-				`${API_URL}/transaction-membership/user`,
-				generateAxiosConfig()
-			)
+			.get(`${API_URL}/transaction-membership/user`, generateAxiosConfig())
 			.then((res) => {
 				if (res.status === 204) {
 					setError("No transaction has been made");
@@ -37,17 +34,14 @@ export default function MySchedule() {
 	}, [setMemberTx, user.id]);
 
 	useEffect(() => {
-		const API_URL = process.env.BE_API_URL_LOCAL;
+		const API_URL = process.env.BE_API_URL;
 		axios
-			.get(
-				`${API_URL}/transaction-class/user`,
-				generateAxiosConfig()
-			)
+			.get(`${API_URL}/transaction-class/user`, generateAxiosConfig())
 			.then((res) => {
 				if (res.status === 204) {
 					setErrorClass("No transaction has been made");
 				}
-				
+
 				setClassTx({ data: res.data.data, page: res.data.page });
 			})
 			.catch((error) => {
@@ -57,7 +51,6 @@ export default function MySchedule() {
 					console.log(error);
 				}
 			});
-		
 	}, [setClassTx, user.id]);
 
 	const [openMember, setOpenMember] = useState(true);
@@ -70,16 +63,10 @@ export default function MySchedule() {
 		setOpenMember(false);
 		setOpenClass(true);
 	};
-	
+
 	return (
 		<Layout>
 			<NavbarTop title={"Transactions"} />
-			{/* <div className="d-flex flex-column pb-5 mb-5">
-				{dataTransactions.data.map((item) => (
-					<TransactionItem key={item.id} entries={item} />
-				))}
-			</div> */}
-
 			<div className="d-flex flex-column pb-5 mb-5">
 				<div className="px-4 mt-4">
 					<Button
@@ -89,7 +76,7 @@ export default function MySchedule() {
 						variant={openMember ? "primary" : "outline-primary"}
 						className="me-3"
 					>
-					Memberships
+						Memberships
 					</Button>
 					<Button
 						onClick={handleClassTab}

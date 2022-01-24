@@ -14,7 +14,7 @@ export default function EditLocation() {
 	const [loading, setLoading] = useState(false);
 
 	const updateProfile = (data) => {
-		const API_URL = process.env.BE_API_URL_LOCAL;
+		const API_URL = process.env.BE_API_URL;
 		axios
 			.put(
 				`${API_URL}/users`,

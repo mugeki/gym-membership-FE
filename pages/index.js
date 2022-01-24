@@ -16,7 +16,7 @@ export default function Home() {
 	const [errorNewsletter, setErrorNewsletter] = useState();
 
 	useEffect(() => {
-		const API_URL = process.env.BE_API_URL_LOCAL;
+		const API_URL = process.env.BE_API_URL;
 		axios
 			.get(`${API_URL}/articles`, generateAxiosConfig())
 			.then((res) => {
@@ -35,7 +35,7 @@ export default function Home() {
 	}, [setNewsletters]);
 
 	useEffect(() => {
-		const API_URL = process.env.BE_API_URL_LOCAL;
+		const API_URL = process.env.BE_API_URL;
 		axios
 			.get(
 				`${API_URL}/transaction-class/active/${user.id}`,
@@ -63,13 +63,15 @@ export default function Home() {
 							Hello, {user.fullname}
 						</h4>
 						<Link href="/profile" passHref>
-							<Image
-								width={"45px"}
-								height={"45px"}
-								src={user.url_image}
-								alt="profile"
-								className="rounded-circle"
-							/>
+							<>
+								<Image
+									width={"45px"}
+									height={"45px"}
+									src={user.url_image}
+									alt="profile"
+									className="rounded-circle"
+								/>
+							</>
 						</Link>
 					</div>
 					<h5 className="mb-0">Your Schedules</h5>

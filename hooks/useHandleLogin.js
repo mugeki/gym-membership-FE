@@ -11,7 +11,7 @@ export default function useHandleLogin() {
 	const router = useRouter();
 
 	const handleLogin = async (res) => {
-		const BE_API_URL_LOCAL = process.env.BE_API_URL_LOCAL;
+		const BE_API_URL_LOCAL = process.env.BE_API_URL;
 		let userData = {
 			...res,
 		};

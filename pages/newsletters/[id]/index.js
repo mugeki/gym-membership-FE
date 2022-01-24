@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import NavbarTop from "../../../components/elements/NavbarTop";
 import Layout from "../../../components/Layout";
-import useFormatDatetime from "../../../hooks/useFormatDatetime";
+import useHandleDate from "../../../hooks/useHandleDate";
 import { generateAxiosConfig, handleUnauthorized } from "../../../utils/helper";
 
 export default function Newsletter() {
@@ -14,7 +14,7 @@ export default function Newsletter() {
 
 	useEffect(() => {
 		if (!router.query.title) {
-			const API_URL = process.env.BE_API_URL_LOCAL;
+			const API_URL = process.env.BE_API_URL;
 			axios
 				.get(`${API_URL}/articles/${router.query.id}`, generateAxiosConfig())
 				.then((res) => {
@@ -30,7 +30,7 @@ export default function Newsletter() {
 		}
 	}, [setNewsletter, router]);
 
-	const { formatDatetime } = useFormatDatetime();
+	const { formatDatetime } = useHandleDate();
 	const date = formatDatetime(newsletter?.created_at);
 	const content = newsletter?.text.split("\n").map((str, i) => (
 		<p

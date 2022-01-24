@@ -11,7 +11,7 @@ export default function Membership() {
 	const [products, setProducts] = useState();
 
 	useEffect(() => {
-		const API_URL = process.env.BE_API_URL_LOCAL;
+		const API_URL = process.env.BE_API_URL;
 		axios
 			.get(`${API_URL}/membership-products`, generateAxiosConfig())
 			.then((res) => {

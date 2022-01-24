@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Cookies from "universal-cookie";
 import NavbarTop from "../../../components/elements/NavbarTop";
 import Layout from "../../../components/Layout";
-import useFormatDatetime from "../../../hooks/useFormatDatetime";
+import useHandleDate from "../../../hooks/useHandleDate";
 import { generateAxiosConfig, handleUnauthorized } from "../../../utils/helper";
 
 export default function Video() {
@@ -60,7 +60,7 @@ export default function Video() {
 					});
 			};
 
-			const API_URL = process.env.BE_API_URL_LOCAL;
+			const API_URL = process.env.BE_API_URL;
 			axios
 				.get(`${API_URL}/videos/${router.query.id}`, generateAxiosConfig())
 				.then((res) => {
@@ -75,7 +75,7 @@ export default function Video() {
 		}
 	}, [router.query]);
 
-	const { formatDatetime } = useFormatDatetime();
+	const { formatDatetime } = useHandleDate();
 	const date = formatDatetime(video?.created_at);
 	const description = video?.description?.split("\n").map((str, i) => (
 		<p

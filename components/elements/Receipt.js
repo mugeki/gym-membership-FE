@@ -25,7 +25,7 @@ export default function Receipt({id, type, entries}){
                         <p className="fs-4 fw-bold ">Receipt ID </p>
                         <p className="fs-4 ms-3 text-light">{`#${entries?.id}`} </p>
                     </div>
-                    <table class="table table-borderless">
+                    <table className="table table-borderless">
                         <tr>
                             <td className="fs-6  col-4 align-top">Billing Info </td>
                             <td className="fs-6 ms-3 col-9">: Transfer to BRI a/n PT Subur Jaya 3245368939 </td>
@@ -40,7 +40,7 @@ export default function Receipt({id, type, entries}){
                         </tr>
                     </table>
                     <div className='hr'></div>
-                    <table class="table table-borderless mt-4">
+                    <table className="table table-borderless mt-4">
                         <tr>
                             <td className="fs-6  col-4 align-top">Discount</td>
                             <td className="fs-6 ms-3 col-4 align-top">: -</td>

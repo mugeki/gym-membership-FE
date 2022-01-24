@@ -10,7 +10,7 @@ export default function Newsletters() {
 	const [error, setError] = useState();
 
 	useEffect(() => {
-		const API_URL = process.env.BE_API_URL_LOCAL;
+		const API_URL = process.env.BE_API_URL;
 		axios
 			.get(`${API_URL}/articles`, generateAxiosConfig())
 			.then((res) => {

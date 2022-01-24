@@ -34,7 +34,7 @@ export default function Login() {
 			setErrorMsg(newErrors);
 		} else {
 			// const API_URL = process.env.BE_API_URL;
-			const API_URL = process.env.BE_API_URL_LOCAL;
+			const API_URL = process.env.BE_API_URL;
 			axios
 				.post(`${API_URL}/users/login`, {
 					...form,
@@ -51,7 +51,7 @@ export default function Login() {
 		}
 	};
 	// const onSuccess = (res) => {
-	// 	const API_URL = process.env.BE_API_URL_LOCAL;
+	// 	const API_URL = process.env.BE_API_URL;
 	// 	axios
 	// 		.post(`${API_URL}/users/login`, {
 	// 			...form,

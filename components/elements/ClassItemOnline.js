@@ -1,13 +1,11 @@
-import { Icon } from "@iconify/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import styles from "../../styles/ClassItem.module.css";
 
 export default function ClassItem({ entries }) {
 	const classID = entries.id;
-	const dataByID=JSON.stringify(entries)
-	const href = `/classes/online/${entries.id}`
+	const dataByID = JSON.stringify(entries);
+	const href = `/classes/online/${entries.id}`;
 	return (
 		<>
 			<Link
@@ -15,28 +13,33 @@ export default function ClassItem({ entries }) {
 					pathname: href,
 					query: {
 						classID: classID,
-						dataByID:dataByID,
+						dataByID: dataByID,
 					},
 				}}
 				as={`/classes/online/${entries.id}`}
 				passHref
-				
 			>
 				<div
-					className={`${styles.item} position-relative d-flex align-items-end text-white text-center rounded-3 mb-3`}
+					className={`${styles.item} position-relative d-flex align-items-end text-white text-center rounded mb-3 shadow-sm`}
+					onClick={entries.member_only ? () => onClick() : undefined}
 				>
 					<Image
 						src={entries.url_image}
 						layout="fill"
 						objectFit="cover"
 						alt="class"
-						className="rounded-3"
+						className="rounded"
 					/>
-
-					<p className= {`${styles.overlay}  ms-3 text-start fs-6 text-capitalize`}>
+					<div
+						className={`${styles.overlay} d-flex flex-column align-items-start justify-content-end h-100 w-100 p-3 rounded`}
+					>
+						<p className="mb-0 fw-bolder fs-6 text-start text-truncate w-100">
 							{entries.name}
-					</p>
-
+						</p>
+						<p className="mb-0 text-start text-truncate w-100">
+							{entries.description}
+						</p>
+					</div>
 				</div>
 			</Link>
 		</>

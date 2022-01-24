@@ -38,7 +38,7 @@ export default function Register() {
 		if (Object.keys(newErrors).length > 0) {
 			setErrorMsg(newErrors);
 		} else {
-			const API_URL = process.env.BE_API_URL_LOCAL;
+			const API_URL = process.env.BE_API_URL;
 			axios
 				.post(`${API_URL}/users`, {
 					...form,
