@@ -11,8 +11,8 @@ import Head from "next/head";
 
 export default function Home() {
 	const user = useSelector((state) => state.user);
-	const [newsletters, setNewsletters] = useState();
-	const [classes, setClasses] = useState();
+	const [newsletters, setNewsletters] = useState([]);
+	const [classes, setClasses] = useState([]);
 	const [errorClass, setErrorClass] = useState();
 	const [errorNewsletter, setErrorNewsletter] = useState();
 
