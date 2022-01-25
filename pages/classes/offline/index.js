@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { generateAxiosConfig, handleUnauthorized } from "../../../utils/helper";
 import Head from "next/head";
+import NavbarTop from "../../../components/elements/NavbarTop";
 
 export default function Classes() {
 	const [classData, setClassData] = useState();
@@ -36,6 +37,7 @@ export default function Classes() {
 				<title>Offline Classes | Alta2Gym</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
+			<NavbarTop title="Classes"/>
 			<div className="container p-4 mb-5">
 				<div className="d-flex flex-column justify-content-center ">
 					<h4 className="text-start fw-bolder">Offline Classes</h4>

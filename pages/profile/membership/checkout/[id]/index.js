@@ -4,30 +4,30 @@ import PaymentItem from "../../../../../components/elements/PaymentItem";
 import styles from "../../../../../styles/ClassItem.module.css";
 import NavbarTop from "../../../../../components/elements/NavbarTop";
 import PaymentAccepted from "../../../../../components/elements/PaymentAcc";
-import PaymentAccount from "../../../../../components/elements/PaymentAccount";
-import { Oval } from "react-loader-spinner";
-import { useRouter } from "next/router";
+
+import { Oval } from  'react-loader-spinner'
+import { useRouter } from 'next/router'
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import {
-	generateAxiosConfig,
-	handleUnauthorized,
-} from "../../../../../utils/helper";
-import Head from "next/head";
+import { generateAxiosConfig, handleUnauthorized } from "../../../../../utils/helper";
 
-export default function BookClass({ data, error }) {
+export default function CheckoutMembership() {
 	const router = useRouter();
-	const idClass = router.query.id;
+    const idMembership=router.query.id
+	console.log("id member", idMembership)
 	const user = useSelector((state) => state.user);
-	const idUser = user.id;
-	const [idActive, setIdActive] = useState(1);
-	const [seeModalAcc, setSeeModalAcc] = useState(false);
+	const idUser=user.id
+    const [idActive, setIdActive]=useState(1)
+	const [seeModalAcc, setSeeModalAcc]=useState(false)
 
-	const [paymentData, setPaymentData] = useState();
+	const [paymentData, setPaymentData]=useState()
 	useEffect(() => {
-		const API_URL = process.env.BE_API_URL;
+		const API_URL = process.env.BE_API_URL_LOCAL;
 		axios
-			.get(`${API_URL}/payment-account`, generateAxiosConfig())
+			.get(
+				`${API_URL}/payment-account`,
+				generateAxiosConfig()
+			)
 			.then((res) => {
 				if (res.status === 204) {
 					setError("There is no payment account");
@@ -42,22 +42,22 @@ export default function BookClass({ data, error }) {
 				}
 			});
 	}, [setPaymentData]);
-
-	const handleSubmit = () => {
-		const API_URL = process.env.BE_API_URL;
+	
+	const handleSubmit=()=>{
+		const API_URL = process.env.BE_API_URL_LOCAL;
 		axios
 			.post(
-				`${API_URL}/transaction-class`,
+				`${API_URL}/transaction-membership`,
 				{
-					user_id: parseInt(idUser),
-					class_id: parseInt(idClass),
-					payment_id: parseInt(idActive),
+					"user_id" :parseInt(idUser),
+					"membership_product_id" : parseInt(idMembership),
+					"payment_id":parseInt(idActive)
 				},
 				generateAxiosConfig()
 			)
-			.then((res) => {
-				setSeeModalAcc(true);
-				console.log(res, "response insert transaction");
+			.then((res)=>{
+				setSeeModalAcc(true)
+				console.log(res, "response insert transaction")
 			})
 			.catch((error) => {
 				if (error.response) {
@@ -65,15 +65,13 @@ export default function BookClass({ data, error }) {
 					console.log(error);
 				}
 			});
-	};
+
+	}
 	return (
 		<Layout>
-			<Head>
-				<title>Book Class | Alta2Gym</title>
-				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
-			</Head>
-			<NavbarTop title={"Book Class"} />
-			{paymentData != null ? (
+            <NavbarTop title={"Checkout Membership"}/>
+			{
+				paymentData!=null?
 				<>
 				<div className="container p-4 mb-5 d-flex flex-column align-content-center">
 				<div className="d-flex flex-row justify-content-between ">
@@ -89,19 +87,25 @@ export default function BookClass({ data, error }) {
                     <p className="">{paymentData[idActive-1]?.desc}</p>
                     <p className="text-danger fs-6 warningText">Note : Maximum payment for a book class is 1x24 hours after booking have been placed </p>
                 </div>
-                <button className={`${styles.button} rounded-3 btn mt-4`} onClick={handleSubmit}>Book and Checkout Class</button>
+                <button className={`${styles.button} rounded-3 btn mt-4`} onClick={handleSubmit}>Checkout Membership</button>
 				</div>
 					{
 					seeModalAcc?
-					<PaymentAccepted title={"Accepted"} message={"please make payment in 1x24 hours after"} hrefTo={`/classes/online`} messageHref={'See Another Classes'} hrefTo_2={`/profile/transactions`} messageHref_2={'Pay Now'}/>
+					<PaymentAccepted title={"Accepted"} message={"please make payment in 1x24 hours after"} hrefTo={`/classes`} messageHref={'See Classes'} hrefTo_2={`/profile/transactions`} messageHref_2={'Pay Now'}/>
 					: null
 					}
 				</>
-			) : (
-				<div className="d-flex justify-content-center m-auto">
-					<Oval heigth="100" width="100" color="grey" ariaLabel="loading" />
+
+				: 
+				<div className="d-flex justify-content-center">
+					<Oval
+					heigth="100"
+					width="100"
+					color='grey'
+					ariaLabel='loading'
+			  		/>
 				</div>
-			)}
+			} 
 		</Layout>
 	);
 }

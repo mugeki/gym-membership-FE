@@ -1,16 +1,15 @@
 import NavbarTop from "../../../../../components/elements/NavbarTop";
+import Layout from "../../../../../components/Layout";
 import Payment from "../../../../../components/elements/Payment";
 import Receipt from "../../../../../components/elements/Receipt";
-import StatusWaiting from "../../../../../components/elements/SeeStatus";
-import {
-	generateAxiosConfig,
-	handleUnauthorized,
-} from "../../../../../utils/helper";
+import StatusWaiting from "../../../../../components/elements/StatusWaiting";
+import StatusTimeout from "../../../../../components/elements/StatusTimeout";
+import StatusDecline from "../../../../../components/elements/StatusDecline";
+import { generateAxiosConfig, handleUnauthorized } from "../../../../../utils/helper";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import Head from "next/head";
 
 export default function TransactionByID({ ID, type }) {
 	const user = useSelector((state) => state.user);
@@ -49,32 +48,32 @@ export default function TransactionByID({ ID, type }) {
 					console.log(error);
 				}
 			});
-	}, [setMemberTx, user.id, idTransactionMember]);
+	}, [setMemberTx, user.id,idTransactionMember]);
 
-	return (
-		<>
-			<Head>
-				<title>Payment | Alta2Gym</title>
-				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
-			</Head>
-			<NavbarTop title={title()} />
-			<div className="p-4">
-				{memberTx === "" ? (
-					<p>setLoading </p>
-				) : memberTx?.data?.status === "waiting-for-payment" ? (
-					<Payment id={idTransactionMember} entries={memberTx?.data} />
-				) : memberTx?.data?.status === "accepted" ? (
-					<Receipt
-						id={idTransactionMember}
-						entries={memberTx?.data}
-						type={"membership"}
-					/>
-				) : (
-					<StatusWaiting />
-				)}
-			</div>
-		</>
-	);
+    return(
+        <Layout>
+            <NavbarTop title="Transactions"/>
+            <div className="p-4">
+                {
+                memberTx===""?
+                    <p>setLoading </p>
+                    :memberTx?.data?.status==="waiting-for-payment" ?
+                    <Payment id={idTransactionMember}  entries={memberTx?.data} type={"membership"} />
+                    :memberTx?.data?.status==="accepted"?
+                    <Receipt id={idTransactionMember} entries={memberTx?.data} type={"membership"}/>
+                    :memberTx?.data?.status==="waiting-for-confirmation"?
+                    <StatusWaiting/>
+					: memberTx?.data?.status==="failed"?
+					<StatusTimeout/>
+					:memberTx?.data?.status==="decline"?
+					<StatusDecline/>
+					:null
+                }
+
+            </div>
+        </Layout>
+    );
+    
 }
 
 // {transactionDetailHandle()}

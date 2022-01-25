@@ -77,7 +77,7 @@ export default function EditProfile() {
 						width={80}
 						height={80}
 						alt="profile"
-						className="rounded-circle"
+						className="img-fluid rounded-circle"
 					/>
 					{loading ? (
 						<Spinner
