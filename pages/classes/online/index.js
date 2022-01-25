@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { generateAxiosConfig, handleUnauthorized } from "../../../utils/helper";
 import NavbarTop from "../../../components/elements/NavbarTop";
+import Head from "next/head";
 
 export default function Classes() {
 	const [classData, setClassData] = useState();

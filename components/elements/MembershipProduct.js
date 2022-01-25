@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../../styles/MembershipProduct.module.css";
-import Link from "next/link";
 
 export default function MembershipProduct({ entries }) {
 	const membershipID = entries.id;
