@@ -56,7 +56,7 @@ export default function TransactionByID({ID, type}){
                 memberTx===""?
                     <p>setLoading </p>
                     :memberTx?.data?.status==="waiting-for-payment" ?
-                    <Payment id={idTransactionMember}  entries={memberTx?.data}/>
+                    <Payment id={idTransactionMember}  entries={memberTx?.data} type={"membership"} />
                     :memberTx?.data?.status==="accepted"?
                     <Receipt id={idTransactionMember} entries={memberTx?.data} type={"membership"}/>
                     :

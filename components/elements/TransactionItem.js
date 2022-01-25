@@ -56,11 +56,11 @@ export default function TranasctionItem({ entries }) {
 					<div
 						className={
 							"mb-1 px-2 rounded align-self-start shadow-sm " +
-							(status === "Waiting for payment"
+							(status === "waiting for payment"
 								? "bg-light"
-								: status === "Waiting for confirmation"
+								: status === "waiting for confirmation"
 								? "bg-warning"
-								: status === "Accepted"
+								: status === "accepted"
 								? "bg-success"
 								: "bg-danger")
 						}
