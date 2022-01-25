@@ -12,6 +12,7 @@ import {
 import Image from "next/image";
 import axios from "axios";
 import styles from "../../../../styles/ClassItem.module.css";
+import Head from "next/head";
 
 export default function OnlineClassById() {
 	const user = useSelector((state) => state.user);
@@ -50,6 +51,10 @@ export default function OnlineClassById() {
 	const href = `/classes/online/${idClass}/book-class`;
 	return (
 		<Layout>
+			<Head>
+				<title>{classData?.name} | Alta2Gym</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
 			<NavbarTop title={"Online Classes"} />
 			<div className="container d-flex flex-column justify-content-center p-4 mb-5">
 				<h6 className="fw-bolder mb-0 fs-5 text-capitalize">

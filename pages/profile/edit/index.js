@@ -13,6 +13,7 @@ import { useState } from "react";
 import { generateAxiosConfig, handleUnauthorized } from "../../../utils/helper";
 import { storeUser } from "../../../store/userSlice";
 import axios from "axios";
+import Head from "next/head";
 
 export default function EditProfile() {
 	const user = useSelector((state) => state.user);
@@ -64,6 +65,10 @@ export default function EditProfile() {
 	};
 	return (
 		<Layout>
+			<Head>
+				<title>Edit Profile | Alta2Gym</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
 			<NavbarTop title={"Edit Profile"} />
 			<div className="container d-flex flex-column align-items-center px-4">
 				<div className="d-flex flex-column align-items-center py-4">

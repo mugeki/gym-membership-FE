@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { generateAxiosConfig, handleUnauthorized } from "../../../utils/helper";
+import Head from "next/head";
 
 export default function MySchedule() {
 	const user = useSelector((state) => state.user);
@@ -33,6 +34,10 @@ export default function MySchedule() {
 
 	return (
 		<Layout>
+			<Head>
+				<title>My Schedule | Alta2Gym</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
 			<NavbarTop title={"My Schedule"} />
 			<div className="d-flex flex-column pb-5 mb-5">
 				{error && <p className="text-center text-light mt-5">{error}</p>}

@@ -7,6 +7,7 @@ import axios from "axios";
 import { generateAxiosConfig, handleUnauthorized } from "../utils/helper";
 import HomeClassesList from "../components/elements/HomeClassesList";
 import Image from "next/image";
+import Head from "next/head";
 
 export default function Home() {
 	const user = useSelector((state) => state.user);
@@ -56,6 +57,10 @@ export default function Home() {
 
 	return (
 		<Layout>
+			<Head>
+				<title>Alta2Gym</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
 			<div className="container p-4 mb-5">
 				<main className="d-flex flex-column justify-content-center">
 					<div className="d-flex align-items-center justify-content-between flex-nowrap mb-4">

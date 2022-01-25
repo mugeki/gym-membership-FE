@@ -10,6 +10,7 @@ import {
 	handleUnauthorized,
 } from "../../../../../utils/helper";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 export default function TransactionByID({ ID, type }) {
 	const user = useSelector((state) => state.user);
@@ -53,6 +54,10 @@ export default function TransactionByID({ ID, type }) {
 
 	return (
 		<>
+			<Head>
+				<title>Payment | Alta2Gym</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
 			<NavbarTop title={title} />
 			{/* <Receipt entries={entries} productType={productType}/> */}
 			<div className="p-4">

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { generateAxiosConfig } from "../../../utils/helper";
+import Head from "next/head";
 
 export default function Membership() {
 	const user = useSelector((state) => state.user);
@@ -24,6 +25,10 @@ export default function Membership() {
 		user.expire_date || new Date(user?.expire_date).toLocaleDateString("en-GB");
 	return (
 		<Layout>
+			<Head>
+				<title>Membership | Alta2Gym</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
 			<NavbarTop title={"Membership"} />
 			<div className="d-flex flex-column pb-5 mb-4">
 				<div className="d-flex flex-column border-0 border-bottom p-4 pb-3">

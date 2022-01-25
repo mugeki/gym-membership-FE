@@ -1,4 +1,5 @@
 import axios from "axios";
+import Head from "next/head";
 import { useEffect, useState } from "react";
 import NewsletterItem from "../../components/elements/NewsletterItem";
 import Layout from "../../components/Layout";
@@ -26,6 +27,10 @@ export default function Newsletters() {
 
 	return (
 		<Layout>
+			<Head>
+				<title>Newsletters | Alta2Gym</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
 			<div className="container p-4 mb-5">
 				<main className="d-flex flex-column justify-content-center">
 					<h4 className="text-start fw-bolder mb-4">Newsletters</h4>

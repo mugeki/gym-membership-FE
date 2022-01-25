@@ -1,4 +1,5 @@
 import axios from "axios";
+import Head from "next/head";
 import { useEffect, useState } from "react";
 import VideoItem from "../../components/elements/VideoItem";
 import Layout from "../../components/Layout";
@@ -26,6 +27,10 @@ export default function Videos() {
 
 	return (
 		<Layout>
+			<Head>
+				<title>Videos | Alta2Gym</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
 			<div className="container p-4 mb-5">
 				<div className="d-flex flex-column justify-content-center">
 					<h4 className="text-start fw-bolder mb-4">Videos</h4>

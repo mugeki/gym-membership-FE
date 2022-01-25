@@ -13,6 +13,7 @@ import {
 	generateAxiosConfig,
 	handleUnauthorized,
 } from "../../../../../utils/helper";
+import Head from "next/head";
 
 export default function BookClass({ data, error }) {
 	const router = useRouter();
@@ -67,6 +68,10 @@ export default function BookClass({ data, error }) {
 	};
 	return (
 		<Layout>
+			<Head>
+				<title>Book Class | Alta2Gym</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
 			<NavbarTop title={"Book Class"} />
 			{paymentData != null ? (
 				<>

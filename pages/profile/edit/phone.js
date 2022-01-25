@@ -1,4 +1,5 @@
 import axios from "axios";
+import Head from "next/head";
 import { useState } from "react";
 import { Button, Form, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -63,6 +64,10 @@ export default function EditPhone() {
 
 	return (
 		<Layout>
+			<Head>
+				<title>Edit Phone Number | Alta2Gym</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
 			<NavbarTop title={"Edit Phone Number"} />
 			<Form className="container p-4" noValidate onSubmit={onSubmit}>
 				<Form.Label>Enter new Phone Number</Form.Label>

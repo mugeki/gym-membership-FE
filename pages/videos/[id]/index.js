@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Base64 } from "js-base64";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Cookies from "universal-cookie";
@@ -88,6 +89,10 @@ export default function Video() {
 	));
 	return (
 		<Layout>
+			<Head>
+				<title>{video?.title} | Alta2Gym</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
 			<NavbarTop title={"Videos"} />
 			{error && <p className="text-center text-light mt-5">{error}</p>}
 			{video && (

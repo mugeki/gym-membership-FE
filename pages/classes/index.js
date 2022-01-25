@@ -6,6 +6,7 @@ import styles from "../../styles/ClassItem.module.css";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { generateAxiosConfig, handleUnauthorized } from "../../utils/helper";
+import Head from "next/head";
 
 export default function Classes() {
 	const [offlineClass, setOfflineClass] = useState();
@@ -53,6 +54,10 @@ export default function Classes() {
 
 	return (
 		<Layout>
+			<Head>
+				<title>Classes| Alta2Gym</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
 			<div className="container p-4 mb-5">
 				<div className="d-flex flex-column justify-content-center ">
 					<h4 className="text-start fw-bolder">Classes</h4>

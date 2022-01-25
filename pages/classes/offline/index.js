@@ -4,6 +4,7 @@ import ClassItemOffline from "../../../components/elements/ClassItemOffline";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { generateAxiosConfig, handleUnauthorized } from "../../../utils/helper";
+import Head from "next/head";
 
 export default function Classes() {
 	const [classData, setClassData] = useState();
@@ -31,6 +32,10 @@ export default function Classes() {
 
 	return (
 		<Layout>
+			<Head>
+				<title>Offline Classes | Alta2Gym</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
 			<div className="container p-4 mb-5">
 				<div className="d-flex flex-column justify-content-center ">
 					<h4 className="text-start fw-bolder">Offline Classes</h4>

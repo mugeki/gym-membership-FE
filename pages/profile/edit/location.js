@@ -1,4 +1,5 @@
 import axios from "axios";
+import Head from "next/head";
 import { useEffect, useState } from "react";
 import { Button, Form, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -48,6 +49,10 @@ export default function EditLocation() {
 
 	return (
 		<Layout>
+			<Head>
+				<title>Edit Location | Alta2Gym</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
 			<NavbarTop title={"Edit Location"} />
 			<Form className="container p-4" onSubmit={onSubmit}>
 				<Form.Label>Enter new Location</Form.Label>

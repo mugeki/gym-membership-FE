@@ -1,4 +1,5 @@
 import axios from "axios";
+import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -44,6 +45,10 @@ export default function Newsletter() {
 
 	return (
 		<Layout>
+			<Head>
+				<title>{newsletter?.title} | Alta2Gym</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
 			<NavbarTop title={"Newsletter"} />
 			{error && <p className="text-center text-light mt-5">{error}</p>}
 			{newsletter && (
