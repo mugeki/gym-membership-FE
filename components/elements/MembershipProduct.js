@@ -1,8 +1,22 @@
 import Image from "next/image";
+import Link from "next/link";
 import styles from "../../styles/MembershipProduct.module.css";
 
 export default function MembershipProduct({ entries }) {
+	const membershipID = entries.id;
+	const dataByID=JSON.stringify(entries)
+	const href = `/profile/membership/checkout/${membershipID}`
 	return (
+		<Link
+		href={{
+			pathname: href,
+			query: {
+				membershipID: membershipID,
+			},
+		}}
+		as={`/profile/membership/checkout/${membershipID}`}
+		passHref
+		>
 		<div
 			className={`${styles.item} position-relative d-flex align-items-end text-white text-center rounded my-2`}
 		>
@@ -22,5 +36,6 @@ export default function MembershipProduct({ entries }) {
 				</h6>
 			</div>
 		</div>
+		</Link>
 	);
 }
