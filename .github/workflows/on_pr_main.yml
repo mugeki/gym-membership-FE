@@ -51,5 +51,5 @@ jobs:
           ssh development '
           docker rm -vf gym-membership-fe && \
           docker pull mugeki/gym-membership-fe:1.0.0 && \
-          docker run -d -p 80:80 --name gym-membership-fe \
+          docker run -d -p 3000:3000 --name gym-membership-fe \
           mugeki/gym-membership-fe:1.0.0'
