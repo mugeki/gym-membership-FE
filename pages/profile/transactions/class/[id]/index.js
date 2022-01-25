@@ -9,6 +9,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { generateAxiosConfig, handleUnauthorized } from "../../../../../utils/helper";
 import { useRouter } from "next/router";
+import StatusDecline from "../../../../../components/elements/StatusDecline";
 
 export default function TransactionByID({ID, type}){
     const user = useSelector((state) => state.user);
@@ -16,18 +17,18 @@ export default function TransactionByID({ID, type}){
     const idTransactionClass=router.query.id
 	const [classTx, setClassTx] = useState("");
 	const [errorClass, setErrorClass] = useState();
-    const title=()=>{
-		if(classTx?.status=="accepted"){
-			return "Receipt"
-		}else{
-			if(classTx?.status=="waiting-for-confirmation"){
-				return "Transaction Status"
-			}
-			else{
-				return "Payment"
-			}
-		}
-	}
+    // const title=()=>{
+	// 	if(classTx?.status=="accepted"){
+	// 		return "Receipt"
+	// 	}else{
+	// 		if(classTx?.status=="waiting-for-confirmation"){
+	// 			return "Transaction Status"
+	// 		}
+	// 		else{
+	// 			return "Payment"
+	// 		}
+	// 	}
+	// }
 
 	useEffect(() => {
 		const API_URL = process.env.BE_API_URL_LOCAL;
@@ -53,8 +54,7 @@ export default function TransactionByID({ID, type}){
 
     return(
         <Layout>
-            <NavbarTop title={title}/>
-            {/* <Receipt entries={entries} productType={productType}/> */}
+            <NavbarTop title="Transactions"/>
             <div className="p-4">
             {
                 classTx===""?
@@ -67,6 +67,8 @@ export default function TransactionByID({ID, type}){
                     <StatusWaiting/>
 					: classTx?.data?.status==="failed"?
 					<StatusTimeout/>
+					:classTx?.data?.status==="decline"?
+					<StatusDecline/>
 					:null
                 }
             </div>

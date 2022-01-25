@@ -4,6 +4,7 @@ import Payment from "../../../../../components/elements/Payment";
 import Receipt from "../../../../../components/elements/Receipt";
 import StatusWaiting from "../../../../../components/elements/StatusWaiting";
 import StatusTimeout from "../../../../../components/elements/StatusTimeout";
+import StatusDecline from "../../../../../components/elements/StatusDecline";
 import { generateAxiosConfig, handleUnauthorized } from "../../../../../utils/helper";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -52,7 +53,7 @@ export default function TransactionByID({ID, type}){
 
     return(
         <Layout>
-            <NavbarTop title={title()}/>
+            <NavbarTop title="Transactions"/>
             <div className="p-4">
                 {
                 memberTx===""?
@@ -65,6 +66,8 @@ export default function TransactionByID({ID, type}){
                     <StatusWaiting/>
 					: memberTx?.data?.status==="failed"?
 					<StatusTimeout/>
+					:memberTx?.data?.status==="decline"?
+					<StatusDecline/>
 					:null
                 }
 
