@@ -1,7 +1,9 @@
 import NavbarTop from "../../../../../components/elements/NavbarTop";
+import Layout from "../../../../../components/Layout";
+import StatusTimeout from "../../../../../components/elements/StatusTimeout";
 import Payment from "../../../../../components/elements/Payment";
 import Receipt from "../../../../../components/elements/Receipt";
-import StatusWaiting from "../../../../../components/elements/SeeStatus";
+import StatusWaiting from "../../../../../components/elements/StatusWaiting";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -50,7 +52,7 @@ export default function TransactionByID({ID, type}){
 	}, [setClassTx, user.id,idTransactionClass]);
 
     return(
-        <>
+        <Layout>
             <NavbarTop title={title}/>
             {/* <Receipt entries={entries} productType={productType}/> */}
             <div className="p-4">
@@ -61,11 +63,14 @@ export default function TransactionByID({ID, type}){
                     <Payment id={idTransactionClass} entries={classTx.data} type={"class"}/>
                     :classTx.data.status==="completed"?
                     <Receipt id={idTransactionClass} entries={classTx.data} type={"class"}/>
-                    :
+                    :classTx?.data?.status==="waiting-for-confirmation"?
                     <StatusWaiting/>
+					: classTx?.data?.status==="failed"?
+					<StatusTimeout/>
+					:null
                 }
             </div>
-        </>
+        </Layout>
     );
     
 }

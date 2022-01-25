@@ -1,7 +1,9 @@
 import NavbarTop from "../../../../../components/elements/NavbarTop";
+import Layout from "../../../../../components/Layout";
 import Payment from "../../../../../components/elements/Payment";
 import Receipt from "../../../../../components/elements/Receipt";
-import StatusWaiting from "../../../../../components/elements/SeeStatus";
+import StatusWaiting from "../../../../../components/elements/StatusWaiting";
+import StatusTimeout from "../../../../../components/elements/StatusTimeout";
 import { generateAxiosConfig, handleUnauthorized } from "../../../../../utils/helper";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -49,7 +51,7 @@ export default function TransactionByID({ID, type}){
 	}, [setMemberTx, user.id,idTransactionMember]);
 
     return(
-        <>
+        <Layout>
             <NavbarTop title={title()}/>
             <div className="p-4">
                 {
@@ -59,12 +61,15 @@ export default function TransactionByID({ID, type}){
                     <Payment id={idTransactionMember}  entries={memberTx?.data} type={"membership"} />
                     :memberTx?.data?.status==="accepted"?
                     <Receipt id={idTransactionMember} entries={memberTx?.data} type={"membership"}/>
-                    :
+                    :memberTx?.data?.status==="waiting-for-confirmation"?
                     <StatusWaiting/>
+					: memberTx?.data?.status==="failed"?
+					<StatusTimeout/>
+					:null
                 }
 
             </div>
-        </>
+        </Layout>
     );
     
 }
