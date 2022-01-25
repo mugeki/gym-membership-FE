@@ -4,7 +4,6 @@ import PaymentItem from "../../../../../components/elements/PaymentItem";
 import styles from "../../../../../styles/ClassItem.module.css";
 import NavbarTop from "../../../../../components/elements/NavbarTop";
 import PaymentAccepted from "../../../../../components/elements/PaymentAcc";
-import PaymentAccount from "../../../../../components/elements/PaymentAccount";
 
 import { Oval } from  'react-loader-spinner'
 import { useRouter } from 'next/router'
@@ -12,9 +11,10 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { generateAxiosConfig, handleUnauthorized } from "../../../../../utils/helper";
 
-export default function BookClass({ data, error }) {
+export default function CheckoutMembership() {
 	const router = useRouter();
-    const idClass=router.query.id
+    const idMembership=router.query.id
+	console.log("id member", idMembership)
 	const user = useSelector((state) => state.user);
 	const idUser=user.id
     const [idActive, setIdActive]=useState(1)
@@ -47,10 +47,10 @@ export default function BookClass({ data, error }) {
 		const API_URL = process.env.BE_API_URL_LOCAL;
 		axios
 			.post(
-				`${API_URL}/transaction-class`,
+				`${API_URL}/transaction-membership`,
 				{
 					"user_id" :parseInt(idUser),
-					"class_id" : parseInt(idClass),
+					"membership_product_id" : parseInt(idMembership),
 					"payment_id":parseInt(idActive)
 				},
 				generateAxiosConfig()
@@ -69,7 +69,7 @@ export default function BookClass({ data, error }) {
 	}
 	return (
 		<Layout>
-            <NavbarTop title={"Book Class"}/>
+            <NavbarTop title={"Checkout Membership"}/>
 			{
 				paymentData!=null?
 				<>
@@ -87,11 +87,11 @@ export default function BookClass({ data, error }) {
                     <p className="">{paymentData[idActive-1]?.desc}</p>
                     <p className="text-danger fs-6 warningText">Note : Maximum payment for a book class is 1x24 hours after booking have been placed </p>
                 </div>
-                <button className={`${styles.button} rounded-3 btn mt-4`} onClick={handleSubmit}>Book and Checkout Class</button>
+                <button className={`${styles.button} rounded-3 btn mt-4`} onClick={handleSubmit}>Checkout Membership</button>
 				</div>
 					{
 					seeModalAcc?
-					<PaymentAccepted title={"Accepted"} message={"please make payment in 1x24 hours after"} hrefTo={`/classes/online`} messageHref={'See Another Classes'} hrefTo_2={`/profile/transactions`} messageHref_2={'Pay Now'}/>
+					<PaymentAccepted title={"Accepted"} message={"please make payment in 1x24 hours after"} hrefTo={`/classes`} messageHref={'See Classes'} hrefTo_2={`/profile/transactions`} messageHref_2={'Pay Now'}/>
 					: null
 					}
 				</>

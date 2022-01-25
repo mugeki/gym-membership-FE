@@ -80,8 +80,8 @@ export default function ClassById() {
 				</div>
                 <div className="d-flex flex-column align-items-start">
                     <p className="fw-bold mb-0 mt-2">Location</p>
-					{/* <p className="fs-smaller">{classData?.data?.location}</p> */}
-					<p className="fs-smaller">Online Meeting</p>
+					<p className="fs-smaller">{classData?.data?.location}</p>
+					{/* <p className="fs-smaller">Online Meeting</p> */}
 				</div>
                  <button className={`btn ${styles.button} rounded-3`} onClick={() => router.push(href)} >Book</button>
 			</div>

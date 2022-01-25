@@ -1,7 +1,10 @@
 import NavbarTop from "../../../../../components/elements/NavbarTop";
+import Layout from "../../../../../components/Layout";
 import Payment from "../../../../../components/elements/Payment";
 import Receipt from "../../../../../components/elements/Receipt";
-import StatusWaiting from "../../../../../components/elements/SeeStatus";
+import StatusWaiting from "../../../../../components/elements/StatusWaiting";
+import StatusTimeout from "../../../../../components/elements/StatusTimeout";
+import StatusDecline from "../../../../../components/elements/StatusDecline";
 import { generateAxiosConfig, handleUnauthorized } from "../../../../../utils/helper";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -49,22 +52,27 @@ export default function TransactionByID({ID, type}){
 	}, [setMemberTx, user.id,idTransactionMember]);
 
     return(
-        <>
-            <NavbarTop title={title()}/>
+        <Layout>
+            <NavbarTop title="Transactions"/>
             <div className="p-4">
                 {
                 memberTx===""?
                     <p>setLoading </p>
                     :memberTx?.data?.status==="waiting-for-payment" ?
-                    <Payment id={idTransactionMember}  entries={memberTx?.data}/>
+                    <Payment id={idTransactionMember}  entries={memberTx?.data} type={"membership"} />
                     :memberTx?.data?.status==="accepted"?
                     <Receipt id={idTransactionMember} entries={memberTx?.data} type={"membership"}/>
-                    :
+                    :memberTx?.data?.status==="waiting-for-confirmation"?
                     <StatusWaiting/>
+					: memberTx?.data?.status==="failed"?
+					<StatusTimeout/>
+					:memberTx?.data?.status==="decline"?
+					<StatusDecline/>
+					:null
                 }
 
             </div>
-        </>
+        </Layout>
     );
     
 }
