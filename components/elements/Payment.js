@@ -72,36 +72,39 @@ export default function Payment({ id,entries, type }){
 	}
 
 	const handleTimeout=()=>{
-		const API_URL = process.env.BE_API_URL_LOCAL;
-        const endpointSubmit =()=>{
-            if (type=="class"){
-                return `transaction-class/status-to-failed/${id}`
-            }else if (type=="membership"){
-                return `transaction-membership/status-to-failed/${id}`
+            console.log("cekkkk===========2")
+            const API_URL = process.env.BE_API_URL_LOCAL;
+            const endpointSubmit =()=>{
+                if (type=="class"){
+                    return `transaction-class/status-to-failed/${id}`
+                }else if (type=="membership"){
+                    return `transaction-membership/status-to-failed/${id}`
+                }
             }
-        }
-        console.log(`endpoint : ${API_URL}/${endpointSubmit()}`)
-		axios
-			.put(
-				`${API_URL}/${endpointSubmit()}`,
-				{
-					"status" :"failed",
-				},
-				generateAxiosConfig()
-			)
-			.then((res)=>{
-				// setModalSuccess(true)
-				console.log(res, "response update status transaction")
-			})
-			.catch((error) => {
-				if (error.response) {
-					handleUnauthorized(error.response);
-					console.log(error);
-				}
-			});
+            axios
+                .put(
+                    `${API_URL}/${endpointSubmit()}`,
+                    {
+                        "status" :"failed",
+                    },
+                    generateAxiosConfig()
+                )
+                .then((res)=>{
+                    // setModalSuccess(true)
+                    // setUpdateFailed(false)
+                    console.log(res, "response update status transaction")
+                })
+                .catch((error) => {
+                    if (error.response) {
+                        handleUnauthorized(error.response);
+                        console.log(error);
+                    }
+                });
+
 	}
     const [modalTimeout, setModalTimeout]=useState(true)
     const [modalSuccess, setModalSuccess]=useState(false)
+    const [updateFailed, setUpdateFailed]=useState(false)
     const renderer = ({ hours, minutes, seconds, completed }) => {
     if (completed) {
         handleTimeout()

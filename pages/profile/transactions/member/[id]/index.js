@@ -56,7 +56,7 @@ export default function TransactionByID({ID, type}){
             <NavbarTop title="Transactions"/>
             <div className="p-4">
                 {
-                memberTx===""?
+                memberTx==null?
                     <p>setLoading </p>
                     :memberTx?.data?.status==="waiting-for-payment" ?
                     <Payment id={idTransactionMember}  entries={memberTx?.data} type={"membership"} />
