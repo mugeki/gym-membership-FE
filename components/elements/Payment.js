@@ -13,6 +13,7 @@ import { generateAxiosConfig, handleUnauthorized } from "../../utils/helper";
 import { app } from "../../firebase/firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import imageCompression from "browser-image-compression";
+import ModalTimeout from "./ModalTimeout";
 
 export default function Payment({ id,entries, type }){
     const hiddenFileInput = useRef(null);
@@ -72,7 +73,8 @@ export default function Payment({ id,entries, type }){
 	}
 
 	const handleTimeout=()=>{
-            console.log("cekkkk===========2")
+        console.log("cekkkk===")
+            setUpdateFailed(updateFailed+1)
             const API_URL = process.env.BE_API_URL_LOCAL;
             const endpointSubmit =()=>{
                 if (type=="class"){
@@ -90,8 +92,6 @@ export default function Payment({ id,entries, type }){
                     generateAxiosConfig()
                 )
                 .then((res)=>{
-                    // setModalSuccess(true)
-                    // setUpdateFailed(false)
                     console.log(res, "response update status transaction")
                 })
                 .catch((error) => {
@@ -104,18 +104,21 @@ export default function Payment({ id,entries, type }){
 	}
     const [modalTimeout, setModalTimeout]=useState(true)
     const [modalSuccess, setModalSuccess]=useState(false)
-    const [updateFailed, setUpdateFailed]=useState(false)
+    const [updateFailed, setUpdateFailed]=useState(0)
     const renderer = ({ hours, minutes, seconds, completed }) => {
-    if (completed) {
-        handleTimeout()
-        return <TimeoutModal  show={modalTimeout} onHide={() => setModalTimeout(false)} />
-    } else {
-        return (
-        <div className={`align-self-center mt-3 ${styles.countdown} rounded-3 `}>
-            <p className="fs-6 fw-bold m-0 p-1 rounded-3 bg-danger" >{hours} hours : {minutes} minutes : {seconds}</p>
-        </div>
-        )
-    }
+        if (completed) {
+            if (updateFailed==0){
+                handleTimeout()
+            }
+            // return <TimeoutModal  show={modalTimeout} onHide={() => setModalTimeout(false)} />
+            return <ModalTimeout/>
+        } else {
+            return (
+            <div className={`align-self-center mt-3 ${styles.countdown} rounded-3 `}>
+                <p className="fs-6 fw-bold m-0 p-1 rounded-3 bg-danger" >{hours} hours : {minutes} minutes : {seconds}</p>
+            </div>
+            )
+        }
     };
     const date=()=>{
         const dateUpdated = new Date(Date.parse(entries?.updated_at))
@@ -203,6 +206,7 @@ export default function Payment({ id,entries, type }){
                 hrefTo="/profile/transactions"
                 messageHref="back to"
             />
+            
         </>
     );
 }
