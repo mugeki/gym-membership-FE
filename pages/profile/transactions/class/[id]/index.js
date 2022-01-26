@@ -45,7 +45,11 @@ export default function TransactionByID({ID, type}){
             <div className="p-4">
             {
                 classTx===""?
-                    <p>setLoading </p>
+				<div class="d-flex justify-content-center text-primary">
+					<div class="spinner-border" role="status">
+					<span class="sr-only">Loading...</span>
+					</div>
+			  	</div>
                     :classTx.data.status==="waiting-for-payment" ?
                     <Payment id={idTransactionClass} entries={classTx.data} type={"class"}/>
                     :classTx.data.status==="accepted"?

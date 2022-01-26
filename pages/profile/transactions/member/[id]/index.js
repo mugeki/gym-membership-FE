@@ -57,7 +57,11 @@ export default function TransactionByID({ID, type}){
             <div className="p-4">
                 {
                 memberTx==null?
-                    <p>setLoading </p>
+				<div class="d-flex justify-content-center text-primary">
+					<div class="spinner-border" role="status">
+					<span class="sr-only">Loading...</span>
+					</div>
+			  	</div>
                     :memberTx?.data?.status==="waiting-for-payment" ?
                     <Payment id={idTransactionMember}  entries={memberTx?.data} type={"membership"} />
                     :memberTx?.data?.status==="accepted"?
