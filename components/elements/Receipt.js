@@ -1,15 +1,22 @@
+import Image from "next/image";
 
 export default function Receipt({id, type, entries}){
-
-
-    
     return(
         <>
             <div className="mt-4 d-flex flex-column align-items-center">
                 <div className="col-12 d-flex flex-column align-items-center">
-                    <div className="bg-dark col-3"><p>a</p></div>
-                    <p className="fw-bold">Company.Inc</p>
+                <div className=" col-3">
+                    <Image
+                    layout="intrinsic"
+                    objectFit="cover"
+                    alt="logo"
+                    src={`https://firebasestorage.googleapis.com/v0/b/gym-membership-8fe2f.appspot.com/o/Picture1.png?alt=media&token=b9fe1e67-cf3e-454b-b4ab-7643285f49ca`}
+                    width={100}
+                    height={80}
+                    />
+                    </div>
                 </div>
+                <p className="fw-bold fw-light fst-italic">Dare to Be Great</p>
                 <p></p>
                 <p className="fs-2 text-primary mb-0">
                     Rp {entries?.nominal.toLocaleString().replace(/,/g, ".")}
