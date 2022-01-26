@@ -23,11 +23,15 @@ export default function EditProfile() {
 
 	const updateProfile = (data) => {
 		const API_URL = process.env.BE_API_URL;
+		const formData = { ...data };
+		delete formData.id;
+		delete formData.is_member;
+		delete formData.expire_date;
 		axios
 			.put(
 				`${API_URL}/users`,
 				{
-					...data,
+					...formData,
 				},
 				generateAxiosConfig()
 			)

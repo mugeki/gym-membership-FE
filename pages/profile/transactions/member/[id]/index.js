@@ -5,7 +5,10 @@ import Receipt from "../../../../../components/elements/Receipt";
 import StatusWaiting from "../../../../../components/elements/StatusWaiting";
 import StatusTimeout from "../../../../../components/elements/StatusTimeout";
 import StatusDecline from "../../../../../components/elements/StatusDecline";
-import { generateAxiosConfig, handleUnauthorized } from "../../../../../utils/helper";
+import {
+	generateAxiosConfig,
+	handleUnauthorized,
+} from "../../../../../utils/helper";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -48,32 +51,36 @@ export default function TransactionByID({ ID, type }) {
 					console.log(error);
 				}
 			});
-	}, [setMemberTx, user.id,idTransactionMember]);
+	}, [setMemberTx, user.id, idTransactionMember]);
 
-    return(
-        <Layout>
-            <NavbarTop title="Transactions"/>
-            <div className="p-4">
-                {
-                memberTx===""?
-                    <p>setLoading </p>
-                    :memberTx?.data?.status==="waiting-for-payment" ?
-                    <Payment id={idTransactionMember}  entries={memberTx?.data} type={"membership"} />
-                    :memberTx?.data?.status==="accepted"?
-                    <Receipt id={idTransactionMember} entries={memberTx?.data} type={"membership"}/>
-                    :memberTx?.data?.status==="waiting-for-confirmation"?
-                    <StatusWaiting/>
-					: memberTx?.data?.status==="failed"?
-					<StatusTimeout/>
-					:memberTx?.data?.status==="decline"?
-					<StatusDecline/>
-					:null
-                }
-
-            </div>
-        </Layout>
-    );
-    
+	return (
+		<Layout>
+			<NavbarTop title="Transactions" />
+			<div className="p-4">
+				{memberTx === "" ? (
+					<p>setLoading </p>
+				) : memberTx?.data?.status === "waiting-for-payment" ? (
+					<Payment
+						id={idTransactionMember}
+						entries={memberTx?.data}
+						type={"membership"}
+					/>
+				) : memberTx?.data?.status === "accepted" ? (
+					<Receipt
+						id={idTransactionMember}
+						entries={memberTx?.data}
+						type={"membership"}
+					/>
+				) : memberTx?.data?.status === "waiting-for-confirmation" ? (
+					<StatusWaiting />
+				) : memberTx?.data?.status === "failed" ? (
+					<StatusTimeout />
+				) : memberTx?.data?.status === "decline" ? (
+					<StatusDecline />
+				) : null}
+			</div>
+		</Layout>
+	);
 }
 
 // {transactionDetailHandle()}

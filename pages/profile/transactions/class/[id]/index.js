@@ -54,27 +54,32 @@ export default function TransactionByID({ ID, type }) {
 			});
 	}, [setClassTx, user.id, idTransactionClass]);
 
-    return(
-        <Layout>
-            <NavbarTop title="Transactions"/>
-            <div className="p-4">
-            {
-                classTx===""?
-                    <p>setLoading </p>
-                    :classTx.data.status==="waiting-for-payment" ?
-                    <Payment id={idTransactionClass} entries={classTx.data} type={"class"}/>
-                    :classTx.data.status==="completed"?
-                    <Receipt id={idTransactionClass} entries={classTx.data} type={"class"}/>
-                    :classTx?.data?.status==="waiting-for-confirmation"?
-                    <StatusWaiting/>
-					: classTx?.data?.status==="failed"?
-					<StatusTimeout/>
-					:classTx?.data?.status==="decline"?
-					<StatusDecline/>
-					:null
-                }
-            </div>
-        </Layout>
-    );
-    
+	return (
+		<Layout>
+			<NavbarTop title="Transactions" />
+			<div className="p-4">
+				{classTx === "" ? (
+					<p>setLoading </p>
+				) : classTx.data.status === "waiting-for-payment" ? (
+					<Payment
+						id={idTransactionClass}
+						entries={classTx.data}
+						type={"class"}
+					/>
+				) : classTx.data.status === "completed" ? (
+					<Receipt
+						id={idTransactionClass}
+						entries={classTx.data}
+						type={"class"}
+					/>
+				) : classTx?.data?.status === "waiting-for-confirmation" ? (
+					<StatusWaiting />
+				) : classTx?.data?.status === "failed" ? (
+					<StatusTimeout />
+				) : classTx?.data?.status === "decline" ? (
+					<StatusDecline />
+				) : null}
+			</div>
+		</Layout>
+	);
 }
