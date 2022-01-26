@@ -17,19 +17,6 @@ export default function TransactionByID({ID, type}){
     const idTransactionClass=router.query.id
 	const [classTx, setClassTx] = useState("");
 	const [errorClass, setErrorClass] = useState();
-    // const title=()=>{
-	// 	if(classTx?.status=="accepted"){
-	// 		return "Receipt"
-	// 	}else{
-	// 		if(classTx?.status=="waiting-for-confirmation"){
-	// 			return "Transaction Status"
-	// 		}
-	// 		else{
-	// 			return "Payment"
-	// 		}
-	// 	}
-	// }
-
 	useEffect(() => {
 		const API_URL = process.env.BE_API_URL_LOCAL;
 		axios
@@ -68,7 +55,7 @@ export default function TransactionByID({ID, type}){
 					: classTx?.data?.status==="failed"?
 					<StatusTimeout/>
 					:classTx?.data?.status==="decline"?
-					<StatusDecline/>
+					<StatusDecline entries={classTx.data} type={"class"}/>
 					:null
                 }
             </div>

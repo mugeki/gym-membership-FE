@@ -67,7 +67,7 @@ export default function TransactionByID({ID, type}){
 					: memberTx?.data?.status==="failed"?
 					<StatusTimeout/>
 					:memberTx?.data?.status==="decline"?
-					<StatusDecline/>
+					<StatusDecline  entries={memberTx?.data} type={"membership"}/>
 					:null
                 }
 

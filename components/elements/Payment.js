@@ -5,7 +5,6 @@ import PaymentItem from "./PaymentItem";
 import {useState, useRef,useEffect} from 'react'
 import { Icon } from '@iconify/react';
 import Image from "next/image";
-import ReactDOM from 'react-dom';
 import Countdown from 'react-countdown';
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -73,7 +72,6 @@ export default function Payment({ id,entries, type }){
 	}
 
 	const handleTimeout=()=>{
-        console.log("cekkkk===")
             setUpdateFailed(updateFailed+1)
             const API_URL = process.env.BE_API_URL_LOCAL;
             const endpointSubmit =()=>{
@@ -102,7 +100,6 @@ export default function Payment({ id,entries, type }){
                 });
 
 	}
-    const [modalTimeout, setModalTimeout]=useState(true)
     const [modalSuccess, setModalSuccess]=useState(false)
     const [updateFailed, setUpdateFailed]=useState(0)
     const renderer = ({ hours, minutes, seconds, completed }) => {
@@ -149,7 +146,6 @@ export default function Payment({ id,entries, type }){
                 renderer={renderer}
                 />
             </div>
-            {/* <PaymentAccount/> */}
             <div className="d-flex flex-row justify-content-between ">
                 <PaymentItem entries={entries?.payment} idActive={entries?.payment?.id} />
             </div>

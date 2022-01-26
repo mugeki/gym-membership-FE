@@ -27,14 +27,16 @@ export default function TranasctionItem({ entries }) {
 	const linkStatus=()=>{
 		if(entries.status=="accepted"){
 			return "see receipt"
+		}else if(entries.status=="waiting-for-confirmation"){
+			return "see status"
+		}else if(entries.status=="waiting-for-payment"){
+			return "pay now"
+		}else if(entries.status=="decline"){
+			return "repay mow"
+		}else if (entries.status=="failed"){
+			return "timeout"
 		}else{
-			if(entries.status=="waiting-for-confirmation"){
-				return "see status"
-			}
-			else{
-
-				return "pay now"
-			}
+			return ""
 		}
 	}
 	return (
