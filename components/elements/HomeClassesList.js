@@ -3,7 +3,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import useHandleDate from "../../hooks/useHandleDate";
 import HomeClassesItem from "./HomeClassesItem";
 
-export default function HomeClassesList({ entries }) {
+export default function HomeClassesList({ entries, error, setError }) {
 	const { parseDateList } = useHandleDate();
 	const splitData = (array, chunkSize) =>
 		Array(Math.ceil(array.length / chunkSize))
@@ -24,12 +24,13 @@ export default function HomeClassesList({ entries }) {
 		return result;
 	};
 	const classesData = processData();
+	if (!error && classesData.length === 0) {
+		setError("No upcoming class in the next 1 week");
+	}
 	return (
 		<>
 			{classesData.length === 0 ? (
-				<p className="text-center text-light mt-5">
-					No upcoming class in the next 1 week
-				</p>
+				<p className="text-center text-light mt-5"></p>
 			) : (
 				<Carousel showIndicators={false} showThumbs={false} showStatus={false}>
 					{splitData(classesData, 3).map((chunk, i) => (

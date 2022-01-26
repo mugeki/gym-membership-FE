@@ -22,9 +22,7 @@ export default function Home() {
 			.get(`${API_URL}/articles`, generateAxiosConfig())
 			.then((res) => {
 				if (res.status === 204) {
-					setErrorNewsletter((state) => {
-						return { ...state, classes: "Newsletter not found" };
-					});
+					setErrorNewsletter("Newsletter not found");
 				} else {
 					setNewsletters(res.data.data.slice(0, 4));
 				}
@@ -89,7 +87,15 @@ export default function Home() {
 					{errorClass && (
 						<p className="text-center text-light mt-5">{errorClass}</p>
 					)}{" "}
-					{classes && <HomeClassesList entries={classes} />}
+					{classes && (
+						<HomeClassesList
+							entries={classes}
+							error={errorClass}
+							setError={(value) => {
+								setErrorClass(value);
+							}}
+						/>
+					)}
 					<div className="d-flex justify-content-between align-items-center mt-5">
 						<h5>Latest Newsletter</h5>
 						<Link href="/newsletters" passHref>
