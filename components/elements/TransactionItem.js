@@ -22,7 +22,6 @@ export default function TranasctionItem({ entries }) {
 			return `/profile/transactions/class/${entries.id}`
 		}
 	} 
-	// const href =`/profile/transaction/${entries.id}`
 
 	const linkStatus=()=>{
 		if(entries.status=="accepted"){
@@ -32,7 +31,7 @@ export default function TranasctionItem({ entries }) {
 		}else if(entries.status=="waiting-for-payment"){
 			return "pay now"
 		}else if(entries.status=="decline"){
-			return "repay mow"
+			return "repay now"
 		}else if (entries.status=="failed"){
 			return "timeout"
 		}else{

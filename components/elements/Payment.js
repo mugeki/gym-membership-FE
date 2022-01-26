@@ -1,5 +1,4 @@
 import styles from "../../styles/Payment.module.css";
-import TimeoutModal from "./TimeoutModal"
 import CustomModal from "./CustomModal"
 import PaymentItem from "./PaymentItem";
 import {useState, useRef,useEffect} from 'react'
@@ -107,7 +106,6 @@ export default function Payment({ id,entries, type }){
             if (updateFailed==0){
                 handleTimeout()
             }
-            // return <TimeoutModal  show={modalTimeout} onHide={() => setModalTimeout(false)} />
             return <ModalTimeout/>
         } else {
             return (
