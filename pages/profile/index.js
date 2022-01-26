@@ -22,7 +22,7 @@ export default function Profile() {
 	return (
 		<Layout>
 			<Head>
-				<title>Profile | Alta2Gym</title>
+				<title>Profile | Gymbro</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<div className="container d-flex flex-column p-4">

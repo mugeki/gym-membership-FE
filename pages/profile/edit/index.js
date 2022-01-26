@@ -66,7 +66,7 @@ export default function EditProfile() {
 	return (
 		<Layout>
 			<Head>
-				<title>Edit Profile | Alta2Gym</title>
+				<title>Edit Profile | Gymbro</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<NavbarTop title={"Edit Profile"} />

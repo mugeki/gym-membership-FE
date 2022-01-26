@@ -73,7 +73,7 @@ export default function Register() {
 			className={`${styles.container} d-flex flex-column justify-content-between p-4`}
 		>
 			<Head>
-				<title>Register | Alta2Gym</title>
+				<title>Register | Gymbro</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<div className="flex-grow text-white mb-5">

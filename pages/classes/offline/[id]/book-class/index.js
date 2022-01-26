@@ -69,33 +69,53 @@ export default function BookClass({ data, error }) {
 	return (
 		<Layout>
 			<Head>
-				<title>Book Class | Alta2Gym</title>
+				<title>Book Class | Gymbro</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<NavbarTop title={"Book Class"} />
 			{paymentData != null ? (
 				<>
-				<div className="container p-4 mb-5 d-flex flex-column align-content-center">
-				<div className="d-flex flex-row justify-content-between ">
-                    {paymentData?.map((item)=> (
-						<PaymentItem key={item.id} entries={item} setIdActive={setIdActive} idActive={idActive} />
-					))}
-				</div>
-                <div className={`card p-3 rounded-3 ${styles.bgGrey}`}>
-                    <p className="fw-bold mb-0">Transfer to</p>
-                    <p className="mb-0">{paymentData[idActive-1]?.name}</p>
-                    <p className="">{`${paymentData[idActive-1]?.no_card} (a/n ${paymentData[idActive-1]?.owner_name})`}</p>
-                    <p className="fw-bold mb-0">Description</p>
-                    <p className="">{paymentData[idActive-1]?.desc}</p>
-                    <p className="text-danger fs-6 warningText">Note : Maximum payment for a book class is 1x24 hours after booking have been placed </p>
-                </div>
-                <button className={`${styles.button} rounded-3 btn mt-4`} onClick={handleSubmit}>Book and Checkout Class</button>
-				</div>
-					{
-					seeModalAcc?
-					<PaymentAccepted title={"Accepted"} message={"please make payment in 1x24 hours after"} hrefTo={`/classes/online`} messageHref={'See Another Classes'} hrefTo_2={`/profile/transactions`} messageHref_2={'Pay Now'}/>
-					: null
-					}
+					<div className="container p-4 mb-5 d-flex flex-column align-content-center">
+						<div className="d-flex flex-row justify-content-between ">
+							{paymentData?.map((item) => (
+								<PaymentItem
+									key={item.id}
+									entries={item}
+									setIdActive={setIdActive}
+									idActive={idActive}
+								/>
+							))}
+						</div>
+						<div className={`card p-3 rounded-3 ${styles.bgGrey}`}>
+							<p className="fw-bold mb-0">Transfer to</p>
+							<p className="mb-0">{paymentData[idActive - 1]?.name}</p>
+							<p className="">{`${paymentData[idActive - 1]?.no_card} (a/n ${
+								paymentData[idActive - 1]?.owner_name
+							})`}</p>
+							<p className="fw-bold mb-0">Description</p>
+							<p className="">{paymentData[idActive - 1]?.desc}</p>
+							<p className="text-danger fs-6 warningText">
+								Note : Maximum payment for a book class is 1x24 hours after
+								booking have been placed{" "}
+							</p>
+						</div>
+						<button
+							className={`${styles.button} rounded-3 btn mt-4`}
+							onClick={handleSubmit}
+						>
+							Book and Checkout Class
+						</button>
+					</div>
+					{seeModalAcc ? (
+						<PaymentAccepted
+							title={"Accepted"}
+							message={"please make payment in 1x24 hours after"}
+							hrefTo={`/classes/online`}
+							messageHref={"See Another Classes"}
+							hrefTo_2={`/profile/transactions`}
+							messageHref_2={"Pay Now"}
+						/>
+					) : null}
 				</>
 			) : (
 				<div className="d-flex justify-content-center m-auto">

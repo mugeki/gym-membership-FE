@@ -68,7 +68,7 @@ export default function MySchedule() {
 	return (
 		<Layout>
 			<Head>
-				<title>Transactions | Alta2Gym</title>
+				<title>Transactions | Gymbro</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<NavbarTop title={"Transactions"} />

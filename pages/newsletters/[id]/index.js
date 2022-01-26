@@ -46,7 +46,7 @@ export default function Newsletter() {
 	return (
 		<Layout>
 			<Head>
-				<title>{newsletter?.title} | Alta2Gym</title>
+				<title>{newsletter?.title} | Gymbro</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<NavbarTop title={"Newsletter"} />

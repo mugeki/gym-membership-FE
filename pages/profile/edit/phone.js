@@ -65,7 +65,7 @@ export default function EditPhone() {
 	return (
 		<Layout>
 			<Head>
-				<title>Edit Phone Number | Alta2Gym</title>
+				<title>Edit Phone Number | Gymbro</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<NavbarTop title={"Edit Phone Number"} />

@@ -56,7 +56,7 @@ export default function Classes() {
 	return (
 		<Layout>
 			<Head>
-				<title>Offline Classes | Alta2Gym</title>
+				<title>Offline Classes | Gymbro</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<NavbarTop title="Classes" />

@@ -67,7 +67,7 @@ export default function EditPassword() {
 	return (
 		<Layout>
 			<Head>
-				<title>Edit Password | Alta2Gym</title>
+				<title>Edit Password | Gymbro</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<NavbarTop title={"Edit Password"} />

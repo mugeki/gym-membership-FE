@@ -70,7 +70,7 @@ export default function BookClass({ data, error }) {
 	return (
 		<Layout>
 			<Head>
-				<title>Book Class | Alta2Gym</title>
+				<title>Book Class | Gymbro</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<NavbarTop title={"Book Class"} />

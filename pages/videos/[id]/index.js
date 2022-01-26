@@ -90,7 +90,7 @@ export default function Video() {
 	return (
 		<Layout>
 			<Head>
-				<title>{video?.title} | Alta2Gym</title>
+				<title>{video?.title} | Gymbro</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<NavbarTop title={"Videos"} />

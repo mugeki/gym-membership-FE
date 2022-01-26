@@ -26,7 +26,7 @@ export default function Membership() {
 	return (
 		<Layout>
 			<Head>
-				<title>Membership | Alta2Gym</title>
+				<title>Membership | Gymbro</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<NavbarTop title={"Membership"} />

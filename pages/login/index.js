@@ -86,7 +86,7 @@ export default function Login() {
 			className={`${styles.container} d-flex flex-column justify-content-between p-4`}
 		>
 			<Head>
-				<title>Login | Alta2Gym</title>
+				<title>Login | Gymbro</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<div className="flex-grow text-white mb-5">

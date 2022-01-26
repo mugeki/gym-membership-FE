@@ -35,7 +35,7 @@ export default function MySchedule() {
 	return (
 		<Layout>
 			<Head>
-				<title>My Schedule | Alta2Gym</title>
+				<title>My Schedule | Gymbro</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<NavbarTop title={"My Schedule"} />

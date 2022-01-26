@@ -56,7 +56,7 @@ export default function Home() {
 	return (
 		<Layout>
 			<Head>
-				<title>Alta2Gym</title>
+				<title>Gymbro</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<div className="container p-4 mb-5">

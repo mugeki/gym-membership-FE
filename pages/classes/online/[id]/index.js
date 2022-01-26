@@ -52,7 +52,7 @@ export default function OnlineClassById() {
 	return (
 		<Layout>
 			<Head>
-				<title>{classData?.name} | Alta2Gym</title>
+				<title>{classData?.name} | Gymbro</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<NavbarTop title={"Online Classes"} />

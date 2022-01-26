@@ -50,7 +50,7 @@ export default function EditLocation() {
 	return (
 		<Layout>
 			<Head>
-				<title>Edit Location | Alta2Gym</title>
+				<title>Edit Location | Gymbro</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<NavbarTop title={"Edit Location"} />

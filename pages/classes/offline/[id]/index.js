@@ -56,7 +56,7 @@ export default function OfflineClassById() {
 	return (
 		<Layout>
 			<Head>
-				<title>{classData?.name} | Alta2Gym</title>
+				<title>{classData?.name} | Gymbro</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<NavbarTop title={"Offline Classes"} />

@@ -50,7 +50,7 @@ export default function Videos() {
 	return (
 		<Layout>
 			<Head>
-				<title>Videos | Alta2Gym</title>
+				<title>Videos | Gymbro</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<div className="container p-4 mb-5">
