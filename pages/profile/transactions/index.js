@@ -74,12 +74,6 @@ export default function MySchedule() {
 	return (
 		<Layout>
 			<NavbarTop title={"Profile"} />
-			{/* <div className="d-flex flex-column pb-5 mb-5">
-				{dataTransactions.data.map((item) => (
-					<TransactionItem key={item.id} entries={item} />
-				))}
-			</div> */}
-
 			<div className="d-flex flex-column pb-5 mb-5">
 				<div className="px-4 mt-4">
 					<Button
