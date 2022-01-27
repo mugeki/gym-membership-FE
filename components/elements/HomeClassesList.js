@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import useHandleDate from "../../hooks/useHandleDate";
@@ -26,9 +27,10 @@ export default function HomeClassesList({ entries, error, setError }) {
 	const classesData = processData();
 	if (!error && classesData.length === 0) {
 		setError("No upcoming class in the next 1 week");
-	} else {
+	} else if (classesData.length > 0) {
 		setError("");
 	}
+
 	return (
 		<Carousel showIndicators={false} showThumbs={false} showStatus={false}>
 			{splitData(classesData, 3).map((chunk, i) => (
