@@ -68,7 +68,7 @@ export default function TranasctionItem({ entries }) {
 						? " View status"
 						: entries.status === "waiting for payment"
 						? "Pay now"
-						: entries.status === "decline"
+						: entries.status === "declined"
 						? "Repay now"
 						: entries.status === "failed"
 						? "Timed Out"
