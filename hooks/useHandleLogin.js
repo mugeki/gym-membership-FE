@@ -16,9 +16,14 @@ export default function useHandleLogin() {
 		let userData = {
 			...res,
 		};
+		const config = {
+			headers: {
+				Authorization: "Bearer " + userData.token,
+			},
+		};
 		delete userData.token;
 		await axios
-			.get(`${API_URL}/members/${res.id}`, generateAxiosConfig())
+			.get(`${API_URL}/members/${res.id}`, config)
 			.then((resp) => {
 				userData.is_member = resp.data.data.is_member;
 				userData.expire_date = resp.data.data.expire_date;
