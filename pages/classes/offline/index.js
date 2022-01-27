@@ -66,7 +66,7 @@ export default function Classes() {
 					{errorClass && (
 						<p className="text-center text-light mt-5">{errorClass}</p>
 					)}
-					{classData?.data?.map((item) => (
+					{classData?.map((item) => (
 						<ClassItemOffline key={item.id} entries={item} />
 					))}
 				</div>

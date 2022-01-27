@@ -64,7 +64,7 @@ export default function Classes() {
 					<div className="d-flex flex-row justify-content-between mt-4">
 						<p className="fw-bolder">Online Categories</p>
 						<Link href="/classes/online" passHref>
-							<p className={`${styles.link} mb-0`}>See All</p>
+							<p className={`${styles.link} mb-0`}>View All</p>
 						</Link>
 					</div>
 					{onlineClass?.map((item, i) => (
@@ -76,7 +76,7 @@ export default function Classes() {
 					<div className="d-flex flex-row justify-content-between mt-4">
 						<p className="fw-bolder">Offline Categories</p>
 						<Link href="/classes/offline" passHref>
-							<p className={`${styles.link} mb-0`}>See All</p>
+							<p className={`${styles.link} mb-0`}>View All</p>
 						</Link>
 					</div>
 					{offlineClass?.map((item, i) => (

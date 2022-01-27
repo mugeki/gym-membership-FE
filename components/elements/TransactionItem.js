@@ -2,8 +2,6 @@ import Link from "next/link";
 import { Button } from "react-bootstrap";
 export default function TranasctionItem({ entries }) {
 	const date = new Date(entries.created_at);
-	const tempStatus = entries.status.replaceAll("-", " ");
-	const status = tempStatus.charAt(0).toUpperCase() + tempStatus.slice(1);
 
 	const transactionID = entries.ID;
 	const href = () => {
@@ -32,17 +30,19 @@ export default function TranasctionItem({ entries }) {
 				<div
 					className={
 						"mb-1 px-2 py-1 rounded align-self-start shadow-sm " +
-						(status === "Waiting for payment"
+						(entries.status === "waiting for payment"
 							? "bg-light"
-							: status === "waiting for confirmation"
+							: entries.status === "waiting for confirmation"
 							? "bg-warning"
-							: status === "accepted"
+							: entries.status === "accepted"
 							? "bg-success"
 							: "bg-danger")
 					}
 					style={{ fontSize: "14px" }}
 				>
-					<p className="m-0 text-white">{status}</p>
+					<p className="m-0 text-white">
+						{entries.status.charAt(0).toUpperCase() + entries.status.slice(1)}
+					</p>
 				</div>
 
 				<p className="mb-0">
