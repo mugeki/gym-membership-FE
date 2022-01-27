@@ -57,8 +57,12 @@ export default function TransactionByID({ ID, type }) {
 		<Layout>
 			<NavbarTop title="Transactions" />
 			<div className="p-4">
-				{memberTx === "" ? (
-					<p>setLoading </p>
+				{memberTx == null ? (
+					<div className="d-flex justify-content-center text-primary">
+						<div className="spinner-border" role="status">
+							<span className="sr-only">Loading...</span>
+						</div>
+					</div>
 				) : memberTx?.data?.status === "waiting-for-payment" ? (
 					<Payment
 						id={idTransactionMember}
@@ -76,16 +80,9 @@ export default function TransactionByID({ ID, type }) {
 				) : memberTx?.data?.status === "failed" ? (
 					<StatusTimeout />
 				) : memberTx?.data?.status === "decline" ? (
-					<StatusDecline />
+					<StatusDecline entries={memberTx?.data} type={"membership"} />
 				) : null}
 			</div>
 		</Layout>
 	);
 }
-
-// {transactionDetailHandle()}
-// <Payment entries={memberTx?.data}/>
-// <Receipt id={idTransactionMember} type={"member"}/>
-// <StatusWaiting/>
-// <p>{memberTx?.data?.product_name}</p>
-// <p>tess</p>

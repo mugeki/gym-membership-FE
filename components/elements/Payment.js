@@ -1,8 +1,7 @@
 import styles from "../../styles/Payment.module.css";
-import TimeoutModal from "./TimeoutModal";
 import CustomModal from "./CustomModal";
 import PaymentItem from "./PaymentItem";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 import Countdown from "react-countdown";
@@ -11,6 +10,7 @@ import { generateAxiosConfig, handleUnauthorized } from "../../utils/helper";
 import { app } from "../../firebase/firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import imageCompression from "browser-image-compression";
+import ModalTimeout from "./ModalTimeout";
 
 export default function Payment({ id, entries, type }) {
 	const hiddenFileInput = useRef(null);
@@ -68,7 +68,8 @@ export default function Payment({ id, entries, type }) {
 	};
 
 	const handleTimeout = () => {
-		const API_URL = process.env.BE_API_URL;
+		setUpdateFailed(updateFailed + 1);
+		const API_URL = process.env.BE_API_URL_LOCAL;
 		const endpointSubmit = () => {
 			if (type == "class") {
 				return `transaction-class/status-to-failed/${id}`;
@@ -76,7 +77,6 @@ export default function Payment({ id, entries, type }) {
 				return `transaction-membership/status-to-failed/${id}`;
 			}
 		};
-		console.log(`endpoint : ${API_URL}/${endpointSubmit()}`);
 		axios
 			.put(
 				`${API_URL}/${endpointSubmit()}`,
@@ -86,7 +86,6 @@ export default function Payment({ id, entries, type }) {
 				generateAxiosConfig()
 			)
 			.then((res) => {
-				// setModalSuccess(true)
 				console.log(res, "response update status transaction");
 			})
 			.catch((error) => {
@@ -96,17 +95,14 @@ export default function Payment({ id, entries, type }) {
 				}
 			});
 	};
-	const [modalTimeout, setModalTimeout] = useState(true);
 	const [modalSuccess, setModalSuccess] = useState(false);
+	const [updateFailed, setUpdateFailed] = useState(0);
 	const renderer = ({ hours, minutes, seconds, completed }) => {
 		if (completed) {
-			handleTimeout();
-			return (
-				<TimeoutModal
-					show={modalTimeout}
-					onHide={() => setModalTimeout(false)}
-				/>
-			);
+			if (updateFailed == 0) {
+				handleTimeout();
+			}
+			return <ModalTimeout />;
 		} else {
 			return (
 				<div
@@ -147,7 +143,6 @@ export default function Payment({ id, entries, type }) {
 				</table>
 				<Countdown date={date()} renderer={renderer} />
 			</div>
-			{/* <PaymentAccount/> */}
 			<div className="d-flex flex-row justify-content-between ">
 				<PaymentItem
 					entries={entries?.payment}
@@ -167,7 +162,6 @@ export default function Payment({ id, entries, type }) {
 				className={`card shadow p-4 d-flex flex-column align-items-center container-fluid p-1 ${styles.containerUpload}`}
 			>
 				{urlImage ? (
-					// <p>{urlImage}</p>
 					<div className="d-flex justify-self-end me-auto">
 						<Image
 							src={urlImage}
@@ -212,7 +206,7 @@ export default function Payment({ id, entries, type }) {
 							accept="image/*"
 							style={{ display: "none" }}
 						/>
-						<p className={` text-primary`}>upload here</p>
+						<p className={` text-primary`}>Upload here</p>
 					</div>
 				)}
 			</div>
@@ -220,9 +214,8 @@ export default function Payment({ id, entries, type }) {
 				className={`col-12 btn ${styles.button} mt-3`}
 				onClick={handleSubmit}
 			>
-				submit
+				Submit
 			</button>
-			{/* {modalShow ?<TimeoutModal hide/>:null} */}
 			<CustomModal
 				show={modalSuccess}
 				onHide={() => setModalSuccess(false)}

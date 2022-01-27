@@ -20,18 +20,6 @@ export default function TransactionByID({ ID, type }) {
 	const idTransactionClass = router.query.id;
 	const [classTx, setClassTx] = useState("");
 	const [errorClass, setErrorClass] = useState();
-	const title = () => {
-		if (classTx?.status == "accepted") {
-			return "Receipt";
-		} else {
-			if (classTx?.status == "waiting-for-confirmation") {
-				return "Transaction Status";
-			} else {
-				return "Payment";
-			}
-		}
-	};
-
 	useEffect(() => {
 		const API_URL = process.env.BE_API_URL;
 		axios
@@ -59,14 +47,18 @@ export default function TransactionByID({ ID, type }) {
 			<NavbarTop title="Transactions" />
 			<div className="p-4">
 				{classTx === "" ? (
-					<p>setLoading </p>
+					<div className="d-flex justify-content-center text-primary">
+						<div className="spinner-border" role="status">
+							<span className="sr-only">Loading...</span>
+						</div>
+					</div>
 				) : classTx.data.status === "waiting-for-payment" ? (
 					<Payment
 						id={idTransactionClass}
 						entries={classTx.data}
 						type={"class"}
 					/>
-				) : classTx.data.status === "completed" ? (
+				) : classTx.data.status === "accepted" ? (
 					<Receipt
 						id={idTransactionClass}
 						entries={classTx.data}
@@ -77,7 +69,7 @@ export default function TransactionByID({ ID, type }) {
 				) : classTx?.data?.status === "failed" ? (
 					<StatusTimeout />
 				) : classTx?.data?.status === "decline" ? (
-					<StatusDecline />
+					<StatusDecline entries={classTx.data} type={"class"} />
 				) : null}
 			</div>
 		</Layout>

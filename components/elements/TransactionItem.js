@@ -6,7 +6,6 @@ export default function TranasctionItem({ entries }) {
 	const status = tempStatus.charAt(0).toUpperCase() + tempStatus.slice(1);
 
 	const transactionID = entries.ID;
-	const transactionData = entries;
 	const href = () => {
 		if (entries.membership_product_id != null) {
 			console.log("route to member", entries.membership_product_id);
@@ -23,17 +22,20 @@ export default function TranasctionItem({ entries }) {
 			return `/profile/transactions/class/${entries.id}`;
 		}
 	};
-	// const href =`/profile/transaction/${entries.id}`
 
 	const linkStatus = () => {
 		if (entries.status == "accepted") {
 			return "View receipt";
+		} else if (entries.status == "waiting-for-confirmation") {
+			return "View status";
+		} else if (entries.status == "waiting-for-payment") {
+			return "Pay now";
+		} else if (entries.status == "decline") {
+			return "Repay now";
+		} else if (entries.status == "failed") {
+			return "Timed out";
 		} else {
-			if (entries.status == "waiting-for-confirmation") {
-				return "View status";
-			} else {
-				return "Pay now";
-			}
+			return "";
 		}
 	};
 	return (
@@ -45,7 +47,6 @@ export default function TranasctionItem({ entries }) {
 				},
 			}}
 			as={as()}
-			// onClick={(<ClassById entries={entries} />)}
 			passHref
 			params
 		>
