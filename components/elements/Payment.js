@@ -69,7 +69,7 @@ export default function Payment({ id, entries, type }) {
 
 	const handleTimeout = () => {
 		setUpdateFailed(updateFailed + 1);
-		const API_URL = process.env.BE_API_URL_LOCAL;
+		const API_URL = process.env.BE_API_URL;
 		const endpointSubmit = () => {
 			if (type == "class") {
 				return `transaction-class/status-to-failed/${id}`;
@@ -123,7 +123,7 @@ export default function Payment({ id, entries, type }) {
 		return newDate;
 	};
 	return (
-		<>
+		<div className="pb-5">
 			<div className="mb-4 d-flex flex-column">
 				<table>
 					<tr>
@@ -157,7 +157,7 @@ export default function Payment({ id, entries, type }) {
 				<p className="">{entries?.payment?.desc}</p>
 			</div>
 			<p className="fw-bold m-0 mt-4">Upload Receipt</p>
-			<p>please upload an image of receipt</p>
+			<p className="text-light">Please upload an image of receipt</p>
 			<div
 				className={`card shadow p-4 d-flex flex-column align-items-center container-fluid p-1 ${styles.containerUpload}`}
 			>
@@ -224,6 +224,6 @@ export default function Payment({ id, entries, type }) {
 				hrefTo="/profile/transactions"
 				messageHref="back to"
 			/>
-		</>
+		</div>
 	);
 }

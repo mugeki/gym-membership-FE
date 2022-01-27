@@ -1,5 +1,5 @@
-import styles from "../../styles/Transaction.module.css";
 import Link from "next/link";
+import { Button } from "react-bootstrap";
 export default function TranasctionItem({ entries }) {
 	const date = new Date(entries.created_at);
 	const tempStatus = entries.status.replaceAll("-", " ");
@@ -23,65 +23,58 @@ export default function TranasctionItem({ entries }) {
 		}
 	};
 
-	const linkStatus = () => {
-		if (entries.status == "accepted") {
-			return "View receipt";
-		} else if (entries.status == "waiting-for-confirmation") {
-			return "View status";
-		} else if (entries.status == "waiting-for-payment") {
-			return "Pay now";
-		} else if (entries.status == "decline") {
-			return "Repay now";
-		} else if (entries.status == "failed") {
-			return "Timed out";
-		} else {
-			return "";
-		}
-	};
 	return (
-		<Link
-			href={{
-				pathname: href(),
-				query: {
-					ID: transactionID,
-				},
-			}}
-			as={as()}
-			passHref
-			params
-		>
-			<div className="d-flex justify-content-between align-items-center border-0 border-bottom p-4 py-3">
-				<div className="d-flex flex-column">
-					<p className="mb-2 fw-bolder text-primary text-capitalize">
-						{entries.product_name}
-					</p>
-					<div
-						className={
-							"mb-1 px-2 py-1 rounded align-self-start shadow-sm " +
-							(status === "Waiting for payment"
-								? "bg-light"
-								: status === "waiting for confirmation"
-								? "bg-warning"
-								: status === "accepted"
-								? "bg-success"
-								: "bg-danger")
-						}
-						style={{ fontSize: "14px" }}
-					>
-						<p className="m-0 text-white">{status}</p>
-					</div>
+		<div className="d-flex justify-content-between align-items-center border-0 border-bottom p-4 py-3">
+			<div className="d-flex flex-column">
+				<p className="mb-2 fw-bolder text-primary text-capitalize">
+					{entries.product_name}
+				</p>
+				<div
+					className={
+						"mb-1 px-2 py-1 rounded align-self-start shadow-sm " +
+						(status === "Waiting for payment"
+							? "bg-light"
+							: status === "waiting for confirmation"
+							? "bg-warning"
+							: status === "accepted"
+							? "bg-success"
+							: "bg-danger")
+					}
+					style={{ fontSize: "14px" }}
+				>
+					<p className="m-0 text-white">{status}</p>
+				</div>
 
-					<p className="mb-0">
-						Rp{entries.nominal.toLocaleString().replace(/,/g, ".")}
-					</p>
-					<p className="mb-0">Made at {date.toLocaleString("en-GB")}</p>
-				</div>
-				<div>
-					<button className={`btn ${styles.button} px-2 py-1 rounded-3`}>
-						{linkStatus()}
-					</button>
-				</div>
+				<p className="mb-0">
+					Rp{entries.nominal.toLocaleString().replace(/,/g, ".")}
+				</p>
+				<p className="mb-0">Made at {date.toLocaleString("en-GB")}</p>
 			</div>
-		</Link>
+			<Link
+				href={{
+					pathname: href(),
+					query: {
+						ID: transactionID,
+					},
+				}}
+				as={as()}
+				passHref
+				params
+			>
+				<Button variant="primary">
+					{entries.status === "accepted"
+						? "View receipt"
+						: entries.status === "waiting for confirmation"
+						? " View status"
+						: entries.status === "waiting for payment"
+						? "Pay now"
+						: entries.status === "decline"
+						? "Repay now"
+						: entries.status === "failed"
+						? "Timed Out"
+						: ""}
+				</Button>
+			</Link>
+		</div>
 	);
 }

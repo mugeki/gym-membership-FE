@@ -47,12 +47,11 @@ export default function TransactionByID({ ID, type }) {
 			<NavbarTop title="Transactions" />
 			<div className="p-4">
 				{classTx === "" ? (
-					<div className="d-flex justify-content-center text-primary">
-						<div className="spinner-border" role="status">
-							<span className="sr-only">Loading...</span>
-						</div>
+					<div className="d-flex justify-content-center text-primary align-items-center">
+						<div className="spinner-border" role="status"></div>
+						<span className="sr-only ms-1">Loading...</span>
 					</div>
-				) : classTx.data.status === "waiting-for-payment" ? (
+				) : classTx.data.status === "waiting for payment" ? (
 					<Payment
 						id={idTransactionClass}
 						entries={classTx.data}
@@ -64,7 +63,7 @@ export default function TransactionByID({ ID, type }) {
 						entries={classTx.data}
 						type={"class"}
 					/>
-				) : classTx?.data?.status === "waiting-for-confirmation" ? (
+				) : classTx?.data?.status === "waiting for confirmation" ? (
 					<StatusWaiting />
 				) : classTx?.data?.status === "failed" ? (
 					<StatusTimeout />

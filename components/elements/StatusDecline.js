@@ -41,7 +41,7 @@ export default function StatusDecline({ entries, type }) {
 		hiddenFileInput.current.click();
 	};
 	const handleSubmit = () => {
-		const API_URL = process.env.BE_API_URL_LOCAL;
+		const API_URL = process.env.BE_API_URL;
 		const endpointSubmit = () => {
 			if (type == "class") {
 				return `transaction-class/update-receipt/${id}`;

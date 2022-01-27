@@ -4,16 +4,34 @@ import TransactionItem from "../../../components/elements/TransactionItem";
 import { Button, Fade } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { generateAxiosConfig, handleUnauthorized } from "../../../utils/helper";
 import Head from "next/head";
+import { storeUser } from "../../../store/userSlice";
 
 export default function MySchedule() {
 	const user = useSelector((state) => state.user);
+	const dispatch = useDispatch();
 	const [memberTx, setMemberTx] = useState();
 	const [classTx, setClassTx] = useState();
 	const [errorMember, setErrorMember] = useState();
 	const [errorClass, setErrorClass] = useState();
+
+	useEffect(() => {
+		const API_URL = process.env.BE_API_URL;
+		const userData = { ...user };
+		axios
+			.get(`${API_URL}/members/${user.id}`, generateAxiosConfig())
+			.then((resp) => {
+				userData.is_member = resp.data.data.is_member;
+				userData.expire_date = resp.data.data.expire_date;
+			})
+			.catch(() => {
+				userData.is_member = false;
+				userData.expire_date = "";
+			});
+		dispatch(storeUser(userData));
+	}, [dispatch, user]);
 
 	useEffect(() => {
 		const API_URL = process.env.BE_API_URL;
