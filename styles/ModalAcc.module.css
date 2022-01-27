@@ -5,3 +5,7 @@
     font-size:smaller;
 
 }
+
+.containerModal{
+    z-index:1000;
+}

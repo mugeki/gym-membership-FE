@@ -56,8 +56,12 @@ export default function TransactionByID({ID, type}){
             <NavbarTop title="Transactions"/>
             <div className="p-4">
                 {
-                memberTx===""?
-                    <p>setLoading </p>
+                memberTx==null?
+				<div class="d-flex justify-content-center text-primary">
+					<div class="spinner-border" role="status">
+					<span class="sr-only">Loading...</span>
+					</div>
+			  	</div>
                     :memberTx?.data?.status==="waiting-for-payment" ?
                     <Payment id={idTransactionMember}  entries={memberTx?.data} type={"membership"} />
                     :memberTx?.data?.status==="accepted"?
@@ -67,7 +71,7 @@ export default function TransactionByID({ID, type}){
 					: memberTx?.data?.status==="failed"?
 					<StatusTimeout/>
 					:memberTx?.data?.status==="decline"?
-					<StatusDecline/>
+					<StatusDecline  entries={memberTx?.data} type={"membership"}/>
 					:null
                 }
 

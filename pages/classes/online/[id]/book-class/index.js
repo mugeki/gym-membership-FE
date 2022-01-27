@@ -21,27 +21,7 @@ export default function BookClass({ data, error }) {
 	const [seeModalAcc, setSeeModalAcc]=useState(false)
 
 	const [paymentData, setPaymentData]=useState()
-	useEffect(() => {
-		const API_URL = process.env.BE_API_URL_LOCAL;
-		axios
-			.get(
-				`${API_URL}/payment-account`,
-				generateAxiosConfig()
-			)
-			.then((res) => {
-				if (res.status === 204) {
-					setError("There is no payment account");
-				}
-				setPaymentData(res.data.data);
-			})
-			.catch((error) => {
-				if (error.response) {
-					handleUnauthorized(error.response);
-					setPaymentData(error.response.data.meta.messages[0]);
-					console.log(error);
-				}
-			});
-	}, [setPaymentData]);
+
 	
 	const handleSubmit=()=>{
 		const API_URL = process.env.BE_API_URL_LOCAL;

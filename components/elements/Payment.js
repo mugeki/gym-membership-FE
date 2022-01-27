@@ -1,11 +1,9 @@
 import styles from "../../styles/Payment.module.css";
-import TimeoutModal from "./TimeoutModal"
 import CustomModal from "./CustomModal"
 import PaymentItem from "./PaymentItem";
 import {useState, useRef,useEffect} from 'react'
 import { Icon } from '@iconify/react';
 import Image from "next/image";
-import ReactDOM from 'react-dom';
 import Countdown from 'react-countdown';
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -13,6 +11,7 @@ import { generateAxiosConfig, handleUnauthorized } from "../../utils/helper";
 import { app } from "../../firebase/firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import imageCompression from "browser-image-compression";
+import ModalTimeout from "./ModalTimeout";
 
 export default function Payment({ id,entries, type }){
     const hiddenFileInput = useRef(null);
@@ -72,47 +71,49 @@ export default function Payment({ id,entries, type }){
 	}
 
 	const handleTimeout=()=>{
-		const API_URL = process.env.BE_API_URL_LOCAL;
-        const endpointSubmit =()=>{
-            if (type=="class"){
-                return `transaction-class/status-to-failed/${id}`
-            }else if (type=="membership"){
-                return `transaction-membership/status-to-failed/${id}`
+            setUpdateFailed(updateFailed+1)
+            const API_URL = process.env.BE_API_URL_LOCAL;
+            const endpointSubmit =()=>{
+                if (type=="class"){
+                    return `transaction-class/status-to-failed/${id}`
+                }else if (type=="membership"){
+                    return `transaction-membership/status-to-failed/${id}`
+                }
             }
-        }
-        console.log(`endpoint : ${API_URL}/${endpointSubmit()}`)
-		axios
-			.put(
-				`${API_URL}/${endpointSubmit()}`,
-				{
-					"status" :"failed",
-				},
-				generateAxiosConfig()
-			)
-			.then((res)=>{
-				// setModalSuccess(true)
-				console.log(res, "response update status transaction")
-			})
-			.catch((error) => {
-				if (error.response) {
-					handleUnauthorized(error.response);
-					console.log(error);
-				}
-			});
+            axios
+                .put(
+                    `${API_URL}/${endpointSubmit()}`,
+                    {
+                        "status" :"failed",
+                    },
+                    generateAxiosConfig()
+                )
+                .then((res)=>{
+                    console.log(res, "response update status transaction")
+                })
+                .catch((error) => {
+                    if (error.response) {
+                        handleUnauthorized(error.response);
+                        console.log(error);
+                    }
+                });
+
 	}
-    const [modalTimeout, setModalTimeout]=useState(true)
     const [modalSuccess, setModalSuccess]=useState(false)
+    const [updateFailed, setUpdateFailed]=useState(0)
     const renderer = ({ hours, minutes, seconds, completed }) => {
-    if (completed) {
-        handleTimeout()
-        return <TimeoutModal  show={modalTimeout} onHide={() => setModalTimeout(false)} />
-    } else {
-        return (
-        <div className={`align-self-center mt-3 ${styles.countdown} rounded-3 `}>
-            <p className="fs-6 fw-bold m-0 p-1 rounded-3 bg-danger" >{hours} hours : {minutes} minutes : {seconds}</p>
-        </div>
-        )
-    }
+        if (completed) {
+            if (updateFailed==0){
+                handleTimeout()
+            }
+            return <ModalTimeout/>
+        } else {
+            return (
+            <div className={`align-self-center mt-3 ${styles.countdown} rounded-3 `}>
+                <p className="fs-6 fw-bold m-0 p-1 rounded-3 bg-danger" >{hours} hours : {minutes} minutes : {seconds}</p>
+            </div>
+            )
+        }
     };
     const date=()=>{
         const dateUpdated = new Date(Date.parse(entries?.updated_at))
@@ -143,7 +144,6 @@ export default function Payment({ id,entries, type }){
                 renderer={renderer}
                 />
             </div>
-            {/* <PaymentAccount/> */}
             <div className="d-flex flex-row justify-content-between ">
                 <PaymentItem entries={entries?.payment} idActive={entries?.payment?.id} />
             </div>
@@ -200,6 +200,7 @@ export default function Payment({ id,entries, type }){
                 hrefTo="/profile/transactions"
                 messageHref="back to"
             />
+            
         </>
     );
 }
