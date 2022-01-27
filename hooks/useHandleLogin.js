@@ -4,6 +4,7 @@ import { storeUser } from "../store/userSlice";
 import Cookies from "universal-cookie";
 import axios from "axios";
 import { Base64 } from "js-base64";
+import { generateAxiosConfig } from "../utils/helper";
 
 export default function useHandleLogin() {
 	const cookies = new Cookies();
@@ -11,18 +12,13 @@ export default function useHandleLogin() {
 	const router = useRouter();
 
 	const handleLogin = async (res) => {
-		const BE_API_URL_LOCAL = process.env.BE_API_URL_LOCAL;
+		const API_URL = process.env.BE_API_URL;
 		let userData = {
 			...res,
 		};
 		delete userData.token;
-		const config = {
-			headers: {
-				Authorization: "Bearer " + res.token,
-			},
-		};
 		await axios
-			.get(`${BE_API_URL_LOCAL}/members/${res.id}`, config)
+			.get(`${API_URL}/members/${res.id}`, generateAxiosConfig())
 			.then((resp) => {
 				userData.is_member = resp.data.data.is_member;
 				userData.expire_date = resp.data.data.expire_date;

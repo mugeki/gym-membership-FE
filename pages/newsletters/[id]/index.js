@@ -1,10 +1,11 @@
 import axios from "axios";
+import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import NavbarTop from "../../../components/elements/NavbarTop";
 import Layout from "../../../components/Layout";
-import useFormatDatetime from "../../../hooks/useFormatDatetime";
+import useHandleDate from "../../../hooks/useHandleDate";
 import { generateAxiosConfig, handleUnauthorized } from "../../../utils/helper";
 
 export default function Newsletter() {
@@ -14,7 +15,7 @@ export default function Newsletter() {
 
 	useEffect(() => {
 		if (!router.query.title) {
-			const API_URL = process.env.BE_API_URL_LOCAL;
+			const API_URL = process.env.BE_API_URL;
 			axios
 				.get(`${API_URL}/articles/${router.query.id}`, generateAxiosConfig())
 				.then((res) => {
@@ -30,7 +31,7 @@ export default function Newsletter() {
 		}
 	}, [setNewsletter, router]);
 
-	const { formatDatetime } = useFormatDatetime();
+	const { formatDatetime } = useHandleDate();
 	const date = formatDatetime(newsletter?.created_at);
 	const content = newsletter?.text.split("\n").map((str, i) => (
 		<p
@@ -44,6 +45,10 @@ export default function Newsletter() {
 
 	return (
 		<Layout>
+			<Head>
+				<title>{newsletter?.title} | Gymbro</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
 			<NavbarTop title={"Newsletter"} />
 			{error && <p className="text-center text-light mt-5">{error}</p>}
 			{newsletter && (

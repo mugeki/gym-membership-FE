@@ -9,7 +9,6 @@ export default function useHandleDate() {
 			const difference = currDateTimestamp - Date.now();
 			const isThisWeek = difference >= -86400000 && difference <= 604800000;
 			if (isThisWeek) {
-				console.log();
 				dateStart = currDate[0];
 				dateEnd = currDate[1];
 				dateArr.push([dateStart, dateEnd]);

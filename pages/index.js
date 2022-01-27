@@ -7,23 +7,22 @@ import axios from "axios";
 import { generateAxiosConfig, handleUnauthorized } from "../utils/helper";
 import HomeClassesList from "../components/elements/HomeClassesList";
 import Image from "next/image";
+import Head from "next/head";
 
 export default function Home() {
 	const user = useSelector((state) => state.user);
-	const [newsletters, setNewsletters] = useState();
-	const [classes, setClasses] = useState();
+	const [newsletters, setNewsletters] = useState([]);
+	const [classes, setClasses] = useState([]);
 	const [errorClass, setErrorClass] = useState();
 	const [errorNewsletter, setErrorNewsletter] = useState();
 
 	useEffect(() => {
-		const API_URL = process.env.BE_API_URL_LOCAL;
+		const API_URL = process.env.BE_API_URL;
 		axios
 			.get(`${API_URL}/articles`, generateAxiosConfig())
 			.then((res) => {
 				if (res.status === 204) {
-					setErrorNewsletter((state) => {
-						return { ...state, classes: "Newsletter not found" };
-					});
+					setErrorNewsletter("Newsletter not found");
 				} else {
 					setNewsletters(res.data.data.slice(0, 4));
 				}
@@ -35,7 +34,7 @@ export default function Home() {
 	}, [setNewsletters]);
 
 	useEffect(() => {
-		const API_URL = process.env.BE_API_URL_LOCAL;
+		const API_URL = process.env.BE_API_URL;
 		axios
 			.get(
 				`${API_URL}/transaction-class/active/${user.id}`,
@@ -56,6 +55,10 @@ export default function Home() {
 
 	return (
 		<Layout>
+			<Head>
+				<title>Gymbro</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
 			<div className="container p-4 mb-5">
 				<main className="d-flex flex-column justify-content-center">
 					<div className="d-flex align-items-center justify-content-between flex-nowrap mb-4">
@@ -63,13 +66,15 @@ export default function Home() {
 							Hello, {user.fullname}
 						</h4>
 						<Link href="/profile" passHref>
-							<Image
-								width={"45px"}
-								height={"45px"}
-								src={user.url_image}
-								alt="profile"
-								className="rounded-circle"
-							/>
+							<>
+								<Image
+									width={"45px"}
+									height={"45px"}
+									src={user.url_image}
+									alt="profile"
+									className="rounded-circle"
+								/>
+							</>
 						</Link>
 					</div>
 					<h5 className="mb-0">Your Schedules</h5>
@@ -82,7 +87,15 @@ export default function Home() {
 					{errorClass && (
 						<p className="text-center text-light mt-5">{errorClass}</p>
 					)}{" "}
-					{classes && <HomeClassesList entries={classes} />}
+					{classes && (
+						<HomeClassesList
+							entries={classes}
+							error={errorClass}
+							setError={(value) => {
+								setErrorClass(value);
+							}}
+						/>
+					)}
 					<div className="d-flex justify-content-between align-items-center mt-5">
 						<h5>Latest Newsletter</h5>
 						<Link href="/newsletters" passHref>

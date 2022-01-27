@@ -5,32 +5,34 @@ import Receipt from "../../../../../components/elements/Receipt";
 import StatusWaiting from "../../../../../components/elements/StatusWaiting";
 import StatusTimeout from "../../../../../components/elements/StatusTimeout";
 import StatusDecline from "../../../../../components/elements/StatusDecline";
-import { generateAxiosConfig, handleUnauthorized } from "../../../../../utils/helper";
+import {
+	generateAxiosConfig,
+	handleUnauthorized,
+} from "../../../../../utils/helper";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 
-export default function TransactionByID({ID, type}){
-    const user = useSelector((state) => state.user);
-    const router = useRouter();
-    const idTransactionMember=router.query.id
+export default function TransactionByID({ ID, type }) {
+	const user = useSelector((state) => state.user);
+	const router = useRouter();
+	const idTransactionMember = router.query.id;
 	const [memberTx, setMemberTx] = useState();
 	const [errorMember, setErrorMember] = useState();
-    const title=()=>{
-		if(memberTx?.status=="accepted"){
-			return "Receipt"
-		}else{
-			if(memberTx?.status=="waiting-for-confirmation"){
-				return "Transaction Status"
-			}
-			else{
-				return "Payment"
+	const title = () => {
+		if (memberTx?.status == "accepted") {
+			return "Receipt";
+		} else {
+			if (memberTx?.status == "waiting-for-confirmation") {
+				return "Transaction Status";
+			} else {
+				return "Payment";
 			}
 		}
-	}
+	};
 	useEffect(() => {
-		const API_URL = process.env.BE_API_URL_LOCAL;
+		const API_URL = process.env.BE_API_URL;
 		axios
 			.get(
 				`${API_URL}/transaction-membership/user/${idTransactionMember}`,
@@ -49,45 +51,37 @@ export default function TransactionByID({ID, type}){
 					console.log(error);
 				}
 			});
-	}, [setMemberTx, user.id,idTransactionMember]);
+	}, [setMemberTx, user.id, idTransactionMember]);
 
-    return(
-        <Layout>
-            <NavbarTop title="Transactions"/>
-            <div className="p-4">
-                {
-                memberTx==null?
-				<div class="d-flex justify-content-center text-primary">
-					<div class="spinner-border" role="status">
-					<span class="sr-only">Loading...</span>
+	return (
+		<Layout>
+			<NavbarTop title="Transactions" />
+			<div className="p-4">
+				{memberTx == null ? (
+					<div className="d-flex justify-content-center text-primary align-items-center">
+						<div className="spinner-border" role="status"></div>
+						<span className="sr-only ms-1">Loading...</span>
 					</div>
-			  	</div>
-                    :memberTx?.data?.status==="waiting-for-payment" ?
-                    <Payment id={idTransactionMember}  entries={memberTx?.data} type={"membership"} />
-                    :memberTx?.data?.status==="accepted"?
-                    <Receipt id={idTransactionMember} entries={memberTx?.data} type={"membership"}/>
-                    :memberTx?.data?.status==="waiting-for-confirmation"?
-                    <StatusWaiting/>
-					: memberTx?.data?.status==="failed"?
-					<StatusTimeout/>
-					:memberTx?.data?.status==="decline"?
-					<StatusDecline  entries={memberTx?.data} type={"membership"}/>
-					:null
-                }
-
-            </div>
-        </Layout>
-    );
-    
+				) : memberTx?.data?.status === "waiting for payment" ? (
+					<Payment
+						id={idTransactionMember}
+						entries={memberTx?.data}
+						type={"membership"}
+					/>
+				) : memberTx?.data?.status === "accepted" ? (
+					<Receipt
+						id={idTransactionMember}
+						entries={memberTx?.data}
+						type={"membership"}
+					/>
+				) : memberTx?.data?.status === "waiting for confirmation" ? (
+					<StatusWaiting />
+				) : memberTx?.data?.status === "failed" ? (
+					<StatusTimeout />
+				) : memberTx?.data?.status === "decline" ? (
+					<StatusDecline entries={memberTx?.data} type={"membership"} />
+				) : null}
+			</div>
+		</Layout>
+	);
 }
-
-
-
-
-
-// {transactionDetailHandle()}
-// <Payment entries={memberTx?.data}/>
-// <Receipt id={idTransactionMember} type={"member"}/>
-// <StatusWaiting/>
-// <p>{memberTx?.data?.product_name}</p>
-// <p>tess</p>

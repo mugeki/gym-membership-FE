@@ -7,18 +7,21 @@ import StatusWaiting from "../../../../../components/elements/StatusWaiting";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { generateAxiosConfig, handleUnauthorized } from "../../../../../utils/helper";
+import {
+	generateAxiosConfig,
+	handleUnauthorized,
+} from "../../../../../utils/helper";
 import { useRouter } from "next/router";
 import StatusDecline from "../../../../../components/elements/StatusDecline";
 
-export default function TransactionByID({ID, type}){
-    const user = useSelector((state) => state.user);
-    const router = useRouter();
-    const idTransactionClass=router.query.id
+export default function TransactionByID({ ID, type }) {
+	const user = useSelector((state) => state.user);
+	const router = useRouter();
+	const idTransactionClass = router.query.id;
 	const [classTx, setClassTx] = useState("");
 	const [errorClass, setErrorClass] = useState();
 	useEffect(() => {
-		const API_URL = process.env.BE_API_URL_LOCAL;
+		const API_URL = process.env.BE_API_URL;
 		axios
 			.get(
 				`${API_URL}/transaction-class/user/${idTransactionClass}`,
@@ -37,33 +40,37 @@ export default function TransactionByID({ID, type}){
 					console.log(error);
 				}
 			});
-	}, [setClassTx, user.id,idTransactionClass]);
+	}, [setClassTx, user.id, idTransactionClass]);
 
-    return(
-        <Layout>
-            <NavbarTop title="Transactions"/>
-            <div className="p-4">
-            {
-                classTx===""?
-				<div class="d-flex justify-content-center text-primary">
-					<div class="spinner-border" role="status">
-					<span class="sr-only">Loading...</span>
+	return (
+		<Layout>
+			<NavbarTop title="Transactions" />
+			<div className="p-4">
+				{classTx === "" ? (
+					<div className="d-flex justify-content-center text-primary align-items-center">
+						<div className="spinner-border" role="status"></div>
+						<span className="sr-only ms-1">Loading...</span>
 					</div>
-			  	</div>
-                    :classTx.data.status==="waiting-for-payment" ?
-                    <Payment id={idTransactionClass} entries={classTx.data} type={"class"}/>
-                    :classTx.data.status==="accepted"?
-                    <Receipt id={idTransactionClass} entries={classTx.data} type={"class"}/>
-                    :classTx?.data?.status==="waiting-for-confirmation"?
-                    <StatusWaiting/>
-					: classTx?.data?.status==="failed"?
-					<StatusTimeout/>
-					:classTx?.data?.status==="decline"?
-					<StatusDecline entries={classTx.data} type={"class"}/>
-					:null
-                }
-            </div>
-        </Layout>
-    );
-    
+				) : classTx.data.status === "waiting for payment" ? (
+					<Payment
+						id={idTransactionClass}
+						entries={classTx.data}
+						type={"class"}
+					/>
+				) : classTx.data.status === "accepted" ? (
+					<Receipt
+						id={idTransactionClass}
+						entries={classTx.data}
+						type={"class"}
+					/>
+				) : classTx?.data?.status === "waiting for confirmation" ? (
+					<StatusWaiting />
+				) : classTx?.data?.status === "failed" ? (
+					<StatusTimeout />
+				) : classTx?.data?.status === "decline" ? (
+					<StatusDecline entries={classTx.data} type={"class"} />
+				) : null}
+			</div>
+		</Layout>
+	);
 }

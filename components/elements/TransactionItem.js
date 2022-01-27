@@ -1,87 +1,80 @@
-import styles from "../../styles/Transaction.module.css"
 import Link from "next/link";
+import { Button } from "react-bootstrap";
 export default function TranasctionItem({ entries }) {
 	const date = new Date(entries.created_at);
-	const status =entries.status.replaceAll("-"," ")
-		
-	const transactionID= entries.ID
-	const transactionData= entries
-	const href =()=>{
-		if (entries.membership_product_id!=null){
-			console.log("route to member",entries.membership_product_id)
-			return `/profile/transactions/member/${entries.id}`
-		}else if (entries.class_id!=null){
-			console.log("route to class",entries.class_id)
-			return `/profile/transactions/class/${entries.id}`
-		}
-	} 
-	const as =()=>{
-		if (entries.membership_product_id!=null){
-			return `/profile/transactions/member/${entries.id}`
-		}else if (entries.class_id!=null){
-			return `/profile/transactions/class/${entries.id}`
-		}
-	} 
+	const tempStatus = entries.status.replaceAll("-", " ");
+	const status = tempStatus.charAt(0).toUpperCase() + tempStatus.slice(1);
 
-	const linkStatus=()=>{
-		if(entries.status=="accepted"){
-			return "see receipt"
-		}else if(entries.status=="waiting-for-confirmation"){
-			return "see status"
-		}else if(entries.status=="waiting-for-payment"){
-			return "pay now"
-		}else if(entries.status=="decline"){
-			return "repay now"
-		}else if (entries.status=="failed"){
-			return "timeout"
-		}else{
-			return ""
+	const transactionID = entries.ID;
+	const href = () => {
+		if (entries.membership_product_id != null) {
+			console.log("route to member", entries.membership_product_id);
+			return `/profile/transactions/member/${entries.id}`;
+		} else if (entries.class_id != null) {
+			console.log("route to class", entries.class_id);
+			return `/profile/transactions/class/${entries.id}`;
 		}
-	}
+	};
+	const as = () => {
+		if (entries.membership_product_id != null) {
+			return `/profile/transactions/member/${entries.id}`;
+		} else if (entries.class_id != null) {
+			return `/profile/transactions/class/${entries.id}`;
+		}
+	};
+
 	return (
-		<Link
-		href={{
-			pathname: href(),
-			query: {
-				ID: transactionID
-			},
-		}}
-		as={as()}
-		// onClick={(<ClassById entries={entries} />)}
-		passHref
-		params
-		>
-			<div className="d-flex justify-content-between align-items-center border-0 border-bottom p-4 py-3">
-				<div className="d-flex flex-column">
-					<p className="mb-2 fw-bolder text-primary text-capitalize">{entries.product_name}</p>
-					<div
-						className={
-							"mb-1 px-2 rounded align-self-start shadow-sm " +
-							(status === "waiting for payment"
-								? "bg-light"
-								: status === "waiting for confirmation"
-								? "bg-warning"
-								: status === "accepted"
-								? "bg-success"
-								: "bg-danger")
-						}
-						style={{ fontSize: "14px" }}
-					>
-						<p className="m-0 text-white">{status}</p>
-					</div>
+		<div className="d-flex justify-content-between align-items-center border-0 border-bottom p-4 py-3">
+			<div className="d-flex flex-column">
+				<p className="mb-2 fw-bolder text-primary text-capitalize">
+					{entries.product_name}
+				</p>
+				<div
+					className={
+						"mb-1 px-2 py-1 rounded align-self-start shadow-sm " +
+						(status === "Waiting for payment"
+							? "bg-light"
+							: status === "waiting for confirmation"
+							? "bg-warning"
+							: status === "accepted"
+							? "bg-success"
+							: "bg-danger")
+					}
+					style={{ fontSize: "14px" }}
+				>
+					<p className="m-0 text-white">{status}</p>
+				</div>
 
-					<p className="mb-0">
-						Rp{entries.nominal.toLocaleString().replace(/,/g, ".")}
-					</p>
-					<p className="mb-0">Made at {date.toLocaleString("en-GB")}</p>
-				</div>
-				<div>
-					<button 
-						className={`btn ${styles.button} p-1 rounded-3`} >
-						{linkStatus()}
-					</button>
-				</div>
+				<p className="mb-0">
+					Rp{entries.nominal.toLocaleString().replace(/,/g, ".")}
+				</p>
+				<p className="mb-0">Made at {date.toLocaleString("en-GB")}</p>
 			</div>
-		</Link>
+			<Link
+				href={{
+					pathname: href(),
+					query: {
+						ID: transactionID,
+					},
+				}}
+				as={as()}
+				passHref
+				params
+			>
+				<Button variant="primary">
+					{entries.status === "accepted"
+						? "View receipt"
+						: entries.status === "waiting for confirmation"
+						? " View status"
+						: entries.status === "waiting for payment"
+						? "Pay now"
+						: entries.status === "decline"
+						? "Repay now"
+						: entries.status === "failed"
+						? "Timed Out"
+						: ""}
+				</Button>
+			</Link>
+		</div>
 	);
 }

@@ -67,6 +67,9 @@ export default function VideoItem({ entries }) {
 						<p className="mb-0 fw-bolder fs-6 text-start text-truncate w-100">
 							{entries.title}
 						</p>
+						<p className="mb-0 fw-bolder fs-6 text-start text-truncate w-100">
+							{entries.classification}
+						</p>
 					</div>
 				</div>
 			</Link>

@@ -7,6 +7,7 @@ import useValidateForm from "../../hooks/useValidateForm";
 import styles from "../../styles/UserAuth.module.css";
 import useHandleLogin from "../../hooks/useHandleLogin";
 import axios from "axios";
+import Head from "next/head";
 
 export default function Register() {
 	const handleLogin = useHandleLogin();
@@ -38,7 +39,7 @@ export default function Register() {
 		if (Object.keys(newErrors).length > 0) {
 			setErrorMsg(newErrors);
 		} else {
-			const API_URL = process.env.BE_API_URL_LOCAL;
+			const API_URL = process.env.BE_API_URL;
 			axios
 				.post(`${API_URL}/users`, {
 					...form,
@@ -71,6 +72,10 @@ export default function Register() {
 		<div
 			className={`${styles.container} d-flex flex-column justify-content-between p-4`}
 		>
+			<Head>
+				<title>Register | Gymbro</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
 			<div className="flex-grow text-white mb-5">
 				<h1 className="fw-bolder">JOIN A GYM</h1>
 				<h1 className="fw-bolder">THATS FIT FOR U.</h1>

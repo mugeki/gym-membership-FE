@@ -7,6 +7,7 @@ import Cookies from "universal-cookie";
 import { useDispatch } from "react-redux";
 import { clearUser } from "../../store/userSlice";
 import { useSelector } from "react-redux";
+import Head from "next/head";
 
 export default function Profile() {
 	const user = useSelector((state) => state.user);
@@ -20,6 +21,10 @@ export default function Profile() {
 	};
 	return (
 		<Layout>
+			<Head>
+				<title>Profile | Gymbro</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
 			<div className="container d-flex flex-column p-4">
 				<div className="d-flex align-items-center flex-nowrap">
 					<Image

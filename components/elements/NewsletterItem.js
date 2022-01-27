@@ -60,6 +60,9 @@ export default function NewsletterItem({ entries }) {
 						<p className="mb-0 fw-bolder fs-6 text-start text-truncate w-100">
 							{entries.title}
 						</p>
+						<p className="mb-0 fw-bolder fs-6 text-start text-truncate w-100">
+							{entries.classification}
+						</p>
 						<p className="mb-0">
 							{date.day} {date.month} {date.year}
 						</p>

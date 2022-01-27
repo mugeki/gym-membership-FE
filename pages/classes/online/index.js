@@ -1,33 +1,40 @@
 import axios from "axios";
 import Layout from "../../../components/Layout";
-import ClassItem from "../../../components/elements/ClassItemOnline";
-import Image from "next/image";
-import styles from "../../../styles/ClassItem.module.css";
-import React, { useState, useEffect} from 'react';
-import { useSelector } from "react-redux";
+import ClassItemOnline from "../../../components/elements/ClassItemOnline";
+import React, { useState, useEffect } from "react";
 import { generateAxiosConfig, handleUnauthorized } from "../../../utils/helper";
 import NavbarTop from "../../../components/elements/NavbarTop";
-// import { Hoverable, Pressable } from 'react-native-web-hover'
-// import dataClasses from "../../../mock_data/classes.json";
-
+import Head from "next/head";
+import { Button } from "react-bootstrap";
 
 export default function Classes() {
-	const [classData, setClassData]= useState()
-    const user = useSelector((state) => state.user);
+	const [classData, setClassData] = useState();
+	const [pages, setPages] = useState();
 	const [errorClass, setErrorClass] = useState();
 
-	useEffect(() => {
-		const API_URL = process.env.BE_API_URL_LOCAL;
+	const fetch = (page) => {
+		const API_URL = process.env.BE_API_URL;
 		axios
 			.get(
-				`${API_URL}/classes?class-type=online`,
+				`${API_URL}/classes?class-type=online&page=${page}`,
 				generateAxiosConfig()
 			)
 			.then((res) => {
 				if (res.status === 204) {
-					setError("There is no classes");
+					setErrorClass("There is no classes");
+				} else {
+					setClassData((state) => {
+						if (state) {
+							return [...state, ...res.data.data];
+						}
+						return res.data.data;
+					});
+					setPages(() => {
+						const page = { ...res.data.page };
+						const active = page.offset / page.limit + 1;
+						return { ...res.data.page, currPage: active };
+					});
 				}
-				setClassData({ data: res.data.data, page: res.data.page });
 			})
 			.catch((error) => {
 				if (error.response) {
@@ -36,16 +43,41 @@ export default function Classes() {
 					console.log(error);
 				}
 			});
-	}, [setClassData, user.id]);
+	};
+
+	useEffect(() => {
+		fetch(1);
+	}, []);
+
+	const fetchMore = () => {
+		fetch(pages.currPage + 1);
+	};
+
 	return (
 		<Layout>
-			<NavbarTop title="classes" />
+			<Head>
+				<title>Online Classes | Gymbro</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
+			<NavbarTop title="Classes" />
 			<div className="container p-4 mb-5">
 				<div className="d-flex flex-column justify-content-center ">
 					<h4 className="text-start fw-bolder">Online Classes</h4>
-                    {classData?.data?.map((item) => (
-						<ClassItem key={item.id} entries={item} />
+					{errorClass && (
+						<p className="text-center text-light mt-5">{errorClass}</p>
+					)}
+					{classData?.data?.map((item) => (
+						<ClassItemOnline key={item.id} entries={item} />
 					))}
+				</div>
+				<div className="d-flex justify-content-center">
+					<Button
+						hidden={!classData || classData?.length >= pages?.total_data}
+						variant="outline-primary m-auto"
+						onClick={fetchMore}
+					>
+						Load more
+					</Button>
 				</div>
 			</div>
 		</Layout>
